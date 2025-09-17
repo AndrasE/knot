@@ -1,16 +1,27 @@
 @import "tailwindcss";
 
+/* Add your font-face rules at the top */
+@font-face {
+  font-family: "Dawning";
+  src: url("./assets/fonts/Dawning.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "RobotoExtraLight";
+  src: url("./assets/fonts/RobotoExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
 /* for me  */
 /* eggshell #f5f0e6 */
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color: rgba(0, 0, 0, 0.87);
   background-color: #f5f0e6;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -21,8 +32,10 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  font-family: "RobotoExtraLight", Arial, sans-serif;
 }
 
-h1 {
-  font-size: 2.2em;
+/* Utility class for Dawning font */
+.font-dawning {
+  font-family: "Dawning", serif;
 }

@@ -3,14 +3,14 @@ import Logo from "../assets/navlogo.png";
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-10 flex items-center justify-between gap-4 px-5 py-4 text-lg shadow-sm sm:text-2xl sm:px-20 bg-[#f5f0e6] ">
+    <nav className="fixed top-0 z-10 w-full flex items-center justify-between gap-4 px-5 py-4 text-lg shadow-sm sm:text-2xl md:px-20 bg-[#f5f0e6] ">
       {/* Scroll links */}
       <ScrollLink
         to="hero"
         smooth={true}
         duration={500}
         className="cursor-pointer justify-self-start">
-        <img src={Logo} alt="Logo" className="w-15 " />
+        <img src={Logo} alt="Logo" className="w-10 sm:w-15 " />
       </ScrollLink>
 
       <ScrollLink
