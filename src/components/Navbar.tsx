@@ -1,16 +1,16 @@
 import { Link as ScrollLink } from "react-scroll";
-// import { Link } from "react-router-dom";
+import Logo from "../assets/navlogo.png";
 
 export default function Navbar() {
   return (
-    <nav className="flex gap-4 text-lg font-medium text-red-800">
+    <nav className="sticky top-0 z-10 flex items-center justify-between gap-4 px-5 py-4 text-lg shadow-sm sm:text-2xl sm:px-20 bg-[#f5f0e6] ">
       {/* Scroll links */}
       <ScrollLink
         to="hero"
         smooth={true}
         duration={500}
-        className="cursor-pointer">
-        Home
+        className="cursor-pointer justify-self-start">
+        <img src={Logo} alt="Logo" className="w-15 " />
       </ScrollLink>
 
       <ScrollLink
@@ -18,7 +18,7 @@ export default function Navbar() {
         smooth={true}
         duration={500}
         className="cursor-pointer">
-        Contact
+        Details
       </ScrollLink>
 
       <ScrollLink
@@ -26,7 +26,23 @@ export default function Navbar() {
         smooth={true}
         duration={500}
         className="cursor-pointer">
-        gallery
+        Gallery
+      </ScrollLink>
+
+      <ScrollLink
+        to="guestlist"
+        smooth={true}
+        duration={500}
+        className="cursor-pointer">
+        Guestlist
+      </ScrollLink>
+
+      <ScrollLink
+        to="RSVP"
+        smooth={true}
+        duration={500}
+        className="cursor-pointer">
+        RSVP
       </ScrollLink>
     </nav>
   );
