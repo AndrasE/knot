@@ -9,7 +9,6 @@ export default function Navbar() {
         to="hero"
         smooth={true}
         duration={500}
-        offset={-20}
         className="cursor-pointer justify-self-start">
         <img src={Logo} alt="Logo" className="w-10 sm:w-15 " />
       </ScrollLink>
@@ -18,7 +17,6 @@ export default function Navbar() {
         to="contact"
         smooth={true}
         duration={500}
-        offset={-20}
         className="cursor-pointer">
         Details
       </ScrollLink>
@@ -27,7 +25,6 @@ export default function Navbar() {
         to="gallery"
         smooth={true}
         duration={500}
-        offset={-20}
         className="cursor-pointer">
         Gallery
       </ScrollLink>
@@ -36,14 +33,12 @@ export default function Navbar() {
         to="guestlist"
         smooth={true}
         duration={500}
-        offset={-20}
         className="cursor-pointer">
         Guestlist
       </ScrollLink>
 
       <ScrollLink
         to="RSVP"
-        offset={-20}
         smooth={true}
         duration={500}
         className="cursor-pointer">

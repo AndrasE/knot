@@ -6,7 +6,7 @@ import RSVPSection from "../sections/RSVPSection";
 
 export default function Home() {
   return (
-    <div className="max-w-6xl mx-auto pt-15 sm:pt-10">
+    <div className="max-w-6xl mx-auto">
       <HeroSection />
       <ContactSection />
       <GalleryPreviewSection />
