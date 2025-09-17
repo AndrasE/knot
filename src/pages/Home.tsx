@@ -1,8 +1,9 @@
 import HeroSection from "../sections/HeroSection";
-import ContactSection from "../sections/ContactSection";
+import ContactSection from "../sections/DetailsSection";
 import GalleryPreviewSection from "../sections/GalleryPreviewSection";
 import GuestlistSection from "../sections/GuestlistSection";
 import RSVPSection from "../sections/RSVPSection";
+import DetailsSection from "../sections/DetailsSection";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <HeroSection />
       <ContactSection />
       <GalleryPreviewSection />
+      <DetailsSection />
       <GuestlistSection />
       <RSVPSection />
     </div>
