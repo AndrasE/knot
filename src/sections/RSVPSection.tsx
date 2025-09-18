@@ -38,6 +38,7 @@ export default function RSVPSection() {
     formId: FORMSPARK_FORM_ID,
   });
 
+  // State for form fields and toast
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [description, setDescription] = useState<string>("");

@@ -1,9 +1,9 @@
 import { Link as ScrollLink } from "react-scroll";
-import Logo from "../assets/navlogo.png";
+import Logo from "../assets/images/navlogo.png";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 z-10 w-full flex items-center justify-between gap-4 px-5 py-4 text-lg  shadow-sm sm:text-2xl md:px-20 bg-[#f5f0e6] ">
+    <nav className="fixed top-0 z-10 w-full flex items-center justify-between gap-2 px-2 py-4 text-lg  border-b-1 border-stone-300  shadow-xs sm:px-10 md:px-20 bg-[#f5f0e6] ">
       {/* Scroll links */}
       <ScrollLink
         to="hero"

@@ -1,4 +1,4 @@
-import Us from "../assets/us.png";
+import Us from "../assets/images/us.webp";
 
 export default function HeroSection() {
   return (
