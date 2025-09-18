@@ -23,6 +23,8 @@ export default function HeroSection() {
         <img
           src={Us}
           alt="us"
+          width="300"
+          height="400"
           fetchPriority="high"
           className="w-3/4 rounded-2xl sm:w-1/3 max-w-[300px] shadow-xl"
         />

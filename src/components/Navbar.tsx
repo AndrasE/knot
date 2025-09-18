@@ -12,6 +12,8 @@ export default function Navbar() {
         <img
           src={Logo}
           alt="Logo"
+          width="30"
+          height="30"
           fetchPriority="high"
           className="w-10 sm:w-15 "
         />
