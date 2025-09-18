@@ -3,7 +3,7 @@ import Logo from "../assets/navlogo.png";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 z-10 w-full flex items-center justify-between gap-4 px-5 py-4 text-lg shadow-sm sm:text-2xl md:px-20 bg-[#f5f0e6] ">
+    <nav className="fixed top-0 z-10 w-full flex items-center justify-between gap-4 px-5 py-4 text-lg  shadow-sm sm:text-2xl md:px-20 bg-[#f5f0e6] ">
       {/* Scroll links */}
       <ScrollLink
         to="hero"
@@ -14,7 +14,7 @@ export default function Navbar() {
       </ScrollLink>
 
       <ScrollLink
-        to="contact"
+        to="details"
         smooth={true}
         duration={500}
         className="cursor-pointer">
@@ -30,11 +30,11 @@ export default function Navbar() {
       </ScrollLink>
 
       <ScrollLink
-        to="guestlist"
+        to="guests"
         smooth={true}
         duration={500}
         className="cursor-pointer">
-        Guestlist
+        Guests
       </ScrollLink>
 
       <ScrollLink
