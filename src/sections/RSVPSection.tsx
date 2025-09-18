@@ -101,7 +101,7 @@ export default function RSVPSection() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your Name"
-            className="p-2 border rounded-md border-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500"
+            className="p-2 border rounded-md border-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-400"
             autoComplete="name"
             required
           />
@@ -112,7 +112,7 @@ export default function RSVPSection() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Your Email"
-            className="p-2 border rounded-md border-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500"
+            className="p-2 border rounded-md border-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-400"
             autoComplete="email"
             required
           />
@@ -122,7 +122,7 @@ export default function RSVPSection() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="A short description or message (e.g., plus one, can't come, etc.)"
-            className="p-2 border rounded-md border-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500"
+            className="p-2 border rounded-md border-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-400"
             autoComplete="off"
             rows={4}
           />
