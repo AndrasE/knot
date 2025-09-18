@@ -9,7 +9,12 @@ export default function Navbar() {
         to="/#hero"
         smooth
         className="cursor-pointer justify-self-start">
-        <img src={Logo} alt="Logo" className="w-10 sm:w-15 " />
+        <img
+          src={Logo}
+          alt="Logo"
+          fetchPriority="high"
+          className="w-10 sm:w-15 "
+        />
       </HashLink>
 
       <HashLink to="/#details" smooth className="cursor-pointer">
