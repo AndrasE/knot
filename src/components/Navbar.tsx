@@ -1,5 +1,5 @@
 import { HashLink } from "react-router-hash-link";
-import Logo from "../assets/images/navlogo.png";
+import Logo from "../assets/images/navlogo.avif";
 
 export default function Navbar() {
   return (
