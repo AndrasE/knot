@@ -1,0 +1,4 @@
+/assets/*
+  Content-Security-Policy: default-src 'self' data: https:; frame-ancestors 'self';
+  X-Frame-Options: SAMEORIGIN
+  Cross-Origin-Opener-Policy: same-origin
