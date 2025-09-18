@@ -3,19 +3,19 @@
 /* Add your font-face rules at the top */
 @font-face {
   font-family: "Dawning";
-  src: url("./assets/fonts/Dawning.ttf") format("truetype");
+  src: url("/assets/fonts/Dawning.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
-  font-family: "RobotoExtraLight";
-  src: url("./assets/fonts/RobotoExtraLight.ttf") format("truetype");
-  font-weight: 200;
+  font-family: "Roboto";
+  src: url("/assets/RobotoExtraLight.ttf") format("truetype");
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
-
 /* for me  */
 /* eggshell #f5f0e6 */
 
