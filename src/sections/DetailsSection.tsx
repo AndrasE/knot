@@ -1,24 +1,36 @@
 export default function DetailsSection() {
   return (
-    <section id="contact" className="flex items-center justify-center h-screen">
-      <div className="flex flex-col items-center justify-center pb-10 align-center">
-        <h1 className="text-6xl font-dawning ">Details </h1>
-        <div className="flex flex-row items-center justify-center max-w-3xl gap-5 p-5 sm:gap-10 align-center ">
-          <h2 className="text-4xl font-dawning">When & Where</h2>
-          <div className="flex flex-col gap-3 text-center sm:text-left">
-            <h3 className="text-2xl font-bold">Ceremony:</h3>
-            <p>Saturday, September 14, 2024</p>
-            <h3 className="text-2xl font-bold">Celebration:</h3>
-            <p>
-              We are so excited to celebrate our special day with you! Here are
-              the details you need to know:
-            </p>
-            <h3 className="text-2xl font-bold">After?</h3>
-            <p>
-              If we are not drank enough already, we may take on the city!
-              Improv!{" "}
-            </p>
-          </div>
+    <section
+      id="contact"
+      className="flex items-center justify-center h-screen pt-14 md:pt-16 xl:pt-20">
+      <div className="flex flex-row items-center justify-center max-w-2xl gap-10 p-5 align-center ">
+        <h2 className="hidden text-5xl text-right font-dawning sm:block">
+          When & Where
+        </h2>
+        <div className="flex flex-col gap-3 text-center sm:text-left">
+          <h1 className="text-6xl font-dawning ">Details </h1>
+          <h3 className="mt-2 text-2xl">Ceremony:</h3>
+          <p>Morden Park House - The Gazebo</p>
+          <p>Friday, 24 July 2026 at 14:00 BST (13:00 UTC)</p>
+          <a
+            href="https://maps.app.goo.gl/9RzE9R4LqY4A5Y8A9"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline">
+            Directions
+          </a>
+          <h3 className="mt-2 text-2xl ">Celebration:</h3>
+          <p>Cherry Tree - Dulwich</p>
+          <p>Friday, 24 July 2026 est 16:00 BST (15:00 UTC)</p>
+          <a
+            href="https://maps.app.goo.gl/7RzE9R4LqY4A5Y8A9"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline">
+            Directions
+          </a>
+          <h3 className="mt-2 text-2xl font-bold">After?</h3>
+          <p>No strict plans — just city adventures and a dash of improv!</p>
         </div>
       </div>
     </section>
