@@ -3,7 +3,7 @@ export default function DetailsSection() {
     <section
       id="details"
       className="flex items-center justify-center h-screen pb-5 sm:pb-0 pt-14 md:pt-16 xl:pt-20">
-      <div className="flex flex-row items-center justify-center max-w-2xl gap-10 p-5 align-center ">
+      <div className="flex flex-row items-center justify-center max-w-2xl gap-10 p-5 align-center">
         <h2 className="hidden text-5xl text-right font-dawning sm:block">
           When Where
         </h2>
