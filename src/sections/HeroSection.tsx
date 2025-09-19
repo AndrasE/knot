@@ -4,7 +4,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="flex items-center justify-center max-w-6xl min-h-screen auto md:pt-16 xl:pt-20">
+      className="flex items-center justify-center max-w-6xl min-h-screen ">
       <div className="flex flex-col items-center justify-center gap-5 sm:gap-10 align-center sm:flex-row ">
         <div className="text-center sm:w-2/3">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-dawning">

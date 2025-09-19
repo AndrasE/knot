@@ -87,7 +87,7 @@ export default function RSVPSection() {
   return (
     <section
       id="RSVP"
-      className="flex flex-col items-center justify-center h-screen max-w-2xl p-5 m-auto text-center sm:pb-0 pt-14 md:pt-16 xl:pt-20">
+      className="flex flex-col items-center justify-center h-screen max-w-2xl p-5 m-auto text-center ">
       <h1 className="pb-5 text-6xl font-dawning ">RSVP </h1>
       <div className="flex flex-col gap-3 text-center ">
         <p className="max-w-md">
