@@ -42,18 +42,18 @@ export default function GalleryPreviewSection() {
         />
 
         <div className="text-center sm:text-left sm:w-2/3">
-          <p className="max-w-md pt-2 ">
+          <p className="max-w-md pt-2 pb-5 ">
             Here you will find a gallery of our favorite moments together. We
             can't wait to create more memories with you on our special day! For
             now, we have only shared photos of our venue, as well as a few
             photos of us.
           </p>
+          <Link
+            to="/gallery"
+            className="px-3 py-2 font-bold text-white rounded-md max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
+            View Gallery
+          </Link>
         </div>
-        <Link
-          to="/gallery"
-          className="px-3 py-2 font-bold text-white rounded-md max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
-          View Gallery
-        </Link>
       </div>
     </section>
   );
