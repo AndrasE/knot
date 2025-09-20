@@ -4,10 +4,10 @@ import { Download, Zoom } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/styles.css";
 
 // Import all your images here
-import img1 from "../assets/images/gallery/1.PNG";
-import img2 from "../assets/images/gallery/2.PNG";
-import img3 from "../assets/images/gallery/3.PNG";
-import img4 from "../assets/images/gallery/4.PNG";
+import img1 from "../assets/images/gallery/1.png";
+import img2 from "../assets/images/gallery/2.png";
+import img3 from "../assets/images/gallery/3.png";
+import img4 from "../assets/images/gallery/4.png";
 import img5 from "../assets/images/gallery/sky.jpeg";
 
 const galleryImages = [
