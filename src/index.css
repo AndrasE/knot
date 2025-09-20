@@ -27,6 +27,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+html {
+  scroll-padding-top: 60px; /* ~navbar height */
+}
 
 body {
   margin: 0;
@@ -34,6 +37,11 @@ body {
   min-height: 100vh;
   font-family: "Roboto", Arial, sans-serif;
   font-weight: 100; /* This is correct for the ExtraLight font */
+}
+
+/* Utility class for Navheight adjustment font */
+.nav-height-adjust {
+  min-height: calc(100vh - 60px);
 }
 
 /* Utility class for Dawning font */

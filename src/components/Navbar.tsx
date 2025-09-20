@@ -7,7 +7,7 @@ export default function Navbar() {
   const isHomePage = location.pathname === "/";
 
   return (
-    <nav className="fixed top-0 z-10 w-full flex items-center justify-between gap-2 px-2 py-3 text-lg border-b-1 border-stone-300 sm:px-10 md:px-20 bg-[#f5f0e6] ">
+    <nav className="sticky top-0 z-10 w-full flex items-center justify-between gap-2 px-2 py-3 text-lg border-b-1 border-stone-300 sm:px-10 md:px-20 bg-[#f5f0e6] ">
       {/* Home page HashLink */}
       <HashLink
         to="/#hero"
@@ -27,7 +27,7 @@ export default function Navbar() {
       {isHomePage ? (
         <>
           <HashLink
-            to="/#details"
+            to="/#detailspreview"
             smooth
             className="text-base cursor-pointer sm:text-lg ">
             Details

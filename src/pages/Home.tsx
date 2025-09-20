@@ -2,7 +2,9 @@ import { Suspense, lazy } from "react";
 import HeroSection from "../sections/HeroSection";
 
 // Lazy load all sections that are not in the initial viewport
-const DetailsSection = lazy(() => import("../sections/DetailsSection"));
+const DetailsPreviewSection = lazy(
+  () => import("../sections/DetailsPreviewSection")
+);
 const GalleryPreviewSection = lazy(
   () => import("../sections/GalleryPreviewSection")
 );
@@ -17,7 +19,7 @@ export default function Home() {
 
       {/* All other sections are wrapped in a Suspense component */}
       <Suspense fallback={<div>Loading...</div>}>
-        <DetailsSection />
+        <DetailsPreviewSection />
         <GalleryPreviewSection />
         <GuestsSection />
         <RSVPSection />

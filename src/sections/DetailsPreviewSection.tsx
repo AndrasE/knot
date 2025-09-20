@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-export default function DetailsSection() {
+export default function DetailsPreviewSection() {
   return (
     <section
-      id="details"
-      className="flex items-center justify-center h-screen ">
-      <div className="flex flex-row items-center justify-center max-w-2xl gap-10 p-5 align-center">
+      id="detailspreview"
+      className="flex items-center justify-center max-w-6xl px-5 m-auto nav-height-adjust">
+      <div className="flex flex-row items-center justify-center max-w-2xl gap-10 px-5 align-center">
         <h2 className="hidden text-5xl text-right font-dawning sm:block">
           When Where
         </h2>

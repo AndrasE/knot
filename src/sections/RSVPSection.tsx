@@ -87,7 +87,7 @@ export default function RSVPSection() {
   return (
     <section
       id="RSVP"
-      className="flex flex-col items-center justify-center h-screen max-w-2xl p-5 m-auto text-center ">
+      className="flex flex-col items-center justify-center max-w-2xl px-5 m-auto text-center nav-height-adjust ">
       <h1 className="pb-5 text-6xl font-dawning ">RSVP </h1>
       <div className="flex flex-col gap-3 text-center ">
         <p className="max-w-md">
@@ -130,7 +130,7 @@ export default function RSVPSection() {
           <button
             type="submit"
             disabled={submitting}
-            className="px-4 py-2 ml-auto font-bold text-white transition duration-300 rounded-md max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
+            className="px-3 py-2 ml-auto font-bold text-white transition duration-300 rounded-md max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
             {submitting ? "Sending..." : "Send"}
           </button>
         </form>
