@@ -40,3 +40,22 @@ body {
 .font-dawning {
   font-family: "Dawning", serif;
 }
+
+/* overwrite lighbox styles */
+.yarl__container {
+  background-color: #f5f0e6; /* Change this to your desired color */
+}
+
+.yarl__button {
+  filter: none; /* Remove any filter effects */
+}
+
+/* Changes the icon color to bg-stone-500 and removes any filter effects */
+.yarl__icon {
+  color: #908985; /* Corresponds to Tailwind's bg-stone-600 */
+}
+
+/* Changes the icon color on hover to bg-stone-600 */
+.yarl__icon:hover {
+  color: #57534e; /* Corresponds to Tailwind's bg-stone-700 */
+}

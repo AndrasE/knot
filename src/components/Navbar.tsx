@@ -61,7 +61,7 @@ export default function Navbar() {
           <HashLink
             to="/gallery" // This links to the current page
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-base cursor-pointer sm:text-lg ">
+            className="text-3xl cursor-pointer font-dawning">
             {location.pathname.slice(1).charAt(0).toUpperCase() +
               location.pathname.slice(2)}
           </HashLink>
