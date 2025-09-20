@@ -35,7 +35,7 @@ export default function DetailsSection() {
           <p>No strict plans — just city adventures and a dash of improv!</p>
           <Link
             to="/details"
-            className="px-4 py-2 font-bold text-white rounded-md max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
+            className="px-4 py-2 m-auto mt-4 font-bold text-white rounded-md max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
             More details
           </Link>
         </div>
