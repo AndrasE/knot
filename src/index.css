@@ -42,7 +42,6 @@ body {
 /* Navheight adjustment  */
 .nav-height-adjust {
   min-height: calc(var(--vh, 1vh) * 100 - 60px);
-  overflow-anchor: none;
 }
 
 /* Utility class for Dawning font */
