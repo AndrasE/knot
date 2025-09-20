@@ -7,7 +7,7 @@ export default function App() {
   return (
     <Router>
       <Navbar />
-      <div >
+      <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/gallery" element={<Gallery />} />

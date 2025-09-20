@@ -31,7 +31,7 @@ const gallerySlides = [
 export default function GalleryPreviewSection() {
   return (
     <section
-      id="gallery"
+      id="gallerypreview"
       className="flex flex-col items-center justify-center max-w-2xl min-h-screen p-5 m-auto sm:pt-0 auto">
       <h1 className="pb-8 text-6xl font-dawning">Gallery</h1>
       <div className="flex flex-col items-center justify-center gap-5 sm:gap-10 align-center sm:flex-row ">
