@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function DetailsSection() {
   return (
     <section
@@ -7,9 +9,9 @@ export default function DetailsSection() {
         <h2 className="hidden text-5xl text-right font-dawning sm:block">
           When Where
         </h2>
-        <div className="flex flex-col gap-3 text-center sm:text-left">
+        <div className="flex flex-col gap-2 text-center sm:text-left">
           <h1 className="text-6xl font-dawning ">Details </h1>
-          <h2 className="mt-2 text-2xl">Ceremony:</h2>
+          <h2 className="text-2xl ">Ceremony:</h2>
           <p>Morden Park House - The Gazebo</p>
           <p>Friday, 24 July 2026 at 14:00 BST (13:00 UTC)</p>
           <a
@@ -19,7 +21,7 @@ export default function DetailsSection() {
             className="underline">
             Directions
           </a>
-          <h2 className="mt-2 text-2xl ">Celebration:</h2>
+          <h2 className="text-2xl ">Celebration:</h2>
           <p>Cherry Tree - Dulwich</p>
           <p>Friday, 24 July 2026 est 16:00 BST (15:00 UTC)</p>
           <a
@@ -29,8 +31,13 @@ export default function DetailsSection() {
             className="underline">
             Directions
           </a>
-          <h2 className="mt-2 text-2xl font-bold">After?</h2>
+          <h2 className="text-2xl font-bold ">After?</h2>
           <p>No strict plans — just city adventures and a dash of improv!</p>
+          <Link
+            to="/details"
+            className="px-4 py-2 font-bold text-white rounded-md max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
+            More details
+          </Link>
         </div>
       </div>
     </section>
