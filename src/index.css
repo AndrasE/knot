@@ -41,7 +41,7 @@ body {
 
 /* Navheight adjustment  */
 .nav-height-adjust {
-  height: calc(var(--vh, 1vh) * 100 - 60px);
+  min-height: calc(var(--vh, 1vh) * 100 - 60px);
   overflow-anchor: none;
 }
 
