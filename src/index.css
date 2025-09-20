@@ -39,9 +39,9 @@ body {
   font-weight: 100; /* This is correct for the ExtraLight font */
 }
 
-/* Utility class for Navheight adjustment font */
+/* Navheight adjustment  */
 .nav-height-adjust {
-  min-height: calc(100vh - 60px);
+  min-height: calc(100dvh - 60px);
 }
 
 /* Utility class for Dawning font */
