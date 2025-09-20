@@ -42,7 +42,7 @@ export default function GalleryPreviewSection() {
         />
 
         <div className="text-center sm:text-left sm:w-2/3">
-          <p className="max-w-md pt-2 pb-4">
+          <p className="max-w-md pt-2 pb-4 mb-2">
             Here you will find a gallery of our favorite moments together. We
             can't wait to create more memories with you on our special day! For
             now, we have only shared photos of our venue, as well as a few
