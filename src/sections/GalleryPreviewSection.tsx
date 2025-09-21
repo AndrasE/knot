@@ -32,7 +32,7 @@ export default function GalleryPreviewSection() {
   return (
     <section
       id="gallerypreview"
-      className="flex flex-col items-center justify-center max-w-2xl px-5 m-auto nav-height-adjust ">
+      className="flex flex-col items-center justify-center max-w-2xl px-5 m-auto h-screen ">
       <h1 className="pb-8 text-6xl font-dawning">Gallery</h1>
       <div className="flex flex-col items-center justify-center gap-5 sm:gap-10 align-center sm:flex-row ">
         {/* Replace the img with the Carousel component */}

@@ -7,7 +7,7 @@ export default function Navbar() {
   const isHomePage = location.pathname === "/";
 
   return (
-    <nav className="sticky top-0 z-10 w-full flex items-center justify-between gap-2 px-2 py-3 text-lg border-b-1 border-stone-300 sm:px-10 md:px-20 bg-[#f5f0e6] ">
+    <nav className="fixed top-0 left-0 z-10 flex w-full items-center justify-between gap-2 px-2 py-3 text-lg border-b border-stone-300 sm:px-10 md:px-20 bg-[#f5f0e6]">
       {/* Home page HashLink */}
       <HashLink
         to="/#hero"
@@ -19,7 +19,7 @@ export default function Navbar() {
           width="30"
           height="30"
           fetchPriority="high"
-          className="w-10 "
+          className="w-10"
         />
       </HashLink>
 
@@ -29,47 +29,41 @@ export default function Navbar() {
           <HashLink
             to="/#detailspreview"
             smooth
-            className="text-base cursor-pointer sm:text-lg ">
+            className="text-base cursor-pointer sm:text-lg">
             Details
           </HashLink>
-
           <HashLink
             to="/#gallerypreview"
             smooth
-            className="text-base cursor-pointer sm:text-lg ">
+            className="text-base cursor-pointer sm:text-lg">
             Gallery
           </HashLink>
-
           <HashLink
             to="/#guests"
             smooth
-            className="text-base cursor-pointer sm:text-lg ">
+            className="text-base cursor-pointer sm:text-lg">
             Guests
           </HashLink>
-
           <HashLink
             to="/#RSVP"
             smooth
-            className="text-base cursor-pointer sm:text-lg ">
+            className="text-base cursor-pointer sm:text-lg">
             RSVP
           </HashLink>
         </>
       ) : (
         <>
-          {/* Links for non-homepage routes */}
-
           <HashLink
-            to="/gallery" // This links to the current page
+            to="/gallery"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="absolute bottom-0 text-5xl transform -translate-x-1/2 cursor-pointer font-dawning left-1/2">
+            className="absolute bottom-0 text-5xl transform -translate-x-1/2 cursor-pointer left-1/2 font-dawning">
             {location.pathname.slice(1).charAt(0).toUpperCase() +
               location.pathname.slice(2)}
           </HashLink>
-
           <HashLink
             to="/"
-            smooth // Use smooth scroll to go back to the top of the homepage
-            className="text-base cursor-pointer sm:text-lg ">
+            smooth
+            className="text-base cursor-pointer sm:text-lg">
             Home
           </HashLink>
         </>

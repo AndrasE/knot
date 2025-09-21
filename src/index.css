@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Add your font-face rules at the top */
+/* Fonts */
 @font-face {
   font-family: "Dawning";
   src: url("./assets/fonts/Dawning.ttf") format("truetype");
@@ -12,11 +12,12 @@
 @font-face {
   font-family: "Roboto";
   src: url("./assets/fonts/RobotoExtraLight.ttf") format("truetype");
-  font-weight: 100; /* This is correct for the ExtraLight font */
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 
+/* Base styles */
 :root {
   line-height: 1.5;
   font-weight: 400;
@@ -27,8 +28,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 html {
-  scroll-padding-top: 60px; /* ~navbar height */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -36,12 +38,14 @@ body {
   min-width: 320px;
   min-height: 100vh;
   font-family: "Roboto", Arial, sans-serif;
-  font-weight: 100; /* This is correct for the ExtraLight font */
+  font-weight: 100;
+  /* nav offset half of the nav height */
+  padding-top: 1.8rem;
 }
 
-/* Navheight adjustment  */
-.nav-height-adjust {
-  min-height: calc(100vh - 60px);
+/* Anchor offset fix half of nav height as all sections 100vh */
+section {
+  scroll-margin-top: 1.8rem;
 }
 
 /* Utility class for Dawning font */
@@ -49,21 +53,19 @@ body {
   font-family: "Dawning", serif;
 }
 
-/* overwrite lighbox styles */
+/* Lightbox overrides */
 .yarl__container {
-  background-color: #f5f0e6; /* Change this to your desired color */
+  background-color: #f5f0e6;
 }
 
 .yarl__button {
-  filter: none; /* Remove any filter effects */
+  filter: none;
 }
 
-/* Changes the icon color to bg-stone-500 and removes any filter effects */
 .yarl__icon {
-  color: #908985; /* Corresponds to Tailwind's bg-stone-600 */
+  color: #908985;
 }
 
-/* Changes the icon color on hover to bg-stone-600 */
 .yarl__icon:hover {
-  color: #57534e; /* Corresponds to Tailwind's bg-stone-700 */
+  color: #57534e;
 }
