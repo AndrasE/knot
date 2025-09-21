@@ -8,26 +8,21 @@ import {
 } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/styles.css";
 
-// Import all your images here
-// import img1 from "../assets/images/gallery/1.png";
-// import img2 from "../assets/images/gallery/2.png";
-// import img3 from "../assets/images/gallery/3.png";
-// import img4 from "../assets/images/gallery/4.png";
-import img5 from "../assets/images/gallery/sky.jpeg";
+import image1 from "../assets/images/gallery/1.jpg";
+import image2 from "../assets/images/gallery/2.jpeg";
+import image3 from "../assets/images/gallery/3.jpg";
 
 const galleryImages = [
-  // { src: img1, width: 800, height: 600, title: "Image 1" },
-  // { src: img2, width: 1200, height: 800, title: "Image 2" },
-  // { src: img3, width: 1000, height: 1500, title: "Image 3" },
-  // { src: img4, width: 1200, height: 900, title: "Image 4" },
-  { src: img5, width: 1920, height: 1080, title: "Image 5" },
+  { src: image1, width: 2000, height: 1500, title: "Image 1" },
+  { src: image2, width: 1280, height: 853, title: "Image 2" },
+  { src: image3, width: 2048, height: 1152, title: "Image 3" },
 ];
 
 export default function GalleryPage() {
   const [index, setIndex] = useState(-1);
 
   return (
-    <div className="flex flex-col items-center justify-center max-w-6xl px-5 mx-auto h-screen">
+    <div className="flex flex-col items-center justify-center h-screen max-w-6xl px-5 mx-auto">
       <p className="max-w-2xl pt-4 pb-8 text-center">
         We'll share the best photos here after the wedding, and post a link to a
         shared album where you can view and download all of the photos. As for
