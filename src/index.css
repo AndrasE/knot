@@ -39,13 +39,9 @@ body {
   min-height: 100vh;
   font-family: "Roboto", Arial, sans-serif;
   font-weight: 100;
-  /* nav offset half of the nav height */
-  padding-top: 1.8rem;
 }
-
-/* Anchor offset fix half of nav height as all sections 100vh */
-section {
-  scroll-margin-top: 1.8rem;
+.nav-adjust-padding {
+  padding-top: 1.8rem;
 }
 
 /* Utility class for Dawning font */

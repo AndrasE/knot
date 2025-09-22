@@ -24,27 +24,38 @@ const galleryImages = [
   { src: image5, width: 1200, height: 1200, title: "Image 5" },
   { src: image6, width: 1400, height: 800, title: "Image 6" },
   { src: image7, width: 1400, height: 1050, title: "Image 7" },
+  // Add more images here
+  { src: image1, width: 2000, height: 1500, title: "Image 1" },
+  { src: image2, width: 1280, height: 853, title: "Image 2" },
+  { src: image3, width: 2048, height: 1152, title: "Image 3" },
+  { src: image4, width: 1600, height: 1200, title: "Image 4" },
+  { src: image5, width: 1200, height: 1200, title: "Image 5" },
+  { src: image6, width: 1400, height: 800, title: "Image 6" },
+  { src: image7, width: 1400, height: 1050, title: "Image 7" },
 ];
 
 export default function GalleryPage() {
   const [index, setIndex] = useState(-1);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen max-w-6xl px-5 mx-auto">
-      <p className="max-w-2xl pt-4 pb-8 text-center">
+    <div className="flex flex-col items-center justify-center max-w-6xl min-h-screen px-5 pt-20 mx-auto">
+      <p className="max-w-2xl pt-4 pb-8 text-justify">
         We'll share the best photos here after the wedding, and post a link to a
         shared album where you can view and download all of the photos. As for
         now here are a few photos of the venue and us.
       </p>
-      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-5 pb-5 sm:grid-cols-3 md:grid-cols-4">
         {galleryImages.map((image, i) => (
-          <img
+          <div
             key={i}
-            src={image.src}
-            alt={image.title}
-            onClick={() => setIndex(i)}
-            className="transition-opacity rounded-lg shadow-xl cursor-pointer hover:opacity-80"
-          />
+            className="relative w-full h-64 overflow-hidden rounded-lg shadow-xl">
+            <img
+              src={image.src}
+              alt={image.title}
+              onClick={() => setIndex(i)}
+              className="object-cover w-full h-full transition-opacity duration-300 cursor-pointer hover:opacity-80"
+            />
+          </div>
         ))}
       </div>
 

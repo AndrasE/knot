@@ -2,7 +2,7 @@ export default function GuestsSection() {
   return (
     <section
       id="guests"
-      className="flex flex-col items-center justify-center max-w-2xl px-5 m-auto text-center h-screen ">
+      className="flex flex-col items-center justify-center max-w-2xl min-h-screen px-5 m-auto text-center nav-adjust-padding ">
       <h1 className="pb-5 text-6xl font-dawning ">Guests </h1>
       <div className="flex flex-row items-center justify-center gap-10 align-center ">
         <ul className="grid w-full grid-cols-2 gap-x-10 gap-y-2 md:grid-cols-3 lg:grid-cols-4">

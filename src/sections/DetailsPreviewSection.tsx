@@ -4,7 +4,7 @@ export default function DetailsPreviewSection() {
   return (
     <section
       id="detailspreview"
-      className="flex items-center justify-center h-screen max-w-6xl px-5 m-auto ">
+      className="flex items-center justify-center max-w-6xl min-h-screen px-5 m-auto nav-adjust-padding  ">
       <div className="flex flex-row items-center justify-center max-w-2xl gap-10 px-5 align-center">
         <h2 className="hidden text-5xl text-right font-dawning sm:block">
           When Where
