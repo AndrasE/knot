@@ -41,12 +41,12 @@ export default function GalleryPage() {
 
   return (
     <div className="max-w-6xl pt-20 mx-auto flex-center-100vh">
-      <p className="max-w-2xl pt-4 pb-8 text-justify">
+      <p className="max-w-2xl pt-4 pb-8 text-center">
         We'll share the best photos here after the wedding, and post a link to a
         shared album where you can view and download all of the photos. As for
         now here are a few photos of the venue and us.
       </p>
-      <div className="grid grid-cols-2 gap-5 pb-5 sm:grid-cols-3 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-5 pb-5 md:pb-10 sm:grid-cols-3 md:grid-cols-4">
         {galleryImages.map((image, i) => (
           <div
             key={i}

@@ -52,6 +52,22 @@ body {
   @apply flex flex-col items-center justify-center min-h-screen px-5 mx-auto;
 }
 
+/* Timeline dots */
+.circle-dot {
+  position: relative;
+}
+
+.circle-dot::after {
+  content: "";
+  position: absolute;
+  left: -23px;
+  top: 5px;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: #57534e; /* Darker grey */
+}
+
 /* Lightbox overrides */
 .yarl__container {
   background-color: #f5f0e6;
