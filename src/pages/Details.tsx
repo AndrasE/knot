@@ -17,6 +17,38 @@ export default function DetailsPage() {
           selection of drinks. With its cozy interiors and beautiful outdoor
           seating area, The Cherry Tree provides a perfect setting for a
           memorable celebration with friends and family.
+        </p>{" "}
+        <p className="text-justify ">
+          TBA - The Cherry Tree is a charming gastropub located in the heart of
+          Dulwich Village. Known for its warm and inviting atmosphere, it offers
+          a delightful menu featuring seasonal British cuisine and an extensive
+          selection of drinks. With its cozy interiors and beautiful outdoor
+          seating area, The Cherry Tree provides a perfect setting for a
+          memorable celebration with friends and family.
+        </p>{" "}
+        <p className="text-justify ">
+          TBA - The Cherry Tree is a charming gastropub located in the heart of
+          Dulwich Village. Known for its warm and inviting atmosphere, it offers
+          a delightful menu featuring seasonal British cuisine and an extensive
+          selection of drinks. With its cozy interiors and beautiful outdoor
+          seating area, The Cherry Tree provides a perfect setting for a
+          memorable celebration with friends and family.
+        </p>{" "}
+        <p className="text-justify ">
+          TBA - The Cherry Tree is a charming gastropub located in the heart of
+          Dulwich Village. Known for its warm and inviting atmosphere, it offers
+          a delightful menu featuring seasonal British cuisine and an extensive
+          selection of drinks. With its cozy interiors and beautiful outdoor
+          seating area, The Cherry Tree provides a perfect setting for a
+          memorable celebration with friends and family.
+        </p>{" "}
+        <p className="text-justify ">
+          TBA - The Cherry Tree is a charming gastropub located in the heart of
+          Dulwich Village. Known for its warm and inviting atmosphere, it offers
+          a delightful menu featuring seasonal British cuisine and an extensive
+          selection of drinks. With its cozy interiors and beautiful outdoor
+          seating area, The Cherry Tree provides a perfect setting for a
+          memorable celebration with friends and family.
         </p>
         <p className="pt-4">After?: TBA</p>
         <p>No strict plans — just city adventures and a dash of improv!</p>{" "}

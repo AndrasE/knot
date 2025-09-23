@@ -1,9 +1,10 @@
 import { HashLink } from "react-router-hash-link";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "../assets/images/navlogo.avif";
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const isHomePage = location.pathname === "/";
 
   return (
@@ -54,18 +55,17 @@ export default function Navbar() {
       ) : (
         <>
           <HashLink
-            to="/gallery"
+            to={location.pathname}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="absolute bottom-0 text-5xl transform -translate-x-1/2 cursor-pointer left-1/2 font-dawning">
             {location.pathname.slice(1).charAt(0).toUpperCase() +
               location.pathname.slice(2)}
           </HashLink>
-          <HashLink
-            to="/"
-            smooth
+          <button
+            onClick={() => navigate(-1)} // This is the key change
             className="text-base cursor-pointer sm:text-lg">
-            Home
-          </HashLink>
+            Back
+          </button>
         </>
       )}
     </nav>
