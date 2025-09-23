@@ -29,10 +29,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
   min-width: 320px;
@@ -40,13 +36,20 @@ body {
   font-family: "Roboto", Arial, sans-serif;
   font-weight: 100;
 }
-.nav-adjust-padding {
-  padding-top: 1.8rem;
+
+/* Est nav height */
+.nav-content-offset {
+  padding-top: 3.5rem;
 }
 
-/* Utility class for Dawning font */
+/* Font */
 .font-dawning {
   font-family: "Dawning", serif;
+}
+
+/* Section unitlity class */
+.flex-center-100vh {
+  @apply flex flex-col items-center justify-center min-h-screen px-5 mx-auto;
 }
 
 /* Lightbox overrides */

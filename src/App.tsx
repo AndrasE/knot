@@ -3,12 +3,13 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import Details from "./pages/Details";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Navbar />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/details" element={<Details />} />

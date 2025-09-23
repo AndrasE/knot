@@ -4,8 +4,8 @@ export default function DetailsPreviewSection() {
   return (
     <section
       id="detailspreview"
-      className="flex items-center justify-center max-w-6xl min-h-screen px-5 m-auto nav-adjust-padding  ">
-      <div className="flex flex-row items-center justify-center max-w-2xl gap-10 px-5 align-center">
+      className="max-w-6xl flex-center-100vh nav-content-offset ">
+      <div className="flex flex-row items-center justify-center max-w-2xl gap-10 align-center">
         <h2 className="hidden text-5xl text-right font-dawning sm:block">
           When Where
         </h2>
@@ -35,7 +35,7 @@ export default function DetailsPreviewSection() {
           <p>No strict plans — just city adventures and a dash of improv!</p>
           <Link
             to="/details"
-            className="px-4 py-2 m-auto mt-4 font-bold text-white rounded-md sm:m-0 max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
+            className="px-3 py-2 m-auto font-bold text-white rounded-md sm:m-0 max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
             More details
           </Link>
         </div>

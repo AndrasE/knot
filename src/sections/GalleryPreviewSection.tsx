@@ -32,7 +32,7 @@ export default function GalleryPreviewSection() {
   return (
     <section
       id="gallerypreview"
-      className="flex flex-col items-center justify-center max-w-2xl min-h-screen px-5 m-auto nav-adjust-padding  ">
+      className="max-w-2xl flex-center-100vh nav-content-offset ">
       <h1 className="pb-8 text-6xl font-dawning">Gallery</h1>
       <div className="flex flex-col items-center justify-center gap-5 sm:gap-10 align-center sm:flex-row ">
         {/* Replace the img with the Carousel component */}
@@ -40,9 +40,8 @@ export default function GalleryPreviewSection() {
           slides={gallerySlides}
           className="w-3/4 sm:w-1/3 max-w-[230px] shadow-xl"
         />
-
-        <div className="text-center sm:text-left sm:w-2/3">
-          <p className="max-w-md pt-2 pb-5 ">
+        <div className="flex flex-col gap-2 text-center sm:text-left sm:w-2/3">
+          <p className="max-w-md pt-2 ">
             Here you will find a gallery of our favorite moments together. We
             can't wait to create more memories with you on our special day! For
             now, we have only shared photos of our venue, as well as a few
@@ -50,10 +49,10 @@ export default function GalleryPreviewSection() {
           </p>
           <Link
             to="/gallery"
-            className="px-3 py-2 font-bold text-white rounded-md max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
+            className="px-3 py-2 m-auto font-bold text-white rounded-md sm:m-0 max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
             View Gallery
           </Link>
-        </div>
+        </div>{" "}
       </div>
     </section>
   );

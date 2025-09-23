@@ -37,8 +37,10 @@ const galleryImages = [
 export default function GalleryPage() {
   const [index, setIndex] = useState(-1);
 
+  // Scroll to top when navigating to this page
+
   return (
-    <div className="flex flex-col items-center justify-center max-w-6xl min-h-screen px-5 pt-20 mx-auto">
+    <div className="max-w-6xl pt-20 mx-auto flex-center-100vh">
       <p className="max-w-2xl pt-4 pb-8 text-justify">
         We'll share the best photos here after the wedding, and post a link to a
         shared album where you can view and download all of the photos. As for
