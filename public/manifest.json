@@ -1,6 +1,7 @@
 {
-  "name": "knot",
-  "short_name": "S&A",
+"name": "S&A Wedding App",
+  "short_name": "knot",
+  "description": "Join Sarah and Andras as they tie the knot! RSVP to their wedding and find all the details you need to celebrate with them.",
   "icons": [
     {
       "src": "/pwa-icons/appicon-16x16.png",
