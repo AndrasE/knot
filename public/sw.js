@@ -1,14 +1,5 @@
 const CACHE_NAME = "wedding-app-cache-v1";
-const urlsToCache = [
-  "/",
-  "/index.html",
-  "/static/js/bundle.js",
-  "/static/css/main.css",
-  "/static/media/carousel/1.webp",
-  "/static/media/carousel/2.webp",
-  "/static/media/carousel/3.webp",
-  "/static/media/carousel/4.webp",
-];
+const urlsToCache = ["/", "/index.html"];
 
 self.addEventListener("install", (event) => {
   console.log("Service Worker: Installing...");
