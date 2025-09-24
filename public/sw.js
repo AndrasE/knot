@@ -1,5 +1,17 @@
 const CACHE_NAME = "wedding-app-cache-v1";
-const urlsToCache = ["/", "/index.html"];
+const urlsToCache = [
+  "/",
+  "/index.html",
+  "/src/main.tsx",
+  "/src/assets/css/index.css",
+  "/src/assets/fonts/RobotoExtraLight.ttf",
+  "/src/assets/fonts/Dawning.ttf",
+  "/src/assets/images/carousel/1.webp",
+  "/src/assets/images/carousel/2.webp",
+  "/src/assets/images/carousel/3.webp",
+  "/src/assets/images/carousel/4.webp",
+  // Add more assets here
+];
 
 self.addEventListener("install", (event) => {
   console.log("Service Worker: Installing...");
