@@ -10,6 +10,7 @@ const GalleryPreviewSection = lazy(
 );
 const GuestsSection = lazy(() => import("../sections/GuestsSection"));
 const RSVPSection = lazy(() => import("../sections/RSVPSection"));
+const GameSection = lazy(() => import("../sections/GameSection"));
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <GalleryPreviewSection />
         <GuestsSection />
         <RSVPSection />
+        <GameSection />
       </Suspense>
     </div>
   );
