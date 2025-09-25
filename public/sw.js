@@ -1,57 +1,26 @@
 const CACHE_NAME = "sarah-andras-wedding-app-v1";
 
-// This function fetches the asset manifest and returns a list of files to cache.
-async function getAssetsToCache() {
-  try {
-    // Attempt to fetch the asset manifest from the root.
-    const response = await fetch("/asset-manifest.json");
-    if (!response.ok) {
-      console.warn(
-        "Could not find asset-manifest.json. Falling back to default paths."
-      );
-      // If the manifest isn't found, you can return a simple list of files to cache.
-      // This is a good fallback for when you're not using a build tool that generates a manifest.
-      return [
-        "/",
-        "/index.html",
-        "/src/assets/css/index.css",
-        "/src/assets/fonts/RobotoExtraLight.ttf",
-        "/src/assets/fonts/Dawning.ttf",
-        "/src/assets/images/carousel/1.webp",
-        "/src/assets/images/carousel/2.webp",
-        "/src/assets/images/carousel/3.webp",
-        "/src/assets/images/carousel/4.webp",
-      ];
-    }
-    const manifest = await response.json();
-
-    // Extract the URLs from the manifest.
-    return Object.values(manifest.files || {}).filter((path) => {
-      // You can add more filtering logic here if needed, or simply return all paths.
-      return (
-        path.endsWith(".html") ||
-        path.endsWith(".js") ||
-        path.endsWith(".css") ||
-        path.endsWith(".ttf") ||
-        path.endsWith(".webp")
-      );
-    });
-  } catch (error) {
-    console.error(
-      "Service Worker Error: Unable to get assets to cache.",
-      error
-    );
-    return [];
-  }
-}
+// List of essential files to pre-cache on install.
+const urlsToCache = [
+  "/",
+  "/index.html",
+  "/manifest.json",
+  "/src/assets/css/index.css",
+  "/src/assets/fonts/Dawning.ttf",
+  "/src/assets/fonts/RobotoExtraLight.ttf",
+  "/src/assets/images/us.webp",
+  "/src/assets/images/carousel/1.webp",
+  "/src/assets/images/carousel/2.webp",
+  "/src/assets/images/carousel/3.webp",
+  "/src/assets/images/carousel/4.webp",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
-      const urlsToCache = await getAssetsToCache();
       const cache = await caches.open(CACHE_NAME);
-      // We also cache the root URL for offline support.
-      await cache.addAll(["/", ...urlsToCache]);
+      await cache.addAll(urlsToCache);
+      console.log("Service Worker: Essential files pre-cached successfully.");
     })()
   );
 });
@@ -59,18 +28,33 @@ self.addEventListener("install", (event) => {
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     (async () => {
-      const cache = await caches.open(CACHE_NAME);
-      const cachedResponse = await cache.match(event.request);
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
       try {
+        // Try to fetch the resource from the network first.
         const networkResponse = await fetch(event.request);
-        // You can choose to cache new responses here if you wish.
+        const cache = await caches.open(CACHE_NAME);
+
+        // Cache the new network response for future use.
+        // We clone the response because the stream can only be read once.
+        cache.put(event.request, networkResponse.clone());
+        console.log(
+          `Service Worker: Fetched from network and cached: ${event.request.url}`
+        );
         return networkResponse;
       } catch (error) {
-        console.error("Fetch failed: ", error);
+        // If the network fetch fails, look for a cached version.
+        const cachedResponse = await caches.match(event.request);
+        if (cachedResponse) {
+          console.log(
+            `Service Worker: Serving from cache: ${event.request.url}`
+          );
+          return cachedResponse;
+        }
+
+        // If nothing is found in the cache, and the network is offline.
+        console.error(
+          "Service Worker: Fetch failed and no cache available.",
+          error
+        );
         return new Response("You are offline.", { status: 503 });
       }
     })()
@@ -80,12 +64,14 @@ self.addEventListener("fetch", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
+      // Clean up old caches.
       const cacheNames = await caches.keys();
       await Promise.all(
         cacheNames
           .filter((cacheName) => cacheName !== CACHE_NAME)
           .map((cacheName) => caches.delete(cacheName))
       );
+      console.log("Service Worker: Old caches cleared.");
     })()
   );
 });
