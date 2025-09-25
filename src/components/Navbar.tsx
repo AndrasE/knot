@@ -1,6 +1,6 @@
 import { HashLink } from "react-router-hash-link";
 import { useLocation, useNavigate } from "react-router-dom";
-import Logo from "../assets/images/navlogo.avif";
+import Logo from "../assets/images/icons/navlogo.avif";
 
 export default function Navbar() {
   const location = useLocation();
