@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import BillyIconSvg from "../components/BillyIconSvg";
 
-export default function GameSection() {
+export default function GamePreviewSection() {
   return (
     <Link
       to="/game"

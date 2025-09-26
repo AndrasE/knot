@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Gallery from "./pages/Gallery";
-import Details from "./pages/Details";
 import ScrollToTop from "./components/ScrollToTop";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/Home";
+import DetailsPage from "./pages/Details";
+import GalleryPage from "./pages/Gallery";
+import GamePage from "./pages/Game";
 
 export default function App() {
   useEffect(() => {
@@ -30,9 +31,10 @@ export default function App() {
       <ScrollToTop />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/details" element={<Details />} />
-        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/details" element={<DetailsPage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/game" element={<GamePage />} />
       </Routes>
     </Router>
   );

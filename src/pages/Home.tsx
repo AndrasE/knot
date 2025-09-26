@@ -10,9 +10,11 @@ const GalleryPreviewSection = lazy(
 );
 const GuestsSection = lazy(() => import("../sections/GuestsSection"));
 const RSVPSection = lazy(() => import("../sections/RSVPSection"));
-const GameSection = lazy(() => import("../sections/GameSection"));
+const GamePreviewSection = lazy(
+  () => import("../sections/GamesPreviewSection")
+);
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className="max-w-6xl mx-auto">
       {/* Load this section immediately as it's at the top */}
@@ -24,7 +26,7 @@ export default function Home() {
         <GalleryPreviewSection />
         <GuestsSection />
         <RSVPSection />
-        <GameSection />
+        <GamePreviewSection />
       </Suspense>
     </div>
   );
