@@ -34,17 +34,18 @@ export default function FlappyGame() {
   useEffect(() => {
     const updateDimensions = () => {
       const navbarHeight = 60;
-      const maxWidth = 360;
-      const minWidth = 300;
+      const maxGameContentWidth = 360; // Max ideal width of the *game canvas* itself
+      const minGameContentWidth = 300;
+      const safetyBuffer = 48; // A buffer (e.g., 24px on each side) for parent/child padding and borders
       const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight - navbarHeight;
-      const calculatedWidth = Math.min(
-        maxWidth,
-        Math.max(minWidth, windowWidth)
-      );
-      const calculatedHeight = calculatedWidth * (7 / 6); // Maintain 6:7 ratio
+      const windowHeight = window.innerHeight - navbarHeight; // 1. Calculate the available width for the content, subtracting the safety margin.
+      const availableWidth = Math.max(
+        minGameContentWidth,
+        windowWidth - safetyBuffer
+      ); // 2. Determine the width of the game area, capping it at the ideal maximum.
+      const calculatedWidth = Math.min(maxGameContentWidth, availableWidth); // 3. Calculate height based on the chosen width (maintaining 6:7 ratio)
+      const calculatedHeight = calculatedWidth * (7 / 6); // 4. Final size adjustments // Ensure height fits within available viewport
 
-      // Ensure height fits within available viewport
       const finalHeight = Math.min(calculatedHeight, windowHeight * 0.9);
       const finalWidth = finalHeight * (6 / 7); // Adjust width to maintain ratio
 
@@ -219,10 +220,10 @@ export default function FlappyGame() {
   ]);
 
   return (
-    <div className="flex flex-col items-center justify-center max-w-xl p-0 border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
+    <div className="flex flex-col items-center p-0 mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       <header className="mb-4 text-center">
         <h1 className="pt-2 text-2xl">Flappy Stunkie</h1>
-        <p className="mb-2 text-gray-600">Smootch em!</p>
+        <p className="mb-2 text-gray-600">Smootch 'em!</p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <div className="px-4 py-2 text-indigo-800 bg-indigo-100 rounded-lg shadow-sm">
             Score: <span>{score}</span>
@@ -304,22 +305,13 @@ export default function FlappyGame() {
           ))}
         {/* Start Screen */}
         {!gameStarted && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-3xl text-white bg-black/70">
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-3xl text-white bg-black/50">
             {" "}
-            <p className="mb-2 text-xl">Help stuckies to find a smooch! 🥰</p>
+            <p className="mb-2 text-xl">Help Stunkies get a smooch! 🥰</p>
             <img src={smooch} alt="smooch" className="mb-4 w-60 rounded-2xl" />
-            {/* <div className="relative flex flex-row items-center justify-center mb-4">
-              <img src={flyer} alt="flyer" className="w-16 h-16 rounded-xl" />{" "}
-              <span className="text-xl ">➕</span>{" "}
-              <img
-                src={obstacle}
-                alt="flyer"
-                className="w-16 h-16 rounded-xl"
-              />{" "}
-            </div>{" "} */}
             <button
               onClick={startGame}
-              className="px-4 py-2 text-base text-white transition duration-200 shadow-xl bg-stone-400 hover:bg-stone-500 rounded-xl active:scale-95">
+              className="px-4 py-2 text-base text-white transition duration-200 rounded-md shadow-xl bg-stone-400 hover:bg-stone-500 active:scale-95">
               Start Game{" "}
             </button>{" "}
           </div>
@@ -332,7 +324,7 @@ export default function FlappyGame() {
             <p className="mt-2 text-xl">High Score: {highScore}</p>
             <button
               onClick={startGame}
-              className="px-4 py-2 mt-6 text-base text-white transition duration-200 shadow-xl bg-stone-400 hover:bg-stone-500 rounded-xl active:scale-95">
+              className="px-4 py-2 mt-6 text-base text-white transition duration-200 rounded-md shadow-xl bg-stone-400 hover:bg-stone-500 active:scale-95">
               Play Again
             </button>
           </div>

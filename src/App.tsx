@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/Home";
 import DetailsPage from "./pages/Details";
 import GalleryPage from "./pages/Gallery";
-import GamePage from "./pages/Game";
+import GamesPage from "./pages/Games";
 
 export default function App() {
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/details" element={<DetailsPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/game" element={<GamePage />} />
+        <Route path="/games" element={<GamesPage />} />
       </Routes>
     </Router>
   );
