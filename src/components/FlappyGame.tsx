@@ -7,12 +7,13 @@ export default function FlappyGame() {
   const [velocity, setVelocity] = useState(0);
   const [obstacles, setObstacles] = useState<{ x: number; gapY: number }[]>([]);
   const [score, setScore] = useState(0);
-  const [flappyHighscore, setflappyHighscore] = useState(() => {
-    return parseInt(localStorage.getItem("flappyflappyHighscore") || "0", 10);
+  const [highScore, setHighScore] = useState(() => {
+    return parseInt(localStorage.getItem("flappyHighScore") || "0", 10);
   });
   const [gameOver, setGameOver] = useState(false);
   const [gameAreaWidth, setGameAreaWidth] = useState(360); // Initial width
   const [gameAreaHeight, setGameAreaHeight] = useState(420); // Initial height (6:7 ratio)
+  const [lastJumpTime, setLastJumpTime] = useState(0); // For debouncing touch events
 
   const flyerX = 80;
   const flyerSize = 48;
@@ -20,7 +21,7 @@ export default function FlappyGame() {
   const gapHeight = 144;
   const capHeight = 48;
   const minObstacleSpacing = 200;
-  const gravity = 0.4;
+  const gravity = 0.5;
   const jumpStrength = -7;
 
   // Dynamic sizing
@@ -63,14 +64,22 @@ export default function FlappyGame() {
   useEffect(() => {
     if (gameOver) {
       // Update high score when game ends
-      if (score > flappyHighscore) {
-        setflappyHighscore(score);
-        localStorage.setItem("flappyflappyHighscore", score.toString());
+      if (score > highScore) {
+        setHighScore(score);
+        localStorage.setItem("flappyHighScore", score.toString());
       }
       return;
     }
 
-    const handleJump = () => setVelocity(jumpStrength);
+    const handleJump = () => {
+      const now = Date.now();
+      if (now - lastJumpTime > 200) {
+        // Debounce: 200ms cooldown
+        setVelocity(jumpStrength);
+        setLastJumpTime(now);
+      }
+    };
+
     const handleGlobalAction = (e: KeyboardEvent | MouseEvent | TouchEvent) => {
       if (
         e instanceof KeyboardEvent &&
@@ -82,7 +91,6 @@ export default function FlappyGame() {
       }
     };
 
-    window.addEventListener("keydown", handleGlobalAction);
     window.addEventListener("click", handleGlobalAction);
     window.addEventListener("touchstart", handleGlobalAction); // For mobile
 
@@ -137,8 +145,8 @@ export default function FlappyGame() {
               didCollide = true;
             }
           }
-          // Scoring
-          if (obs.x + 5 === flyerX) {
+          // Scoring: Use range to ensure reliability on mobile
+          if (obs.x + 5 >= flyerX && obs.x + 5 < flyerX + flyerSize) {
             setScore((s) => s + 1);
           }
         });
@@ -150,7 +158,6 @@ export default function FlappyGame() {
 
     return () => {
       clearInterval(gameLoop);
-      window.removeEventListener("keydown", handleGlobalAction);
       window.removeEventListener("click", handleGlobalAction);
       window.removeEventListener("touchstart", handleGlobalAction);
     };
@@ -162,14 +169,15 @@ export default function FlappyGame() {
     gameAreaWidth,
     gameAreaHeight,
     score,
-    flappyHighscore,
+    highScore,
+    lastJumpTime,
   ]);
 
   const wingFlap = ""; // Kept as is per request
 
   return (
-    <div className="flex flex-col items-center p-2 mb-20 border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
-      <h1 className="text-2xl">Flappy Stunkie</h1>
+    <div className="flex flex-col items-center mb-20 border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
+      <h1 className="pt-2 text-2xl">Flappy Stunkie</h1>
       <p className="mb-2 text-gray-600">Smootch em!</p>
       <div
         className="relative mx-auto overflow-hidden border-b-8 border-green-800 rounded-lg shadow-2xl bg-sky-300 max-w-[360px] w-full"
@@ -234,12 +242,12 @@ export default function FlappyGame() {
           </div>
         ))}
         {/* Score & Game Over */}
-        <div className="absolute text-xl top-2 left-2">Score: {score}</div>
+        <div className="absolute top-2 left-2">Score: {score}</div>
         {gameOver && (
           <div className="absolute inset-0 flex flex-col items-center justify-center text-3xl text-white bg-black/70">
             <p className="mb-4 text-3xl">They smooched! ❤️</p>
             <p className="mt-2 text-xl">Final Score: {score}</p>
-            <p className="mt-2 text-xl">High Score: {flappyHighscore}</p>
+            <p className="mt-2 text-xl">High Score: {highScore}</p>
             <button
               onClick={restartGame}
               className="px-6 py-3 mt-6 text-base text-white transition duration-200 shadow-xl bg-stone-400 hover:bg-stone-500 rounded-xl active:scale-95">
