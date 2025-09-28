@@ -74,27 +74,27 @@ const MemoryGame: React.FC = () => {
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [moves, setMoves] = useState<number>(0);
   const [isChecking, setIsChecking] = useState<boolean>(false);
-  const [highscore, setHighscore] = useState<number | null>(null);
+  const [memoryHighscore, setmemoryHighscore] = useState<number | null>(null);
 
   // Derived state
   const matchedCount: number = cards.filter((c) => c.isMatched).length;
   const isGameWon: boolean = matchedCount === 20;
 
-  // Load highscore from localStorage
+  // Load memoryHighscore from localStorage
   useEffect(() => {
-    const stored = localStorage.getItem("memoryGameHighscore");
-    if (stored) setHighscore(Number(stored));
+    const stored = localStorage.getItem("memoryGamememoryHighscore");
+    if (stored) setmemoryHighscore(Number(stored));
   }, []);
 
-  // Save highscore if new record
+  // Save memoryHighscore if new record
   useEffect(() => {
     if (isGameWon) {
-      if (highscore === null || moves < highscore) {
-        setHighscore(moves);
-        localStorage.setItem("memoryGameHighscore", moves.toString());
+      if (memoryHighscore === null || moves < memoryHighscore) {
+        setmemoryHighscore(moves);
+        localStorage.setItem("memoryGamememoryHighscore", moves.toString());
       }
     }
-  }, [isGameWon, moves, highscore]);
+  }, [isGameWon, moves, memoryHighscore]);
 
   // Restart
   const restartGame = useCallback(() => {
@@ -182,7 +182,7 @@ const MemoryGame: React.FC = () => {
       {/* Header */}
       <header className="mb-4 text-center">
         <h1 className="text-2xl ">Memory Match</h1>
-        <p className="mb-2 text-gray-600">Find the 10 matching pairs!</p>
+        <p className="mb-2">Find the 10 matching pairs!</p>
 
         <div className="flex flex-wrap items-center justify-center gap-3">
           <div className="px-4 py-2 text-indigo-800 bg-indigo-100 rounded-lg shadow-sm">
@@ -191,9 +191,9 @@ const MemoryGame: React.FC = () => {
           <div className="px-4 py-2 text-green-800 bg-green-100 rounded-lg shadow-sm">
             Matches: <span>{matchedCount / 2} / 10</span>
           </div>
-          {highscore !== null && (
+          {memoryHighscore !== null && (
             <div className="px-4 py-2 text-yellow-800 bg-yellow-100 rounded-lg shadow-sm">
-              Best: <span>{highscore}</span>
+              Best: <span>{memoryHighscore}</span>
             </div>
           )}
           <button
@@ -215,9 +215,9 @@ const MemoryGame: React.FC = () => {
           <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
             <h2 className="mb-4 text-3xl animate-bounce">🎉 Noice! 🎉</h2>
             <p className="mb-3">You matched all pairs in {moves} moves!</p>
-            {highscore !== null && (
+            {memoryHighscore !== null && (
               <p className="mb-6">
-                🏆 Best Score: <strong>{highscore} moves</strong>
+                🏆 Best Score: <strong>{memoryHighscore} moves</strong>
               </p>
             )}
             <button
