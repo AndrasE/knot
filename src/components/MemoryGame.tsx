@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useCallback, type JSX } from "react";
 
 // --- Import images (fixed set) ---
-import img1 from "../assets/images/game/1.webp";
-import img2 from "../assets/images/game/2.webp";
-import img3 from "../assets/images/game/3.webp";
-import img4 from "../assets/images/game/4.webp";
-import img5 from "../assets/images/game/5.webp";
-import img6 from "../assets/images/game/6.webp";
-import img7 from "../assets/images/game/7.webp";
-import img8 from "../assets/images/game/8.webp";
-import img9 from "../assets/images/game/9.webp";
-import img10 from "../assets/images/game/10.webp";
+import img1 from "../assets/images/game/memory/1.webp";
+import img2 from "../assets/images/game/memory/2.webp";
+import img3 from "../assets/images/game/memory/3.webp";
+import img4 from "../assets/images/game/memory/4.webp";
+import img5 from "../assets/images/game/memory/5.webp";
+import img6 from "../assets/images/game/memory/6.webp";
+import img7 from "../assets/images/game/memory/7.webp";
+import img8 from "../assets/images/game/memory/8.webp";
+import img9 from "../assets/images/game/memory/9.webp";
+import img10 from "../assets/images/game/memory/10.webp";
 
 // --- Types ---
 interface Card {
