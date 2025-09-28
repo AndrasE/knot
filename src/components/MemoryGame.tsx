@@ -181,7 +181,7 @@ const MemoryGame: React.FC = () => {
     <div className="w-full max-w-xl p-2 border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       {/* Header */}
       <header className="mb-4 text-center">
-        <h1 className="text-2xl ">Memory Match</h1>
+        <h1 className="text-2xl ">Stunkie Match</h1>
         <p className="mb-2">Find the 10 matching pairs!</p>
 
         <div className="flex flex-wrap items-center justify-center gap-3">
