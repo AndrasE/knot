@@ -82,7 +82,7 @@ const MemoryGame: React.FC = () => {
 
   // Load highscore from localStorage
   useEffect(() => {
-    const stored = localStorage.getItem("memoryHighscore");
+    const stored = localStorage.getItem("memoryGameHighscore");
     if (stored) setHighscore(Number(stored));
   }, []);
 
@@ -91,7 +91,7 @@ const MemoryGame: React.FC = () => {
     if (isGameWon) {
       if (highscore === null || moves < highscore) {
         setHighscore(moves);
-        localStorage.setItem("memoryHighscore", moves.toString());
+        localStorage.setItem("memoryGameHighscore", moves.toString());
       }
     }
   }, [isGameWon, moves, highscore]);
@@ -184,7 +184,7 @@ const MemoryGame: React.FC = () => {
         <h1 className="mb-2 text-3xl font-bold">Memory Match</h1>
         <p className="mb-4 text-gray-600">Find the 10 matching pairs!</p>
 
-        <div className="flex items-center justify-center space-x-4">
+        <div className="flex flex-wrap items-center justify-center gap-2">
           <div className="px-4 py-2 text-indigo-800 bg-indigo-100 rounded-lg shadow-sm">
             Moves: <span className="font-extrabold">{moves}</span>
           </div>
@@ -192,6 +192,11 @@ const MemoryGame: React.FC = () => {
             Matches:{" "}
             <span className="font-extrabold">{matchedCount / 2} / 10</span>
           </div>
+          {highscore !== null && (
+            <div className="px-4 py-2 text-yellow-800 bg-yellow-100 rounded-lg shadow-sm">
+              Best: <span className="font-extrabold">{highscore}</span>
+            </div>
+          )}
           <button
             onClick={restartGame}
             className="px-4 py-2 text-white transition duration-200 bg-red-400 rounded-lg shadow-sm active:scale-95">
@@ -231,68 +236,3 @@ const MemoryGame: React.FC = () => {
 };
 
 export default MemoryGame;
-
-/*
-// ====================================================================
-// COMPONENT EXPLANATION: How the Memory Match Game Works
-// ====================================================================
-
-// 1. State Management:
-// --------------------
-// - cards: An array of Card objects (20 total). This is the single source of truth for the
-//   entire game board, holding the icon URL, match ID, and the current state (flipped/matched).
-// - flippedCards: An array of numbers (Card IDs) currently showing (max 2). This array drives
-//   the core match-checking logic.
-// - moves: Tracks the total number of pairs of cards flipped.
-// - isChecking: A boolean flag set to true when two cards are flipped and the game is waiting
-//   the 1.2-second timeout before checking for a match. This prevents the user from clicking more cards.
-// - highscore: The lowest number of moves the user has completed the game in, loaded from
-//   and saved to localStorage.
-
-// 2. Initialization (createBoard & shuffle):
-// ------------------------------------------
-// - When the component first mounts or the game is reset, createBoard is called.
-// - It takes the 10 unique image URLs from INITIAL_ICONS.
-// - Each image is duplicated to create 2 Card objects, both sharing the same 'matchId'
-//   (0 through 9). This is the key to matching.
-// - The resulting 20 cards are then randomized using the standard Fisher-Yates (Knuth) shuffle algorithm.
-
-// 3. Card Interaction (handleCardClick):
-// -------------------------------------
-// - This function is called when a card (<div>) is clicked.
-// - It contains several guard clauses to block clicks:
-//   - If isChecking is true (waiting for match result).
-//   - If two cards are already in flippedCards.
-//   - If the clicked card is already flipped or matched.
-// - If the click is valid, it updates the 'cards' state to set the clicked card's 'isFlipped'
-//   property to true (visually revealing the image).
-// - It then adds the card's unique 'id' to the 'flippedCards' array.
-
-// 4. Match Checking Logic (useEffect hook with flippedCards dependency):
-// ----------------------------------------------------------------------
-// - This effect runs *only* when the 'flippedCards' array changes.
-// - If flippedCards.length becomes 2, the match process begins:
-//   a. isChecking is set to true to block further clicks.
-//   b. moves is incremented.
-//   c. A 1200ms (1.2 second) setTimeout is initiated.
-// - Inside the timeout, the two cards are compared using their 'matchId':
-//   - IF they match (matchId is the same): Both cards' 'isMatched' and 'isFlipped' properties
-//     are permanently set to true in the 'cards' state.
-//   - IF they do NOT match: Both cards' 'isFlipped' property is reset to false, hiding them again.
-// - Finally, 'flippedCards' is cleared, and 'isChecking' is set back to false, allowing the next turn.
-
-// 5. Highscore Persistence (useEffect hooks):
-// -------------------------------------------
-// - The first useEffect loads the 'memoryGameHighscore' from localStorage on mount.
-// - The second useEffect runs when isGameWon becomes true:
-//   - It checks if the current 'moves' is better than the stored 'highscore' or if no highscore exists.
-//   - If so, it updates both the highscore state and the value in localStorage.
-
-// 6. Rendering (renderCard):
-// --------------------------
-// - This function determines what the card looks like based on its state:
-//   - If 'isFlipped' or 'isMatched' is true (isVisible), it displays the <img> tag using card.icon (the URL).
-//   - If not visible, it displays the cover '?' symbol.
-//   - Tailwind classes are dynamically applied to change the background color (blue for cover,
-//     light green for matched) and disable pointer events for matched cards.
-*/
