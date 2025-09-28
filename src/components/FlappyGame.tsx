@@ -20,8 +20,8 @@ export default function FlappyGame() {
   const gapHeight = 144;
   const capHeight = 48;
   const minObstacleSpacing = 200;
-  const gravity = 0.5;
-  const jumpStrength = -8;
+  const gravity = 0.4;
+  const jumpStrength = -7;
 
   // Dynamic sizing
   useEffect(() => {
