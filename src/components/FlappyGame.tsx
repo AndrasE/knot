@@ -36,7 +36,7 @@ export default function FlappyGame() {
       const navbarHeight = 60;
       const maxGameContentWidth = 360; // Max ideal width of the *game canvas* itself
       const minGameContentWidth = 300;
-      const safetyBuffer = 48; // A buffer (e.g., 24px on each side) for parent/child padding and borders
+      const safetyBuffer = 16; // A buffer (e.g., 24px on each side) for parent/child padding and borders
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight - navbarHeight; // 1. Calculate the available width for the content, subtracting the safety margin.
       const availableWidth = Math.max(
