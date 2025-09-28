@@ -218,8 +218,6 @@ export default function FlappyGame() {
     lastScoreTime,
   ]);
 
-  const wingFlap = ""; // Kept as is per request
-
   return (
     <div className="flex flex-col items-center justify-center max-w-xl p-0 border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       <header className="mb-4 text-center">
@@ -262,12 +260,12 @@ export default function FlappyGame() {
             />
             {/* Left Wing */}
             <div
-              className={`absolute -left-4 top-3/4 text-2xl transform -translate-y-1/2 -rotate-12 scale-x-[-1] transition-transform ${wingFlap}`}>
+              className={`absolute -left-4 top-3/4 text-2xl transform -translate-y-1/2 -rotate-12 scale-x-[-1] transition-transform `}>
               🪽
             </div>
             {/* Right Wing */}
             <div
-              className={`absolute -right-4 top-3/4 text-2xl transform -translate-y-1/2 rotate-12 transition-transform ${wingFlap}`}>
+              className={`absolute -right-4 top-3/4 text-2xl transform -translate-y-1/2 rotate-12 transition-transform `}>
               🪽
             </div>
           </div>
@@ -329,7 +327,7 @@ export default function FlappyGame() {
         {/* Game Over */}
         {gameStarted && gameOver && (
           <div className="absolute inset-0 flex flex-col items-center justify-center text-3xl text-white bg-black/70">
-            <p className="mb-4 text-3xl">They smooched! ❤️</p>
+            <p className="mb-4 text-2xl">They smooched! ❤️</p>
             <p className="mt-2 text-xl">Final Score: {score}</p>
             <p className="mt-2 text-xl">High Score: {highScore}</p>
             <button
