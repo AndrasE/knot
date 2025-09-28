@@ -178,23 +178,22 @@ const MemoryGame: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-xl p-5 border shadow-xl rounded-2xl sm:p-8 border-stone-500">
+    <div className="w-full max-w-xl p-2 border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       {/* Header */}
-      <header className="mb-6 text-center">
-        <h1 className="mb-2 text-3xl font-bold">Memory Match</h1>
-        <p className="mb-4 text-gray-600">Find the 10 matching pairs!</p>
+      <header className="mb-4 text-center">
+        <h1 className="text-2xl ">Memory Match</h1>
+        <p className="mb-2 text-gray-600">Find the 10 matching pairs!</p>
 
-        <div className="flex flex-wrap items-center justify-center gap-2">
+        <div className="flex flex-wrap items-center justify-center gap-3">
           <div className="px-4 py-2 text-indigo-800 bg-indigo-100 rounded-lg shadow-sm">
-            Moves: <span className="font-extrabold">{moves}</span>
+            Moves: <span>{moves}</span>
           </div>
           <div className="px-4 py-2 text-green-800 bg-green-100 rounded-lg shadow-sm">
-            Matches:{" "}
-            <span className="font-extrabold">{matchedCount / 2} / 10</span>
+            Matches: <span>{matchedCount / 2} / 10</span>
           </div>
           {highscore !== null && (
             <div className="px-4 py-2 text-yellow-800 bg-yellow-100 rounded-lg shadow-sm">
-              Best: <span className="font-extrabold">{highscore}</span>
+              Best: <span>{highscore}</span>
             </div>
           )}
           <button
@@ -214,9 +213,7 @@ const MemoryGame: React.FC = () => {
       {isGameWon && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-600/90">
           <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
-            <h2 className="mb-4 text-3xl font-extrabold animate-bounce">
-              🎉 Noice! 🎉
-            </h2>
+            <h2 className="mb-4 text-3xl animate-bounce">🎉 Noice! 🎉</h2>
             <p className="mb-3">You matched all pairs in {moves} moves!</p>
             {highscore !== null && (
               <p className="mb-6">
