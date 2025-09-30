@@ -12,9 +12,12 @@
   "dependencies": {
     "@formspark/use-formspark": "^0.1.42",
     "@types/react-router-hash-link": "^2.4.9",
+    "canvas-confetti": "^1.9.3",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.23.22",
     "react": "^19.1.1",
+    "react-confetti": "^6.4.0",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.1",
     "react-router-hash-link": "^2.4.3",
@@ -24,6 +27,7 @@
   "devDependencies": {
     "@eslint/js": "^9.33.0",
     "@tailwindcss/vite": "^4.1.13",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^24.5.2",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
