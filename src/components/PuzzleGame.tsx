@@ -175,37 +175,36 @@ function PuzzleGame({ rows = 3, cols = 3 }: Props) {
               const bgPosY = (r / (rows - 1)) * 100 || 0;
 
               return (
-                <motion.div
+                <div
                   key={value}
-                  layout
                   draggable
+                  onDragStart={(e) => onDragStart(e, idx)}
                   onDrop={(e) => onDrop(e, idx)}
                   className="relative flex items-center justify-center overflow-hidden text-sm font-medium border rounded select-none bg-gray-50"
                   style={{
                     width: tileWidth,
                     height: tileHeight,
                     cursor: "grab",
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  // 💡 IMPROVEMENT 2: Use the standard handler
-                  {...{
-                    onDragStart: (e: React.DragEvent<HTMLDivElement>) =>
-                      onDragStart(e, idx),
                   }}>
-                  <div
-                    style={{
-                      backgroundImage: `url('${imageUrl}')`,
-                      backgroundSize: `${cols * 100}% ${rows * 100}%`,
-                      backgroundPosition: `${bgPosX}% ${bgPosY}%`,
-                      width: "100%",
-                      height: "100%",
-                    }}
-                    aria-hidden
-                  />
-                  <span className="absolute text-xs bottom-1 right-1 text-white/80 drop-shadow-sm">
-                    {value + 1}
-                  </span>
-                </motion.div>
+                  <motion.div
+                    layout
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    style={{ width: "100%", height: "100%" }}>
+                    <div
+                      style={{
+                        backgroundImage: `url('${imageUrl}')`,
+                        backgroundSize: `${cols * 100}% ${rows * 100}%`,
+                        backgroundPosition: `${bgPosX}% ${bgPosY}%`,
+                        width: "100%",
+                        height: "100%",
+                      }}
+                      aria-hidden
+                    />
+                    <span className="absolute text-xs bottom-1 right-1 text-white/80 drop-shadow-sm">
+                      {value + 1}
+                    </span>
+                  </motion.div>
+                </div>
               );
             })}
           </AnimatePresence>
