@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 
@@ -28,6 +28,7 @@ export default function DragDropPicturePuzzle() {
   const [imageUrl, setImageUrl] = useState(
     images[Math.floor(Math.random() * images.length)]
   );
+  const gameContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem("puzzleHighScore");
@@ -45,6 +46,24 @@ export default function DragDropPicturePuzzle() {
       if (interval) clearInterval(interval);
     };
   }, [timerActive]);
+
+  // Effect to handle non-passive touchmove event for preventing scrolling
+  useEffect(() => {
+    const gameContainer = gameContainerRef.current;
+    if (!gameContainer) return;
+
+    const preventScroll = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+
+    gameContainer.addEventListener("touchmove", preventScroll, {
+      passive: false,
+    });
+
+    return () => {
+      gameContainer.removeEventListener("touchmove", preventScroll);
+    };
+  }, []);
 
   function shuffleBoard(startTimer = true, changeImage = false) {
     let shuffled: number[] = [];
@@ -188,12 +207,11 @@ export default function DragDropPicturePuzzle() {
       </div>
 
       <div
+        ref={gameContainerRef}
         className="relative mt-4"
         style={{ width: containerSize, height: containerSize }}
         onDragOver={(e) => e.preventDefault()}
-        onTouchEnd={onTouchEnd}
-        onTouchMove={(e) => e.preventDefault()} // Prevents scrolling on mobile
-      >
+        onTouchEnd={onTouchEnd}>
         <div
           style={{
             width: containerSize,
