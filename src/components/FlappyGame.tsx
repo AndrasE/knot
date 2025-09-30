@@ -306,7 +306,6 @@ export default function FlappyGame() {
         {/* Start Screen */}
         {!gameStarted && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-3xl text-white bg-black/50">
-            {" "}
             <p className="mb-2 text-xl">Help Stunkies get a smooch! 🥰</p>
             <img src={smooch} alt="smooch" className="mb-4 w-60 rounded-2xl" />
             <button
@@ -318,15 +317,22 @@ export default function FlappyGame() {
         )}
         {/* Game Over */}
         {gameStarted && gameOver && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-3xl text-white bg-black/70">
-            <p className="mb-4 text-2xl">They smooched! ❤️</p>
-            <p className="mt-2 text-xl">Final Score: {score}</p>
-            <p className="mt-2 text-xl">High Score: {highScore}</p>
-            <button
-              onClick={startGame}
-              className="px-4 py-2 mt-6 text-base text-white transition duration-200 rounded-md shadow-xl bg-stone-400 hover:bg-stone-500 active:scale-95">
-              Play Again
-            </button>
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-600/90">
+            <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
+              <h2 className="mt-1 mb-4 text-2xl animate-bounce">
+                They smooched! ♥️
+              </h2>
+
+              <p className="mb-3">🎯 Final Score: {score}</p>
+              {highScore !== null && (
+                <p className="mb-6">🏆 Best Score: {highScore}</p>
+              )}
+              <button
+                onClick={startGame}
+                className="px-4 py-2 text-white transition duration-200 shadow-xl bg-stone-500 hover:bg-stone-600 rounded-xl active:scale-95">
+                Play Again
+              </button>
+            </div>
           </div>
         )}
       </div>

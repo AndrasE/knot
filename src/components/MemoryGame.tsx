@@ -188,9 +188,7 @@ const MemoryGame: React.FC = () => {
           <div className="px-4 py-2 text-indigo-800 bg-indigo-100 rounded-lg shadow-sm">
             Moves: <span>{moves}</span>
           </div>
-          <div className="px-4 py-2 text-green-800 bg-green-100 rounded-lg shadow-sm">
-            Matches: <span>{matchedCount / 2} / 10</span>
-          </div>
+
           {memoryHighscore !== null && (
             <div className="px-4 py-2 text-yellow-800 bg-yellow-100 rounded-lg shadow-sm">
               Best: <span>{memoryHighscore}</span>
@@ -213,16 +211,17 @@ const MemoryGame: React.FC = () => {
       {isGameWon && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-600/90">
           <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
-            <h2 className="mb-4 text-3xl animate-bounce">🎉 Noice! 🎉</h2>
-            <p className="mb-3">You matched all pairs in {moves} moves!</p>
+            <h2 className="mt-1 mb-4 text-2xl animate-bounce">
+              They are matched! ♥️
+            </h2>
+
+            <p className="mb-3">🎯 Final Score: {moves}</p>
             {memoryHighscore !== null && (
-              <p className="mb-6">
-                🏆 Best Score: <strong>{memoryHighscore} moves</strong>
-              </p>
+              <p className="mb-6">🏆 Best Score: {memoryHighscore}</p>
             )}
             <button
               onClick={restartGame}
-              className="px-6 py-3 text-xl text-white transition duration-200 shadow-xl bg-stone-500 hover:bg-stone-600 rounded-xl active:scale-95">
+              className="px-4 py-2 text-white transition duration-200 shadow-xl bg-stone-500 hover:bg-stone-600 rounded-xl active:scale-95">
               Play Again
             </button>
           </div>

@@ -193,16 +193,10 @@ export default function DragDropPicturePuzzle() {
           onClick={() => shuffleBoard(false, true)}>
           Reset
         </button>
-        <div className="min-w-[80px]">
-          Moves: <strong>{moves}</strong>
-        </div>
-        <div className="min-w-[80px]">
-          Time: <strong>{formatTime(time)}</strong>
-        </div>
+        <div className="min-w-[80px]">Moves: {moves}</div>
+        <div className="min-w-[80px]">Time: {formatTime(time)}</div>
         {highScore !== null && (
-          <div className="min-w-[90px]">
-            Best: <strong>{formatTime(highScore)}</strong>
-          </div>
+          <div className="min-w-[90px]">Best: {formatTime(highScore)}</div>
         )}
       </div>
 
@@ -275,7 +269,7 @@ export default function DragDropPicturePuzzle() {
         {!gameStarted && (
           <div className="absolute inset-0 flex items-center justify-center">
             <button
-              className="px-6 py-3 text-lg font-bold text-white transition-transform transform bg-green-600 rounded-lg shadow-lg hover:bg-green-700 hover:scale-105"
+              className="px-3 py-2 font-bold text-white transition-transform transform bg-green-600 rounded-lg shadow-lg hover:bg-green-700 hover:scale-105"
               onClick={() => {
                 setGameStarted(true);
                 setTimerActive(true);
@@ -297,12 +291,8 @@ export default function DragDropPicturePuzzle() {
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
               className="p-6 text-center bg-white rounded-lg shadow-xl">
               <h3 className="text-2xl font-bold">🎉 Puzzle Solved!</h3>
-              <p className="mt-2">
-                Moves: <strong>{moves}</strong>
-              </p>
-              <p>
-                Time: <strong>{formatTime(time)}</strong>
-              </p>
+              <p className="mt-2">Moves: {moves}</p>
+              <p>Time: {formatTime(time)}</p>
               <div className="flex justify-center gap-2 mt-4">
                 <button
                   className="px-4 py-2 font-semibold text-white bg-green-600 rounded-md hover:bg-green-700"
