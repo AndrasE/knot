@@ -14,7 +14,7 @@ const images = [
   "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1600&auto=format&fit=crop",
 ];
 
-function PuzzleGame({ rows = 3, cols = 3 }: Props) {
+export default function DragDropPicturePuzzle({ rows = 3, cols = 3 }: Props) {
   const total = rows * cols;
   const initial = useMemo(
     () => Array.from({ length: total }, (_, i) => i),
@@ -32,32 +32,12 @@ function PuzzleGame({ rows = 3, cols = 3 }: Props) {
     images[Math.floor(Math.random() * images.length)]
   );
 
-  const shuffleBoard = React.useCallback(
-    (startTimer = true, changeImage = false) => {
-      const shuffled = [...initial].sort(() => Math.random() - 0.5);
-      setBoard(shuffled);
-      setMoves(0);
-      setTime(0);
-      setSolved(false);
-      if (changeImage) {
-        setImageUrl(images[Math.floor(Math.random() * images.length)]);
-      }
-      if (startTimer) {
-        setTimerActive(true);
-        setGameStarted(true);
-      } else {
-        setTimerActive(false);
-        setGameStarted(false);
-      }
-    },
-    [initial]
-  );
-
   useEffect(() => {
     const saved = localStorage.getItem("puzzleHighScore");
     if (saved) setHighScore(parseInt(saved, 10));
     shuffleBoard(false, true); // shuffle but wait for Start Game, pick new image only on mount
-  }, [shuffleBoard]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -68,6 +48,29 @@ function PuzzleGame({ rows = 3, cols = 3 }: Props) {
       if (interval) clearInterval(interval);
     };
   }, [timerActive]);
+
+  function shuffleBoard(startTimer = true, changeImage = false) {
+    let shuffled: number[] = [];
+    do {
+      shuffled = [...initial].sort(() => Math.random() - 0.5);
+    } while (isSolved(shuffled)); // ensure it's not already solved
+
+    setBoard(shuffled);
+    setMoves(0);
+    setTime(0);
+    setSolved(false);
+
+    if (changeImage) {
+      setImageUrl(images[Math.floor(Math.random() * images.length)]);
+    }
+    if (startTimer) {
+      setTimerActive(true);
+      setGameStarted(true);
+    } else {
+      setTimerActive(false);
+      setGameStarted(false);
+    }
+  }
 
   function isSolved(b: number[] = board) {
     for (let i = 0; i < b.length; i++) if (b[i] !== i) return false;
@@ -81,8 +84,6 @@ function PuzzleGame({ rows = 3, cols = 3 }: Props) {
   function onDragStart(e: React.DragEvent<HTMLDivElement>, index: number) {
     setDraggedIndex(index);
     e.dataTransfer.effectAllowed = "move";
-    // 💡 IMPROVEMENT 1: Hide the default drag ghost image
-    e.dataTransfer.setDragImage(new Image(), 0, 0);
   }
 
   function onDrop(e: React.DragEvent<HTMLDivElement>, targetIndex: number) {
@@ -175,36 +176,37 @@ function PuzzleGame({ rows = 3, cols = 3 }: Props) {
               const bgPosY = (r / (rows - 1)) * 100 || 0;
 
               return (
-                <div
+                <motion.div
                   key={value}
-                  draggable
-                  onDragStart={(e) => onDragStart(e, idx)}
-                  onDrop={(e) => onDrop(e, idx)}
-                  className="relative flex items-center justify-center overflow-hidden text-sm font-medium border rounded select-none bg-gray-50"
+                  layout
+                  className="..."
                   style={{
                     width: tileWidth,
                     height: tileHeight,
                     cursor: "grab",
-                  }}>
-                  <motion.div
-                    layout
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    style={{ width: "100%", height: "100%" }}>
-                    <div
-                      style={{
-                        backgroundImage: `url('${imageUrl}')`,
-                        backgroundSize: `${cols * 100}% ${rows * 100}%`,
-                        backgroundPosition: `${bgPosX}% ${bgPosY}%`,
-                        width: "100%",
-                        height: "100%",
-                      }}
-                      aria-hidden
-                    />
-                    <span className="absolute text-xs bottom-1 right-1 text-white/80 drop-shadow-sm">
-                      {value + 1}
-                    </span>
-                  </motion.div>
-                </div>
+                  }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}>
+                  <div
+                    draggable
+                    onDragStart={(e: React.DragEvent<HTMLDivElement>) =>
+                      onDragStart(e, idx)
+                    }
+                    onDrop={(e: React.DragEvent<HTMLDivElement>) =>
+                      onDrop(e, idx)
+                    }
+                    style={{
+                      backgroundImage: `url('${imageUrl}')`,
+                      backgroundSize: `${cols * 100}% ${rows * 100}%`,
+                      backgroundPosition: `${bgPosX}% ${bgPosY}%`,
+                      width: "100%",
+                      height: "100%",
+                    }}
+                    aria-hidden
+                  />
+                  <span className="absolute text-xs bottom-1 right-1 text-white/80 drop-shadow-sm">
+                    {value + 1}
+                  </span>
+                </motion.div>
               );
             })}
           </AnimatePresence>
@@ -251,5 +253,3 @@ function PuzzleGame({ rows = 3, cols = 3 }: Props) {
     </div>
   );
 }
-
-export default PuzzleGame;
