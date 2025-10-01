@@ -216,7 +216,7 @@ export default function FlappyGame() {
   ]);
 
   return (
-    <div className="flex flex-col items-center p-0 mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
+    <div className="max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       <GameHeader
         title="Flappy Stunkie"
         subtitle="Smootch 'em!"
@@ -228,7 +228,7 @@ export default function FlappyGame() {
       />
 
       <div
-        className="relative mx-auto overflow-hidden rounded-2xl bg-sky-300 max-w-[360px] w-full"
+        className="relative  mt-3 sm:mt-5 mx-auto overflow-hidden rounded-2xl bg-sky-300 max-w-[360px] w-full"
         style={{ width: gameAreaWidth, height: gameAreaHeight }}>
         <div className="absolute bottom-0 w-full h-2 bg-green-600"></div>
 

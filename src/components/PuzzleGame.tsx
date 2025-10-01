@@ -173,11 +173,11 @@ export default function DragDropPicturePuzzle() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 p-4">
+    <div className="max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       {/* ✅ Reusable Header */}
       <GameHeader
-        title="Drag & Drop Puzzle"
-        subtitle="Arrange the tiles!"
+        title="Stunkie Puzzle"
+        subtitle="Complete 'em!"
         stats={[
           { label: "Time", value: formatTime(time) },
           ...(highScore !== null
@@ -187,10 +187,10 @@ export default function DragDropPicturePuzzle() {
         onReset={() => shuffleBoard(false, true)}
       />
 
-      {/* Puzzle board */}
+      {/* Puzzle board container */}
       <div
         ref={gameContainerRef}
-        className="relative mt-4"
+        className="relative flex justify-center mt-5 sm:mt-10"
         style={{ width: containerSize, height: containerSize }}
         onDragOver={(e) => e.preventDefault()}
         onTouchEnd={onTouchEnd}>
@@ -202,10 +202,6 @@ export default function DragDropPicturePuzzle() {
             gridTemplateColumns: `repeat(${cols}, 1fr)`,
             gridTemplateRows: `repeat(${rows}, 1fr)`,
             gap: 2,
-            filter: gameStarted ? "none" : "blur(6px)",
-            pointerEvents: gameStarted ? "auto" : "none",
-            backgroundColor: "#334155",
-            borderRadius: "8px",
             padding: "2px",
           }}>
           <AnimatePresence>
@@ -221,9 +217,7 @@ export default function DragDropPicturePuzzle() {
                   key={value}
                   layout
                   data-index={idx}
-                  className={`relative rounded-md ${
-                    isBeingDragged ? "opacity-50" : ""
-                  }`}
+                  className={`relative  ${isBeingDragged ? "opacity-50" : ""}`}
                   style={{
                     width: tileWidth,
                     height: tileHeight,
@@ -241,18 +235,17 @@ export default function DragDropPicturePuzzle() {
                       backgroundPosition: `${bgPosX}% ${bgPosY}%`,
                       width: "100%",
                       height: "100%",
-                      borderRadius: "6px",
+                      borderRadius: "15px",
                     }}
                     aria-hidden
                   />
-                  {/* 🔥 Removed number overlay */}
                 </motion.div>
               );
             })}
           </AnimatePresence>
         </div>
 
-        {/* ✅ Reusable Overlay for Start + Solved */}
+        {/* Overlay */}
         <GameScreenOverlay
           gameStarted={gameStarted}
           gameOver={solved}
@@ -260,7 +253,7 @@ export default function DragDropPicturePuzzle() {
           restartGame={() => shuffleBoard(true, true)}
           score={`${formatTime(time)}`}
           highScore={highScore !== null ? `${formatTime(highScore)}` : null}
-          startText="Solve the puzzle! 🧩"
+          startText="Help Stunkies to be complete! 🥰"
           startImage={smooch}
           gameOverText="They are complete! ♥️"
         />

@@ -204,7 +204,7 @@ const MemoryGame: React.FC = () => {
       <div className="relative mt-5 sm:mt-10 ">
         {gameStarted ? (
           // --- Game Grid ---
-          <div className="grid grid-cols-4 gap-2 sm:grid-cols-5 sm:gap-3">
+          <div className="grid grid-cols-4 gap-2 sm:grid-cols-5 sm:gap-3 ma">
             {cards.map(renderCard)}
           </div>
         ) : (
