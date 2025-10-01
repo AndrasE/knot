@@ -2,24 +2,26 @@ import { useEffect, useState } from "react";
 import flyer from "../assets/images/game/flappy/1.webp";
 import obstacle from "../assets/images/game/flappy/2.webp";
 import smooch from "../assets/images/game/flappy/smooch.webp";
+import GameScreenOverlay from "./GameScreenOverlay";
+import GameHeader from "./GameHeader";
 
 export default function FlappyGame() {
-  const [flyerY, setFlyerY] = useState(0); // Set dynamically after height calculation
+  const [flyerY, setFlyerY] = useState(0);
   const [velocity, setVelocity] = useState(0);
   const [obstacles, setObstacles] = useState<
     { x: number; gapY: number; scored?: boolean }[]
   >([]);
   const [score, setScore] = useState(0);
-  const [targetScore, setTargetScore] = useState(0); // Track intended score for animation
+  const [targetScore, setTargetScore] = useState(0);
   const [highScore, setHighScore] = useState(() => {
     return parseInt(localStorage.getItem("flappyHighScore") || "0", 10);
   });
   const [gameOver, setGameOver] = useState(false);
-  const [gameStarted, setGameStarted] = useState(false); // Track if game has started
-  const [gameAreaWidth, setGameAreaWidth] = useState(360); // Initial width
-  const [gameAreaHeight, setGameAreaHeight] = useState(420); // Initial height (6:7 ratio)
-  const [lastJumpTime, setLastJumpTime] = useState(0); // For debouncing touch events
-  const [lastScoreTime, setLastScoreTime] = useState(0); // For debouncing scoring
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameAreaWidth, setGameAreaWidth] = useState(360);
+  const [gameAreaHeight, setGameAreaHeight] = useState(420);
+  const [lastJumpTime, setLastJumpTime] = useState(0);
+  const [lastScoreTime, setLastScoreTime] = useState(0);
 
   const flyerX = 80;
   const flyerSize = 48;
@@ -34,37 +36,37 @@ export default function FlappyGame() {
   useEffect(() => {
     const updateDimensions = () => {
       const navbarHeight = 60;
-      const maxGameContentWidth = 360; // Max ideal width of the *game canvas* itself
+      const maxGameContentWidth = 360;
       const minGameContentWidth = 300;
-      const safetyBuffer = 16; // A buffer (e.g., 24px on each side) for parent/child padding and borders
+      const safetyBuffer = 16;
       const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight - navbarHeight; // 1. Calculate the available width for the content, subtracting the safety margin.
+      const windowHeight = window.innerHeight - navbarHeight;
+
       const availableWidth = Math.max(
         minGameContentWidth,
         windowWidth - safetyBuffer
-      ); // 2. Determine the width of the game area, capping it at the ideal maximum.
-      const calculatedWidth = Math.min(maxGameContentWidth, availableWidth); // 3. Calculate height based on the chosen width (maintaining 6:7 ratio)
-      const calculatedHeight = calculatedWidth * (7 / 6); // 4. Final size adjustments // Ensure height fits within available viewport
+      );
+      const calculatedWidth = Math.min(maxGameContentWidth, availableWidth);
+      const calculatedHeight = calculatedWidth * (7 / 6);
 
       const finalHeight = Math.min(calculatedHeight, windowHeight * 0.9);
-      const finalWidth = finalHeight * (6 / 7); // Adjust width to maintain ratio
+      const finalWidth = finalHeight * (6 / 7);
 
       setGameAreaWidth(finalWidth);
       setGameAreaHeight(finalHeight);
-      setFlyerY(finalHeight / 2); // Center flyer vertically
+      setFlyerY(finalHeight / 2);
     };
 
-    updateDimensions(); // Initial calculation
+    updateDimensions();
     window.addEventListener("resize", updateDimensions);
-
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
-  // Score animation effect
+  // Score animation
   useEffect(() => {
     if (score >= targetScore) return;
 
-    const increment = Math.ceil((targetScore - score) / 10); // Increment ~2 points per step
+    const increment = Math.ceil((targetScore - score) / 10);
     const interval = setInterval(() => {
       setScore((prev) => {
         const next = prev + increment;
@@ -74,7 +76,7 @@ export default function FlappyGame() {
         }
         return next;
       });
-    }, 30); // 10 steps over ~300ms
+    }, 30);
 
     return () => clearInterval(interval);
   }, [score, targetScore]);
@@ -91,7 +93,7 @@ export default function FlappyGame() {
   };
 
   const restartGame = () => {
-    setGameStarted(false); // Return to start screen
+    setGameStarted(false);
     setFlyerY(gameAreaHeight / 2);
     setVelocity(0);
     setObstacles([]);
@@ -103,7 +105,6 @@ export default function FlappyGame() {
 
   useEffect(() => {
     if (!gameStarted || gameOver) {
-      // Update high score when game ends
       if (gameOver && score > highScore) {
         setHighScore(score);
         localStorage.setItem("flappyHighScore", score.toString());
@@ -114,7 +115,6 @@ export default function FlappyGame() {
     const handleJump = () => {
       const now = Date.now();
       if (now - lastJumpTime > 200) {
-        // Debounce: 200ms cooldown
         setVelocity(jumpStrength);
         setLastJumpTime(now);
       }
@@ -127,29 +127,29 @@ export default function FlappyGame() {
     };
 
     window.addEventListener("click", handleGlobalAction);
-    window.addEventListener("touchstart", handleGlobalAction); // For mobile
+    window.addEventListener("touchstart", handleGlobalAction);
 
     const gameLoop = setInterval(() => {
-      // 1. Flyer physics
+      // Flyer physics
       setFlyerY((prev) => {
         const next = prev + velocity;
-        if (next < 0) return 0; // top boundary
+        if (next < 0) return 0;
         if (next > gameAreaHeight - flyerSize) {
-          setGameOver(true); // hit ground
+          setGameOver(true);
           return gameAreaHeight - flyerSize;
         }
         return next;
       });
       setVelocity((v) => v + gravity);
 
-      // 2. Move & filter obstacles
+      // Move & filter obstacles
       setObstacles((prev) =>
         prev
           .map((obs) => ({ ...obs, x: obs.x - 5 }))
           .filter((obs) => obs.x + obstacleWidth > 0)
       );
 
-      // 3. Spawn new obstacle
+      // Spawn obstacle
       setObstacles((prev) => {
         const lastObstacle = prev[prev.length - 1];
         if (
@@ -157,7 +157,6 @@ export default function FlappyGame() {
           lastObstacle.x < gameAreaWidth - minObstacleSpacing
         ) {
           if (Math.random() < 0.1) {
-            // GapY determines the bottom edge of the top pipe
             const gapY =
               50 + Math.random() * (gameAreaHeight - gapHeight - 100);
             return [...prev, { x: gameAreaWidth, gapY, scored: false }];
@@ -166,15 +165,13 @@ export default function FlappyGame() {
         return prev;
       });
 
-      // 4. Collision detection & Scoring
+      // Collision + scoring
       let didCollide = false;
       setObstacles((prev) => {
         const now = Date.now();
         const newObstacles = prev.map((obs) => ({ ...obs }));
         newObstacles.forEach((obs) => {
-          // Horizontal overlap for collision
           if (flyerX + flyerSize > obs.x && flyerX < obs.x + obstacleWidth) {
-            // Vertical collision (top or bottom block)
             if (
               flyerY < obs.gapY ||
               flyerY + flyerSize > obs.gapY + gapHeight
@@ -182,15 +179,14 @@ export default function FlappyGame() {
               didCollide = true;
             }
           }
-          // Scoring: Trigger when obstacle's right edge passes flyer's left edge
           if (
             !obs.scored &&
             obs.x + obstacleWidth >= flyerX - 5 &&
             obs.x + obstacleWidth <= flyerX &&
-            now - lastScoreTime > 500 // Debounce scoring: 500ms cooldown
+            now - lastScoreTime > 500
           ) {
             setTargetScore((s) => s + 10);
-            obs.scored = true; // Prevent multiple scoring
+            obs.scored = true;
             setLastScoreTime(now);
           }
         });
@@ -221,27 +217,21 @@ export default function FlappyGame() {
 
   return (
     <div className="flex flex-col items-center p-0 mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
-      <header className="mb-4 text-center">
-        <h1 className="pt-2 text-2xl">Flappy Stunkie</h1>
-        <p className="mb-2 text-gray-600">Smootch 'em!</p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <div className="px-4 py-2 text-indigo-800 bg-indigo-100 rounded-lg shadow-sm">
-            Score: <span>{score}</span>
-          </div>
-          <div className="px-4 py-2 text-yellow-800 bg-yellow-100 rounded-lg shadow-sm">
-            Best: <span>{highScore}</span>
-          </div>
-          <button
-            onClick={restartGame}
-            className="px-4 py-2 text-white transition duration-200 bg-red-400 rounded-lg shadow-sm active:scale-95">
-            Reset
-          </button>
-        </div>
-      </header>
+      <GameHeader
+        title="Flappy Stunkie"
+        subtitle="Smootch 'em!"
+        stats={[
+          { label: "Score", value: score },
+          { label: "Best", value: highScore },
+        ]}
+        onReset={restartGame}
+      />
+
       <div
-        className="relative mx-auto overflow-hidden  rounded-lg  bg-sky-300 max-w-[360px] w-full"
+        className="relative mx-auto overflow-hidden rounded-lg bg-sky-300 max-w-[360px] w-full"
         style={{ width: gameAreaWidth, height: gameAreaHeight }}>
-        <div className="absolute bottom-0 w-full h-2 bg-green-600 "></div>
+        <div className="absolute bottom-0 w-full h-2 bg-green-600"></div>
+
         {/* Flyer */}
         {gameStarted && (
           <div
@@ -260,23 +250,20 @@ export default function FlappyGame() {
               alt="flyer"
               className="object-cover w-full h-full rounded-xl"
             />
-            {/* Left Wing */}
-            <div
-              className={`absolute -left-4 top-3/4 text-2xl transform -translate-y-1/2 -rotate-12 scale-x-[-1] transition-transform `}>
+            {/* Wings */}
+            <div className="absolute -left-4 top-3/4 text-2xl -translate-y-1/2 -rotate-12 scale-x-[-1]">
               🪽
             </div>
-            {/* Right Wing */}
-            <div
-              className={`absolute -right-4 top-3/4 text-2xl transform -translate-y-1/2 rotate-12 transition-transform `}>
+            <div className="absolute text-2xl -translate-y-1/2 -right-4 top-3/4 rotate-12">
               🪽
             </div>
           </div>
         )}
+
         {/* Obstacles */}
         {gameStarted &&
           obstacles.map((obs, i) => (
             <div key={i} className="absolute" style={{ left: obs.x }}>
-              {/* Top block (Pipe body) */}
               <div
                 className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-b-xl"
                 style={{ width: obstacleWidth, height: obs.gapY }}>
@@ -287,7 +274,6 @@ export default function FlappyGame() {
                   style={{ height: `${capHeight}px` }}
                 />
               </div>
-              {/* Bottom block (Pipe body) */}
               <div
                 className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-t-xl"
                 style={{
@@ -304,38 +290,19 @@ export default function FlappyGame() {
               </div>
             </div>
           ))}
-        {/* Start Screen */}
-        {!gameStarted && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3   bg-[#f5f0e6]">
-            <p className="mb-2 text-xl">Help Stunkies to smooch! 🥰</p>
-            <img src={smooch} alt="smooch" className="mb-4 w-60 rounded-2xl" />
-            <button
-              onClick={startGame}
-              className="px-4 py-2 text-base text-white transition duration-200 rounded-md shadow-xl bg-stone-400 hover:bg-stone-500 active:scale-95">
-              Start Game{" "}
-            </button>{" "}
-          </div>
-        )}
-        {/* Game Over */}
-        {gameStarted && gameOver && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-600/90">
-            <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
-              <h2 className="mt-1 mb-4 text-2xl animate-bounce">
-                They smooched! ♥️
-              </h2>
 
-              <p className="mb-3">🎯 Final Score: {score}</p>
-              {highScore !== null && (
-                <p className="mb-6">🏆 Best Score: {highScore}</p>
-              )}
-              <button
-                onClick={restartGame}
-                className="px-4 py-2 text-white transition duration-200 shadow-xl bg-stone-500 hover:bg-stone-600 rounded-xl active:scale-95">
-                Restart Game
-              </button>
-            </div>
-          </div>
-        )}
+        {/* ✅ Reusable overlay */}
+        <GameScreenOverlay
+          gameStarted={gameStarted}
+          gameOver={gameOver}
+          startGame={startGame}
+          restartGame={restartGame}
+          score={score}
+          highScore={highScore}
+          startText="Help Stunkies to smooch! 🥰"
+          gameOverText="They smooched! ♥️"
+          startImage={smooch}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, type JSX } from "react";
+import GameScreenOverlay from "./GameScreenOverlay"; // ✅ import reusable overlay
 
 // --- Import images ---
 import img1 from "../assets/images/game/memory/1.webp";
@@ -12,6 +13,7 @@ import img8 from "../assets/images/game/memory/8.webp";
 import img9 from "../assets/images/game/memory/9.webp";
 import img10 from "../assets/images/game/memory/10.webp";
 import smooch from "../assets/images/game/flappy/smooch.webp";
+import GameHeader from "./GameHeader";
 
 // --- Types ---
 interface Card {
@@ -186,79 +188,43 @@ const MemoryGame: React.FC = () => {
   return (
     <div className="w-full max-w-xl p-2 mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       {/* Header - Always visible */}
-      <header className="mb-5 text-center md:mb-10">
-        <h1 className="text-2xl">Stunkie Match</h1>
-        <p className="mb-2">Match 'em!</p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <div className="px-4 py-2 text-indigo-800 bg-indigo-100 rounded-lg shadow-sm">
-            Moves: <span>{moves}</span>
-          </div>
-          {memoryHighscore !== null && (
-            <div className="px-4 py-2 text-yellow-800 bg-yellow-100 rounded-lg shadow-sm">
-              Best: <span>{memoryHighscore}</span>
-            </div>
-          )}
-          <button
-            onClick={restartGame}
-            className="px-4 py-2 text-white transition duration-200 bg-red-400 rounded-lg shadow-sm active:scale-95">
-            Reset
-          </button>
-        </div>
-      </header>
+      <GameHeader
+        title="Stunkie Pair"
+        subtitle="Match 'em!"
+        stats={[
+          { label: "Moves", value: moves },
+          ...(memoryHighscore !== null
+            ? [{ label: "Best", value: memoryHighscore }]
+            : []),
+        ]}
+        onReset={restartGame}
+      />
 
-      {/* Game Area - Holds either the start screen or the grid */}
-      <div className="relative">
-        {!gameStarted ? (
-          // --- Start Screen ---
-          <>
-            {/* 1. An invisible grid that sets the correct height for the container */}
-            <div className="grid invisible grid-cols-4 gap-2 sm:grid-cols-5 sm:gap-3">
-              {cards.map(renderCard)}
-            </div>
-
-            {/* 2. Your start screen, positioned absolutely to fill the container */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-4 bg-[#f5f0e6] rounded-lg">
-              <p className="mb-2 text-xl text-center">
-                Help Stunkies to match! 🥰
-              </p>
-              <img
-                src={smooch}
-                alt="smooch"
-                className="mb-4 w-60 rounded-2xl"
-              />
-              <button
-                onClick={startGame}
-                className="px-4 py-2 text-base text-white transition duration-200 rounded-md shadow-xl bg-stone-400 hover:bg-stone-500 active:scale-95">
-                Start Game
-              </button>
-            </div>
-          </>
-        ) : (
+      {/* Game Area */}
+      <div className="relative mt-5 sm:mt-10 ">
+        {gameStarted ? (
           // --- Game Grid ---
-          // (This part remains unchanged)
           <div className="grid grid-cols-4 gap-2 sm:grid-cols-5 sm:gap-3">
             {cards.map(renderCard)}
           </div>
-        )}
-        {/* --- Win Modal (Overlay) --- */}
-        {isGameWon && gameStarted && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-600/90">
-            <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
-              <h2 className="mt-1 mb-4 text-2xl animate-bounce">
-                They all matched! ♥️
-              </h2>
-              <p className="mb-3">🎯 Moves: {moves}</p>
-              {memoryHighscore !== null && (
-                <p className="mb-6">🏆 Best: {memoryHighscore}</p>
-              )}
-              <button
-                onClick={restartGame}
-                className="px-4 py-2 text-white transition duration-200 shadow-xl bg-stone-500 hover:bg-stone-600 rounded-xl active:scale-95">
-                Play Again
-              </button>
-            </div>
+        ) : (
+          // --- Invisible grid to size container ---
+          <div className="grid invisible grid-cols-4 gap-2 overflow-hidden sm:grid-cols-5 sm:gap-3">
+            {cards.map(renderCard)}
           </div>
         )}
+
+        {/* --- Reusable Overlay --- */}
+        <GameScreenOverlay
+          gameStarted={gameStarted}
+          gameOver={isGameWon}
+          score={moves}
+          highScore={memoryHighscore}
+          startGame={startGame}
+          restartGame={restartGame}
+          startText="Help Stunkies to match! 🥰"
+          startImage={smooch}
+        />
       </div>
     </div>
   );
