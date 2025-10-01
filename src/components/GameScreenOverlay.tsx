@@ -3,8 +3,8 @@ interface GameOverlayProps {
   gameOver: boolean;
   startGame: () => void;
   restartGame: () => void;
-  score?: number;
-  highScore?: number | null;
+  score?: number | string;
+  highScore?: number | string | null;
   startText?: string;
   gameOverText?: string;
   startImage?: string;
@@ -18,8 +18,8 @@ export default function GameOverlay({
   restartGame,
   score,
   highScore,
-  startText = "Help Stunkies to smooch! 🥰",
-  gameOverText = "They smooched! ♥️",
+  startText,
+  gameOverText,
   startImage,
   startImageAlt = "game-start",
 }: GameOverlayProps) {
@@ -27,7 +27,7 @@ export default function GameOverlay({
     <>
       {/* Start Screen */}
       {!gameStarted && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#f5f0e6]">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#f5f0e6] rounded-2xl overflow-hidden">
           <p className="mb-2 text-xl">{startText}</p>
           {startImage && (
             <img

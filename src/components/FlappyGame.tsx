@@ -228,7 +228,7 @@ export default function FlappyGame() {
       />
 
       <div
-        className="relative mx-auto overflow-hidden rounded-lg bg-sky-300 max-w-[360px] w-full"
+        className="relative mx-auto overflow-hidden rounded-2xl bg-sky-300 max-w-[360px] w-full"
         style={{ width: gameAreaWidth, height: gameAreaHeight }}>
         <div className="absolute bottom-0 w-full h-2 bg-green-600"></div>
 

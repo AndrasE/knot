@@ -1,6 +1,9 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
+import GameHeader from "./GameHeader";
+import GameScreenOverlay from "./GameScreenOverlay";
+import smooch from "../assets/images/game/flappy/smooch.webp";
 
 const images = [
   "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=1600&auto=format&fit=crop",
@@ -17,8 +20,8 @@ export default function DragDropPicturePuzzle() {
     () => Array.from({ length: total }, (_, i) => i),
     [total]
   );
+
   const [board, setBoard] = useState<number[]>(initial);
-  const [moves, setMoves] = useState(0);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [solved, setSolved] = useState(false);
   const [time, setTime] = useState(0);
@@ -33,7 +36,7 @@ export default function DragDropPicturePuzzle() {
   useEffect(() => {
     const saved = localStorage.getItem("puzzleHighScore");
     if (saved) setHighScore(parseInt(saved, 10));
-    shuffleBoard(false, true); // shuffle but wait for Start Game, pick new image only on mount
+    shuffleBoard(false, true); // shuffle but wait for Start Game
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -47,19 +50,14 @@ export default function DragDropPicturePuzzle() {
     };
   }, [timerActive]);
 
-  // Effect to handle non-passive touchmove event for preventing scrolling
+  // Prevent mobile scroll while dragging
   useEffect(() => {
     const gameContainer = gameContainerRef.current;
     if (!gameContainer) return;
-
-    const preventScroll = (e: TouchEvent) => {
-      e.preventDefault();
-    };
-
+    const preventScroll = (e: TouchEvent) => e.preventDefault();
     gameContainer.addEventListener("touchmove", preventScroll, {
       passive: false,
     });
-
     return () => {
       gameContainer.removeEventListener("touchmove", preventScroll);
     };
@@ -72,7 +70,6 @@ export default function DragDropPicturePuzzle() {
     } while (isSolved(shuffled)); // ensure it's not already solved
 
     setBoard(shuffled);
-    setMoves(0);
     setTime(0);
     setSolved(false);
 
@@ -97,7 +94,6 @@ export default function DragDropPicturePuzzle() {
   const tileWidth = containerSize / cols;
   const tileHeight = containerSize / rows;
 
-  // Shared logic for swapping pieces, used by both mouse drag-drop and touch events
   function handleSwap(targetIndex: number) {
     if (draggedIndex === null || !gameStarted || draggedIndex === targetIndex)
       return;
@@ -109,8 +105,7 @@ export default function DragDropPicturePuzzle() {
     ];
 
     setBoard(newBoard);
-    setMoves((m) => m + 1);
-    setDraggedIndex(null); // Reset after swap
+    setDraggedIndex(null);
 
     if (isSolved(newBoard)) {
       setTimerActive(false);
@@ -125,7 +120,7 @@ export default function DragDropPicturePuzzle() {
     }
   }
 
-  // --- Mouse Drag-and-Drop Handlers ---
+  // --- Mouse Drag & Drop ---
   function onDragStart(e: React.DragEvent<HTMLDivElement>, index: number) {
     setDraggedIndex(index);
     e.dataTransfer.effectAllowed = "move";
@@ -136,7 +131,7 @@ export default function DragDropPicturePuzzle() {
     handleSwap(targetIndex);
   }
 
-  // --- Mobile Touch Handlers ---
+  // --- Touch events ---
   function onTouchStart(_e: React.TouchEvent<HTMLDivElement>, index: number) {
     if (!gameStarted) return;
     setDraggedIndex(index);
@@ -144,15 +139,11 @@ export default function DragDropPicturePuzzle() {
 
   function onTouchEnd(e: React.TouchEvent<HTMLDivElement>) {
     if (draggedIndex === null) return;
-
-    // Find the element where the touch ended
     const touch = e.changedTouches[0];
     const targetElement = document.elementFromPoint(
       touch.clientX,
       touch.clientY
     );
-
-    // Find the closest parent element that is a puzzle piece (has a data-index)
     const puzzlePiece = targetElement?.closest("[data-index]");
     if (puzzlePiece) {
       const targetIndexStr = puzzlePiece.getAttribute("data-index");
@@ -162,8 +153,6 @@ export default function DragDropPicturePuzzle() {
         return;
       }
     }
-
-    // If the touch ends outside a valid piece, just reset the dragged state
     setDraggedIndex(null);
   }
 
@@ -185,21 +174,20 @@ export default function DragDropPicturePuzzle() {
 
   return (
     <div className="flex flex-col items-center gap-4 p-4">
-      <h2 className="text-xl font-semibold">Drag & Drop Puzzle (3x3)</h2>
+      {/* ✅ Reusable Header */}
+      <GameHeader
+        title="Drag & Drop Puzzle"
+        subtitle="Arrange the tiles!"
+        stats={[
+          { label: "Time", value: formatTime(time) },
+          ...(highScore !== null
+            ? [{ label: "Best", value: formatTime(highScore) }]
+            : []),
+        ]}
+        onReset={() => shuffleBoard(false, true)}
+      />
 
-      <div className="flex flex-wrap items-center justify-center gap-3">
-        <button
-          className="px-3 py-1 text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700"
-          onClick={() => shuffleBoard(false, true)}>
-          Reset
-        </button>
-        <div className="min-w-[80px]">Moves: {moves}</div>
-        <div className="min-w-[80px]">Time: {formatTime(time)}</div>
-        {highScore !== null && (
-          <div className="min-w-[90px]">Best: {formatTime(highScore)}</div>
-        )}
-      </div>
-
+      {/* Puzzle board */}
       <div
         ref={gameContainerRef}
         className="relative mt-4"
@@ -232,7 +220,7 @@ export default function DragDropPicturePuzzle() {
                 <motion.div
                   key={value}
                   layout
-                  data-index={idx} // Added data-index to identify pieces for touch events
+                  data-index={idx}
                   className={`relative rounded-md ${
                     isBeingDragged ? "opacity-50" : ""
                   }`}
@@ -257,52 +245,25 @@ export default function DragDropPicturePuzzle() {
                     }}
                     aria-hidden
                   />
-                  <span className="absolute px-1 py-0.5 text-xs rounded-sm bottom-1 right-1 text-white/90 bg-black/40 drop-shadow-sm">
-                    {value + 1}
-                  </span>
+                  {/* 🔥 Removed number overlay */}
                 </motion.div>
               );
             })}
           </AnimatePresence>
         </div>
 
-        {!gameStarted && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <button
-              className="px-3 py-2 font-bold text-white transition-transform transform bg-green-600 rounded-lg shadow-lg hover:bg-green-700 hover:scale-105"
-              onClick={() => {
-                setGameStarted(true);
-                setTimerActive(true);
-              }}>
-              Start Game
-            </button>
-          </div>
-        )}
-
-        {solved && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/40">
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              className="p-6 text-center bg-white rounded-lg shadow-xl">
-              <h3 className="text-2xl font-bold">🎉 Puzzle Solved!</h3>
-              <p className="mt-2">Moves: {moves}</p>
-              <p>Time: {formatTime(time)}</p>
-              <div className="flex justify-center gap-2 mt-4">
-                <button
-                  className="px-4 py-2 font-semibold text-white bg-green-600 rounded-md hover:bg-green-700"
-                  onClick={() => shuffleBoard(true, true)}>
-                  Play Again
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
+        {/* ✅ Reusable Overlay for Start + Solved */}
+        <GameScreenOverlay
+          gameStarted={gameStarted}
+          gameOver={solved}
+          startGame={() => shuffleBoard(true, false)}
+          restartGame={() => shuffleBoard(true, true)}
+          score={`${formatTime(time)}`}
+          highScore={highScore !== null ? `${formatTime(highScore)}` : null}
+          startText="Solve the puzzle! 🧩"
+          startImage={smooch}
+          gameOverText="They are complete! ♥️"
+        />
       </div>
     </div>
   );
