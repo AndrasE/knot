@@ -239,8 +239,9 @@ export default function FlappyGame() {
         </div>
       </header>
       <div
-        className="relative mx-auto overflow-hidden border-b-8 border-green-800 rounded-lg shadow-2xl bg-sky-300 max-w-[360px] w-full"
+        className="relative mx-auto overflow-hidden  rounded-lg  bg-sky-300 max-w-[360px] w-full"
         style={{ width: gameAreaWidth, height: gameAreaHeight }}>
+        <div className="absolute bottom-0 w-full h-2 bg-green-600 "></div>
         {/* Flyer */}
         {gameStarted && (
           <div
@@ -277,7 +278,7 @@ export default function FlappyGame() {
             <div key={i} className="absolute" style={{ left: obs.x }}>
               {/* Top block (Pipe body) */}
               <div
-                className="relative bg-green-500 shadow-inner rounded-b-xl"
+                className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-b-xl"
                 style={{ width: obstacleWidth, height: obs.gapY }}>
                 <img
                   src={obstacle}
@@ -288,7 +289,7 @@ export default function FlappyGame() {
               </div>
               {/* Bottom block (Pipe body) */}
               <div
-                className="relative bg-green-500 shadow-inner rounded-t-xl"
+                className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-t-xl"
                 style={{
                   width: obstacleWidth,
                   height: gameAreaHeight - (obs.gapY + gapHeight),
@@ -305,8 +306,8 @@ export default function FlappyGame() {
           ))}
         {/* Start Screen */}
         {!gameStarted && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-3xl text-white bg-black/50">
-            <p className="mb-2 text-xl">Help Stunkies get a smooch! 🥰</p>
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3   bg-[#f5f0e6]">
+            <p className="mb-2 text-xl">Help Stunkies to smooch! 🥰</p>
             <img src={smooch} alt="smooch" className="mb-4 w-60 rounded-2xl" />
             <button
               onClick={startGame}
@@ -328,9 +329,9 @@ export default function FlappyGame() {
                 <p className="mb-6">🏆 Best Score: {highScore}</p>
               )}
               <button
-                onClick={startGame}
+                onClick={restartGame}
                 className="px-4 py-2 text-white transition duration-200 shadow-xl bg-stone-500 hover:bg-stone-600 rounded-xl active:scale-95">
-                Play Again
+                Restart Game
               </button>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, type JSX } from "react";
 
-// --- Import images (fixed set) ---
+// --- Import images ---
 import img1 from "../assets/images/game/memory/1.webp";
 import img2 from "../assets/images/game/memory/2.webp";
 import img3 from "../assets/images/game/memory/3.webp";
@@ -11,6 +11,7 @@ import img7 from "../assets/images/game/memory/7.webp";
 import img8 from "../assets/images/game/memory/8.webp";
 import img9 from "../assets/images/game/memory/9.webp";
 import img10 from "../assets/images/game/memory/10.webp";
+import smooch from "../assets/images/game/flappy/smooch.webp";
 
 // --- Types ---
 interface Card {
@@ -21,7 +22,7 @@ interface Card {
   isMatched: boolean;
 }
 
-// --- Card Assets (10 unique pairs → 20 cards) ---
+// --- Card Assets ---
 const INITIAL_ICONS: string[] = [
   img1,
   img2,
@@ -74,34 +75,41 @@ const MemoryGame: React.FC = () => {
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [moves, setMoves] = useState<number>(0);
   const [isChecking, setIsChecking] = useState<boolean>(false);
-  const [memoryHighscore, setmemoryHighscore] = useState<number | null>(null);
+  const [memoryHighscore, setMemoryHighscore] = useState<number | null>(null);
+  const [gameStarted, setGameStarted] = useState<boolean>(false);
 
   // Derived state
   const matchedCount: number = cards.filter((c) => c.isMatched).length;
-  const isGameWon: boolean = matchedCount === 20;
+  const isGameWon: boolean = matchedCount === cards.length && cards.length > 0;
 
-  // Load memoryHighscore from localStorage
+  // Load highscore from localStorage
   useEffect(() => {
-    const stored = localStorage.getItem("memoryGamememoryHighscore");
-    if (stored) setmemoryHighscore(Number(stored));
+    const stored = localStorage.getItem("memoryGameHighscore");
+    if (stored) setMemoryHighscore(Number(stored));
   }, []);
 
-  // Save memoryHighscore if new record
+  // Save highscore if new record
   useEffect(() => {
     if (isGameWon) {
       if (memoryHighscore === null || moves < memoryHighscore) {
-        setmemoryHighscore(moves);
-        localStorage.setItem("memoryGamememoryHighscore", moves.toString());
+        setMemoryHighscore(moves);
+        localStorage.setItem("memoryGameHighscore", moves.toString());
       }
     }
   }, [isGameWon, moves, memoryHighscore]);
 
-  // Restart
-  const restartGame = useCallback(() => {
+  // Function to start the game
+  const startGame = () => {
     setCards(createBoard());
     setFlippedCards([]);
     setMoves(0);
     setIsChecking(false);
+    setGameStarted(true);
+  };
+
+  // Restart (returns to start screen)
+  const restartGame = useCallback(() => {
+    setGameStarted(false);
   }, []);
 
   // Check match when two cards are flipped
@@ -130,7 +138,6 @@ const MemoryGame: React.FC = () => {
           );
         }
       });
-
       setFlippedCards([]);
       setIsChecking(false);
     }, 1200);
@@ -154,7 +161,6 @@ const MemoryGame: React.FC = () => {
   // Render
   const renderCard = (card: Card): JSX.Element => {
     const isVisible: boolean = card.isFlipped || card.isMatched;
-
     const cardClassName = isVisible
       ? card.isMatched
         ? "bg-green-200 pointer-events-none opacity-80"
@@ -178,17 +184,15 @@ const MemoryGame: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-xl p-2 border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
-      {/* Header */}
-      <header className="mb-4 text-center">
-        <h1 className="text-2xl ">Stunkie Match</h1>
-        <p className="mb-2">Find the 10 matching pairs!</p>
-
+    <div className="w-full max-w-xl p-2 mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
+      {/* Header - Always visible */}
+      <header className="mb-5 text-center md:mb-10">
+        <h1 className="text-2xl">Stunkie Match</h1>
+        <p className="mb-2">Match 'em!</p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <div className="px-4 py-2 text-indigo-800 bg-indigo-100 rounded-lg shadow-sm">
             Moves: <span>{moves}</span>
           </div>
-
           {memoryHighscore !== null && (
             <div className="px-4 py-2 text-yellow-800 bg-yellow-100 rounded-lg shadow-sm">
               Best: <span>{memoryHighscore}</span>
@@ -202,31 +206,60 @@ const MemoryGame: React.FC = () => {
         </div>
       </header>
 
-      {/* Game Grid */}
-      <div className="grid grid-cols-4 gap-2 sm:grid-cols-5 sm:gap-3">
-        {cards.map(renderCard)}
-      </div>
+      {/* Game Area - Holds either the start screen or the grid */}
+      <div className="relative">
+        {!gameStarted ? (
+          // --- Start Screen ---
+          <>
+            {/* 1. An invisible grid that sets the correct height for the container */}
+            <div className="grid invisible grid-cols-4 gap-2 sm:grid-cols-5 sm:gap-3">
+              {cards.map(renderCard)}
+            </div>
 
-      {/* Win Modal */}
-      {isGameWon && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-600/90">
-          <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
-            <h2 className="mt-1 mb-4 text-2xl animate-bounce">
-              They are matched! ♥️
-            </h2>
-
-            <p className="mb-3">🎯 Final Score: {moves}</p>
-            {memoryHighscore !== null && (
-              <p className="mb-6">🏆 Best Score: {memoryHighscore}</p>
-            )}
-            <button
-              onClick={restartGame}
-              className="px-4 py-2 text-white transition duration-200 shadow-xl bg-stone-500 hover:bg-stone-600 rounded-xl active:scale-95">
-              Play Again
-            </button>
+            {/* 2. Your start screen, positioned absolutely to fill the container */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-4 bg-[#f5f0e6] rounded-lg">
+              <p className="mb-2 text-xl text-center">
+                Help Stunkies to match! 🥰
+              </p>
+              <img
+                src={smooch}
+                alt="smooch"
+                className="mb-4 w-60 rounded-2xl"
+              />
+              <button
+                onClick={startGame}
+                className="px-4 py-2 text-base text-white transition duration-200 rounded-md shadow-xl bg-stone-400 hover:bg-stone-500 active:scale-95">
+                Start Game
+              </button>
+            </div>
+          </>
+        ) : (
+          // --- Game Grid ---
+          // (This part remains unchanged)
+          <div className="grid grid-cols-4 gap-2 sm:grid-cols-5 sm:gap-3">
+            {cards.map(renderCard)}
           </div>
-        </div>
-      )}
+        )}
+        {/* --- Win Modal (Overlay) --- */}
+        {isGameWon && gameStarted && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-600/90">
+            <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
+              <h2 className="mt-1 mb-4 text-2xl animate-bounce">
+                They all matched! ♥️
+              </h2>
+              <p className="mb-3">🎯 Moves: {moves}</p>
+              {memoryHighscore !== null && (
+                <p className="mb-6">🏆 Best: {memoryHighscore}</p>
+              )}
+              <button
+                onClick={restartGame}
+                className="px-4 py-2 text-white transition duration-200 shadow-xl bg-stone-500 hover:bg-stone-600 rounded-xl active:scale-95">
+                Play Again
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
