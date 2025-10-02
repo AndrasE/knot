@@ -36,21 +36,26 @@ export default function FlappyGame() {
   useEffect(() => {
     const updateDimensions = () => {
       const navbarHeight = 60;
-      const maxGameContentWidth = 360;
       const minGameContentWidth = 300;
       const safetyBuffer = 16;
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight - navbarHeight;
+
+      const useSquare = windowWidth >= 1024; // lg breakpoint
+      const maxGameContentWidth = useSquare ? 580 : 480; // ✅ larger on desktop
 
       const availableWidth = Math.max(
         minGameContentWidth,
         windowWidth - safetyBuffer
       );
       const calculatedWidth = Math.min(maxGameContentWidth, availableWidth);
-      const calculatedHeight = calculatedWidth * (7 / 6);
+
+      const calculatedHeight = useSquare
+        ? calculatedWidth // 1:1 aspect
+        : calculatedWidth * (7 / 6); // default aspect
 
       const finalHeight = Math.min(calculatedHeight, windowHeight * 0.9);
-      const finalWidth = finalHeight * (6 / 7);
+      const finalWidth = useSquare ? finalHeight : finalHeight * (6 / 7);
 
       setGameAreaWidth(finalWidth);
       setGameAreaHeight(finalHeight);
@@ -216,7 +221,7 @@ export default function FlappyGame() {
   ]);
 
   return (
-    <div className="max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
+    <div className="w-full max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       <GameHeader
         title="Flappy Stunkie"
         subtitle="Smootch 'em!"
@@ -227,82 +232,84 @@ export default function FlappyGame() {
         onReset={restartGame}
       />
 
-      <div
-        className="relative  mt-3 sm:mt-5 mx-auto overflow-hidden rounded-2xl bg-sky-300 max-w-[360px] w-full"
-        style={{ width: gameAreaWidth, height: gameAreaHeight }}>
-        <div className="absolute bottom-0 w-full h-2 bg-green-600"></div>
+      <div className="flex justify-center mt-5 sm:mt-10 ">
+        <div
+          className="relative overflow-hidden rounded-2xl bg-sky-300"
+          style={{ width: gameAreaWidth, height: gameAreaHeight }}>
+          <div className="absolute bottom-0 w-full h-2 bg-green-600"></div>
 
-        {/* Flyer */}
-        {gameStarted && (
-          <div
-            className={`absolute transition-transform duration-100 ease-linear ${
-              gameOver ? "opacity-50" : ""
-            }`}
-            style={{
-              left: flyerX,
-              top: flyerY,
-              width: flyerSize,
-              height: flyerSize,
-              transform: `rotate(${Math.min(90, velocity * 5)}deg)`,
-            }}>
-            <img
-              src={flyer}
-              alt="flyer"
-              className="object-cover w-full h-full rounded-xl"
-            />
-            {/* Wings */}
-            <div className="absolute -left-4 top-3/4 text-2xl -translate-y-1/2 -rotate-12 scale-x-[-1]">
-              🪽
-            </div>
-            <div className="absolute text-2xl -translate-y-1/2 -right-4 top-3/4 rotate-12">
-              🪽
-            </div>
-          </div>
-        )}
-
-        {/* Obstacles */}
-        {gameStarted &&
-          obstacles.map((obs, i) => (
-            <div key={i} className="absolute" style={{ left: obs.x }}>
-              <div
-                className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-b-xl"
-                style={{ width: obstacleWidth, height: obs.gapY }}>
-                <img
-                  src={obstacle}
-                  alt="obstacle-head-top"
-                  className="absolute bottom-0 object-cover w-full transform rotate-180 rounded-xl"
-                  style={{ height: `${capHeight}px` }}
-                />
+          {/* Flyer */}
+          {gameStarted && (
+            <div
+              className={`absolute transition-transform duration-100 ease-linear ${
+                gameOver ? "opacity-50" : ""
+              }`}
+              style={{
+                left: flyerX,
+                top: flyerY,
+                width: flyerSize,
+                height: flyerSize,
+                transform: `rotate(${Math.min(90, velocity * 5)}deg)`,
+              }}>
+              <img
+                src={flyer}
+                alt="flyer"
+                className="object-cover w-full h-full rounded-xl"
+              />
+              {/* Wings */}
+              <div className="absolute -left-4 top-3/4 text-2xl -translate-y-1/2 -rotate-12 scale-x-[-1]">
+                🪽
               </div>
-              <div
-                className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-t-xl"
-                style={{
-                  width: obstacleWidth,
-                  height: gameAreaHeight - (obs.gapY + gapHeight),
-                  marginTop: gapHeight,
-                }}>
-                <img
-                  src={obstacle}
-                  alt="obstacle-head-bottom"
-                  className="absolute top-0 object-cover w-full rounded-xl"
-                  style={{ height: `${capHeight}px` }}
-                />
+              <div className="absolute text-2xl -translate-y-1/2 -right-4 top-3/4 rotate-12">
+                🪽
               </div>
             </div>
-          ))}
+          )}
 
-        {/* ✅ Reusable overlay */}
-        <GameScreenOverlay
-          gameStarted={gameStarted}
-          gameOver={gameOver}
-          startGame={startGame}
-          restartGame={restartGame}
-          score={score}
-          highScore={highScore}
-          startText="Help Stunkies to smooch! 🥰"
-          gameOverText="They smooched! ♥️"
-          startImage={smooch}
-        />
+          {/* Obstacles */}
+          {gameStarted &&
+            obstacles.map((obs, i) => (
+              <div key={i} className="absolute" style={{ left: obs.x }}>
+                <div
+                  className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-b-xl"
+                  style={{ width: obstacleWidth, height: obs.gapY }}>
+                  <img
+                    src={obstacle}
+                    alt="obstacle-head-top"
+                    className="absolute bottom-0 object-cover w-full transform rotate-180 rounded-xl"
+                    style={{ height: `${capHeight}px` }}
+                  />
+                </div>
+                <div
+                  className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-t-xl"
+                  style={{
+                    width: obstacleWidth,
+                    height: gameAreaHeight - (obs.gapY + gapHeight),
+                    marginTop: gapHeight,
+                  }}>
+                  <img
+                    src={obstacle}
+                    alt="obstacle-head-bottom"
+                    className="absolute top-0 object-cover w-full rounded-xl"
+                    style={{ height: `${capHeight}px` }}
+                  />
+                </div>
+              </div>
+            ))}
+
+          {/* ✅ Reusable overlay */}
+          <GameScreenOverlay
+            gameStarted={gameStarted}
+            gameOver={gameOver}
+            startGame={startGame}
+            restartGame={restartGame}
+            score={score}
+            highScore={highScore}
+            startText="Help Stunkies to smooch! 🥰"
+            gameOverText="They smooched! ♥️"
+            startImage={smooch}
+          />
+        </div>
       </div>
     </div>
   );

@@ -204,12 +204,12 @@ const MemoryGame: React.FC = () => {
       <div className="relative mt-5 sm:mt-10 ">
         {gameStarted ? (
           // --- Game Grid ---
-          <div className="grid grid-cols-4 gap-2 sm:grid-cols-5 sm:gap-3 ma">
+          <div className="grid  grid-cols-4 gap-2 overflow-hidden min-[539px]:grid-cols-5 sm:gap-3">
             {cards.map(renderCard)}
           </div>
         ) : (
           // --- Invisible grid to size container ---
-          <div className="grid invisible grid-cols-4 gap-2 overflow-hidden sm:grid-cols-5 sm:gap-3">
+          <div className="grid invisible grid-cols-4 gap-2 overflow-hidden min-[539px]:grid-cols-5 sm:gap-3">
             {cards.map(renderCard)}
           </div>
         )}

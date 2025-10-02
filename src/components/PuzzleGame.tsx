@@ -4,13 +4,11 @@ import confetti from "canvas-confetti";
 import GameHeader from "./GameHeader";
 import GameScreenOverlay from "./GameScreenOverlay";
 import smooch from "../assets/images/game/flappy/smooch.webp";
+import img1 from "../assets/images/game/puzzle/1.jpg";
+import img2 from "../assets/images/game/puzzle/2.jpg";
+import img3 from "../assets/images/game/puzzle/3.jpg";
 
-const images = [
-  "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=1600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1523413651479-597eb2da0ad1?q=80&w=1600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1600&auto=format&fit=crop",
-];
+const images = [img1, img2, img3];
 
 export default function DragDropPicturePuzzle() {
   const rows = 3;
@@ -89,10 +87,6 @@ export default function DragDropPicturePuzzle() {
     for (let i = 0; i < b.length; i++) if (b[i] !== i) return false;
     return true;
   }
-
-  const containerSize = 480;
-  const tileWidth = containerSize / cols;
-  const tileHeight = containerSize / rows;
 
   function handleSwap(targetIndex: number) {
     if (draggedIndex === null || !gameStarted || draggedIndex === targetIndex)
@@ -173,7 +167,7 @@ export default function DragDropPicturePuzzle() {
   }
 
   return (
-    <div className="max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
+    <div className="w-full max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       {/* ✅ Reusable Header */}
       <GameHeader
         title="Stunkie Puzzle"
@@ -190,19 +184,15 @@ export default function DragDropPicturePuzzle() {
       {/* Puzzle board container */}
       <div
         ref={gameContainerRef}
-        className="relative flex justify-center mt-5 sm:mt-10"
-        style={{ width: containerSize, height: containerSize }}
+        className="relative flex justify-center w-full mx-auto mt-5 max-w sm:mt-10 aspect-square"
         onDragOver={(e) => e.preventDefault()}
         onTouchEnd={onTouchEnd}>
         <div
+          className="grid w-full h-full"
           style={{
-            width: containerSize,
-            height: containerSize,
-            display: "grid",
             gridTemplateColumns: `repeat(${cols}, 1fr)`,
             gridTemplateRows: `repeat(${rows}, 1fr)`,
             gap: 2,
-            padding: "2px",
           }}>
           <AnimatePresence>
             {board.map((value, idx) => {
@@ -217,10 +207,8 @@ export default function DragDropPicturePuzzle() {
                   key={value}
                   layout
                   data-index={idx}
-                  className={`relative  ${isBeingDragged ? "opacity-50" : ""}`}
+                  className={`relative ${isBeingDragged ? "opacity-50" : ""}`}
                   style={{
-                    width: tileWidth,
-                    height: tileHeight,
                     cursor: gameStarted ? "grab" : "default",
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}>
