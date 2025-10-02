@@ -4,6 +4,6 @@ export default function launchConfetti() {
   confetti({
     particleCount: 220,
     spread: 80,
-    origin: { y: 0.6 },
+    origin: { y: 0.7 },
   });
 }
