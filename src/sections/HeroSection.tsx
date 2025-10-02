@@ -4,7 +4,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="max-w-6xl   flex-center-100vh nav-content-offset ">
+      className="max-w-6xl flex-center-100vh nav-content-offset ">
       <div className="flex flex-col items-center justify-center gap-5 sm:gap-10 align-center sm:flex-row ">
         <div className="text-center sm:w-2/3">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-dawning">
@@ -20,14 +20,16 @@ export default function HeroSection() {
             We're tying the knot!
           </p>
         </div>
-        <img
-          src={Us}
-          alt="us"
-          width="300"
-          height="400"
-          fetchPriority="high"
-          className="w-3/4 rounded-2xl sm:w-1/3 max-w-[300px] shadow-xl"
-        />
+        <div className="w-3/4 rounded-2xl sm:w-1/3 max-w-[300px] shadow-xl">
+          <img
+            src={Us}
+            alt="us"
+            fetchPriority="high"
+            width="300"
+            height="300"
+            className="w-full h-full rounded-2xl"
+          />
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, type JSX } from "react";
 import GameHeader from "./GameHeader";
 import GameScreenOverlay from "./GameScreenOverlay";
+import launchConfetti from "./Confetti";
 
 // --- Import images ---
 import img1 from "../assets/images/game/memory/1.webp";
@@ -93,6 +94,7 @@ export default function MemoryGame() {
   // Save highscore if new record
   useEffect(() => {
     if (isGameWon) {
+      launchConfetti();
       if (memoryHighscore === null || moves < memoryHighscore) {
         setMemoryHighscore(moves);
         localStorage.setItem("memoryGameHighscore", moves.toString());

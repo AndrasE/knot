@@ -4,6 +4,7 @@ import obstacle from "../assets/images/game/flappy/2.webp";
 import smooch from "../assets/images/game/flappy/smooch.webp";
 import GameHeader from "./GameHeader";
 import GameScreenOverlay from "./GameScreenOverlay";
+import launchConfetti from "./Confetti";
 
 export default function FlappyGame() {
   const [flyerY, setFlyerY] = useState(0);
@@ -35,13 +36,12 @@ export default function FlappyGame() {
   // Dynamic sizing
   useEffect(() => {
     const updateDimensions = () => {
-      const navbarHeight = 60;
       const minGameContentWidth = 300;
       const safetyBuffer = 16;
       const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight - navbarHeight;
+      const windowHeight = window.innerHeight;
 
-      const useSquare = windowWidth >= 1024; // lg breakpoint
+      const useSquare = windowWidth >= 1024;
       const maxGameContentWidth = useSquare ? 580 : 480; // ✅ larger on desktop
 
       const availableWidth = Math.max(
@@ -110,6 +110,7 @@ export default function FlappyGame() {
 
   useEffect(() => {
     if (!gameStarted || gameOver) {
+      launchConfetti();
       if (gameOver && score > highScore) {
         setHighScore(score);
         localStorage.setItem("flappyHighScore", score.toString());
@@ -246,7 +247,7 @@ export default function FlappyGame() {
         gameOverText="They smooched! ♥️"
         startImage={smooch}>
         {" "}
-        <div className="flex justify-center  ">
+        <div className="flex justify-center ">
           {" "}
           <div
             className="relative overflow-hidden rounded-2xl bg-sky-300"
@@ -287,18 +288,18 @@ export default function FlappyGame() {
                 <div key={i} className="absolute" style={{ left: obs.x }}>
                   {" "}
                   <div
-                    className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-b-xl"
+                    className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-b-md"
                     style={{ width: obstacleWidth, height: obs.gapY }}>
                     {" "}
                     <img
                       src={obstacle}
                       alt="obstacle-head-top"
-                      className="absolute bottom-0 object-cover w-full transform rotate-180 rounded-xl"
+                      className="absolute bottom-0 object-cover w-full transform rotate-180 rounded-md"
                       style={{ height: `${capHeight}px` }}
                     />{" "}
                   </div>{" "}
                   <div
-                    className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-t-xl"
+                    className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-t-md"
                     style={{
                       width: obstacleWidth,
                       height: gameAreaHeight - (obs.gapY + gapHeight),
@@ -308,7 +309,7 @@ export default function FlappyGame() {
                     <img
                       src={obstacle}
                       alt="obstacle-head-bottom"
-                      className="absolute top-0 object-cover w-full rounded-xl"
+                      className="absolute top-0 object-cover w-full rounded-md"
                       style={{ height: `${capHeight}px` }}
                     />{" "}
                   </div>{" "}

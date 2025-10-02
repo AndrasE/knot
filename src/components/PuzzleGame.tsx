@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import confetti from "canvas-confetti";
 import GameHeader from "./GameHeader";
 import smooch from "../assets/images/game/flappy/smooch.webp";
 import img1 from "../assets/images/game/puzzle/1.jpg";
 import img2 from "../assets/images/game/puzzle/2.jpg";
 import img3 from "../assets/images/game/puzzle/3.jpg";
 import GameContainer from "./GameScreenOverlay";
+import launchConfetti from "./Confetti";
 
 const images = [img1, img2, img3];
 
@@ -148,14 +148,6 @@ export default function DragDropPicturePuzzle() {
       }
     }
     setDraggedIndex(null);
-  }
-
-  function launchConfetti() {
-    confetti({
-      particleCount: 150,
-      spread: 80,
-      origin: { y: 0.6 },
-    });
   }
 
   function formatTime(seconds: number) {
