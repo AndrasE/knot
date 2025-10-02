@@ -12,7 +12,7 @@ export default function GameHeader({
   onReset,
 }: GameHeaderProps) {
   return (
-    <header className="mb-4 text-center">
+    <header className="text-center ">
       <h1 className="pt-2 text-2xl">{title}</h1>
       {subtitle && <p className="mb-2 text-gray-600">{subtitle}</p>}
 

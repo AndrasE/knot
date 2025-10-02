@@ -192,7 +192,7 @@ export default function DragDropPicturePuzzle() {
         gameOverText="They are complete! ♥️">
         <div
           ref={gameContainerRef}
-          className="relative flex justify-center w-full mx-auto mt-5 sm:mt-10 aspect-square"
+          className="relative flex justify-center w-full mx-auto aspect-square"
           onDragOver={(e) => e.preventDefault()}
           onTouchEnd={onTouchEnd}>
           <div

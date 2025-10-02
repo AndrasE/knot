@@ -3,7 +3,7 @@ import flyer from "../assets/images/game/flappy/1.webp";
 import obstacle from "../assets/images/game/flappy/2.webp";
 import smooch from "../assets/images/game/flappy/smooch.webp";
 import GameHeader from "./GameHeader";
-import GameContainer from "./GameScreenOverlay";
+import GameScreenOverlay from "./GameScreenOverlay";
 
 export default function FlappyGame() {
   const [flyerY, setFlyerY] = useState(0);
@@ -232,21 +232,21 @@ export default function FlappyGame() {
         ]}
         onReset={restartGame}
       />
-      {/* CORRECTION: The GameContainer is now correctly used as a single wrapper 
+      {/* CORRECTION: The GameScreenOverlay is now correctly used as a single wrapper 
         for the game elements.
       */}{" "}
-      <GameContainer
+      <GameScreenOverlay
         gameStarted={gameStarted}
         gameOver={gameOver}
         startGame={startGame}
-        restartGame={restartGame}
+        restartGame={startGame}
         score={score}
         highScore={highScore}
         startText="Help Stunkies to smooch! 🥰"
         gameOverText="They smooched! ♥️"
         startImage={smooch}>
         {" "}
-        <div className="flex justify-center mt-5 sm:mt-10 ">
+        <div className="flex justify-center  ">
           {" "}
           <div
             className="relative overflow-hidden rounded-2xl bg-sky-300"
@@ -316,7 +316,7 @@ export default function FlappyGame() {
               ))}{" "}
           </div>{" "}
         </div>{" "}
-      </GameContainer>{" "}
+      </GameScreenOverlay>{" "}
     </div>
   );
 }

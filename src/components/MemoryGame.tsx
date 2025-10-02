@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, type JSX } from "react";
 import GameHeader from "./GameHeader";
-import GameContainer from "./GameScreenOverlay";
+import GameScreenOverlay from "./GameScreenOverlay";
 
 // --- Import images ---
 import img1 from "../assets/images/game/memory/1.webp";
@@ -201,7 +201,7 @@ export default function MemoryGame() {
       />
 
       {/* --- ✅ CORRECTED USAGE --- */}
-      <GameContainer
+      <GameScreenOverlay
         gameStarted={gameStarted}
         gameOver={isGameWon}
         score={moves}
@@ -213,12 +213,12 @@ export default function MemoryGame() {
         gameOverText="You matched them 💖!">
         {/* Pass ONLY the actual game grid as the child.
         No more conditional logic or extra wrappers are needed here.
-        The GameContainer will decide whether to show this grid or the start screen.
+        The GameScreenOverlay will decide whether to show this grid or the start screen.
       */}
         <div className="grid grid-cols-4 gap-2 min-[539px]:grid-cols-5 sm:gap-3">
           {cards.map(renderCard)}
         </div>
-      </GameContainer>
+      </GameScreenOverlay>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 
 // The props are mostly the same, but we add `children`
-interface GameContainerProps {
+interface GameScreenOverlayProps {
   children: React.ReactNode; // To accept the actual game component
   gameStarted: boolean;
   gameOver: boolean;
@@ -15,7 +15,7 @@ interface GameContainerProps {
   startImageAlt?: string;
 }
 
-export default function GameContainer({
+export default function GameScreenOverlay({
   children, // The game grid/area will be passed here
   gameStarted,
   gameOver,
@@ -27,7 +27,7 @@ export default function GameContainer({
   gameOverText,
   startImage,
   startImageAlt = "game-start",
-}: GameContainerProps) {
+}: GameScreenOverlayProps) {
   return (
     // This is the main wrapper with all the container styling
     <div className="relative w-full max-w-xl p-2 mx-auto mt-5 overflow-hidden ">
@@ -57,7 +57,7 @@ export default function GameContainer({
 
           {/* The Game Over screen can remain an absolute overlay, as it appears on top of the finished game */}
           {gameOver && (
-            <div className="absolute inset-0 z-50 flex items-center justify-center bg-stone-600/70">
+            <div className="absolute inset-0 z-50 flex items-center justify-center bg-[#f5f0e6]/75">
               <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
                 <h2 className="mt-1 mb-4 text-2xl animate-bounce">
                   {gameOverText}
