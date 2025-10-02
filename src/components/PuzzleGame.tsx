@@ -2,11 +2,11 @@ import React, { useEffect, useMemo, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import GameHeader from "./GameHeader";
-import GameScreenOverlay from "./GameScreenOverlay";
 import smooch from "../assets/images/game/flappy/smooch.webp";
 import img1 from "../assets/images/game/puzzle/1.jpg";
 import img2 from "../assets/images/game/puzzle/2.jpg";
 import img3 from "../assets/images/game/puzzle/3.jpg";
+import GameContainer from "./GameScreenOverlay";
 
 const images = [img1, img2, img3];
 
@@ -168,7 +168,6 @@ export default function DragDropPicturePuzzle() {
 
   return (
     <div className="w-full max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
-      {/* ✅ Reusable Header */}
       <GameHeader
         title="Stunkie Puzzle"
         subtitle="Complete 'em!"
@@ -181,71 +180,71 @@ export default function DragDropPicturePuzzle() {
         onReset={() => shuffleBoard(false, true)}
       />
 
-      {/* Puzzle board container */}
-      <div
-        ref={gameContainerRef}
-        className="relative flex justify-center w-full mx-auto mt-5 max-w sm:mt-10 aspect-square"
-        onDragOver={(e) => e.preventDefault()}
-        onTouchEnd={onTouchEnd}>
+      <GameContainer
+        gameStarted={gameStarted}
+        gameOver={solved}
+        startGame={() => shuffleBoard(true, false)}
+        restartGame={() => shuffleBoard(true, true)}
+        score={formatTime(time)}
+        highScore={highScore !== null ? formatTime(highScore) : null}
+        startText="Help Stunkies to be complete! 🥰"
+        startImage={smooch}
+        gameOverText="They are complete! ♥️">
         <div
-          className="grid w-full h-full"
-          style={{
-            gridTemplateColumns: `repeat(${cols}, 1fr)`,
-            gridTemplateRows: `repeat(${rows}, 1fr)`,
-            gap: 2,
-          }}>
-          <AnimatePresence>
-            {board.map((value, idx) => {
-              const r = Math.floor(value / cols);
-              const c = value % cols;
-              const bgPosX = (c / (cols - 1)) * 100 || 0;
-              const bgPosY = (r / (rows - 1)) * 100 || 0;
-              const isBeingDragged = draggedIndex === idx;
+          ref={gameContainerRef}
+          className="relative flex justify-center w-full mx-auto mt-5 sm:mt-10 aspect-square"
+          onDragOver={(e) => e.preventDefault()}
+          onTouchEnd={onTouchEnd}>
+          <div
+            className="grid w-full h-full"
+            style={{
+              gridTemplateColumns: `repeat(${cols}, 1fr)`,
+              gridTemplateRows: `repeat(${rows}, 1fr)`,
+              gap: 2,
+            }}>
+            <AnimatePresence>
+              {board.map((value, idx) => {
+                const r = Math.floor(value / cols);
+                const c = value % cols;
+                const bgPosX = (c / (cols - 1)) * 100 || 0;
+                const bgPosY = (r / (rows - 1)) * 100 || 0;
+                const isBeingDragged = draggedIndex === idx;
 
-              return (
-                <motion.div
-                  key={value}
-                  layout
-                  data-index={idx}
-                  className={`relative ${isBeingDragged ? "opacity-50" : ""}`}
-                  style={{
-                    cursor: gameStarted ? "grab" : "default",
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}>
-                  <div
-                    draggable={gameStarted}
-                    onDragStart={(e) => onDragStart(e, idx)}
-                    onDrop={(e) => onDrop(e, idx)}
-                    onTouchStart={(e) => onTouchStart(e, idx)}
-                    style={{
-                      backgroundImage: `url('${imageUrl}')`,
-                      backgroundSize: `${cols * 100}% ${rows * 100}%`,
-                      backgroundPosition: `${bgPosX}% ${bgPosY}%`,
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: "15px",
-                    }}
-                    aria-hidden
-                  />
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+                return (
+                  <motion.div
+                    key={value}
+                    layout
+                    data-index={idx}
+                    className={`relative ${isBeingDragged ? "opacity-50" : ""}`}
+                    style={{ cursor: gameStarted ? "grab" : "default" }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 30,
+                    }}>
+                    <div
+                      draggable={gameStarted}
+                      onDragStart={(e) => onDragStart(e, idx)}
+                      onDrop={(e) => onDrop(e, idx)}
+                      onTouchStart={(e) => onTouchStart(e, idx)}
+                      style={{
+                        backgroundImage: `url('${imageUrl}')`,
+                        backgroundSize: `${cols * 100}% ${rows * 100}%`,
+                        backgroundPosition: `${bgPosX}% ${bgPosY}%`,
+                        backgroundRepeat: "no-repeat",
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "15px",
+                      }}
+                      aria-hidden
+                    />
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
         </div>
-
-        {/* Overlay */}
-        <GameScreenOverlay
-          gameStarted={gameStarted}
-          gameOver={solved}
-          startGame={() => shuffleBoard(true, false)}
-          restartGame={() => shuffleBoard(true, true)}
-          score={`${formatTime(time)}`}
-          highScore={highScore !== null ? `${formatTime(highScore)}` : null}
-          startText="Help Stunkies to be complete! 🥰"
-          startImage={smooch}
-          gameOverText="They are complete! ♥️"
-        />
-      </div>
+      </GameContainer>
     </div>
   );
 }

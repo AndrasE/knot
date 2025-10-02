@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useCallback, type JSX } from "react";
-import GameScreenOverlay from "./GameScreenOverlay"; // ✅ import reusable overlay
+import { useState, useEffect, useCallback, type JSX } from "react";
+import GameHeader from "./GameHeader";
+import GameContainer from "./GameScreenOverlay";
 
 // --- Import images ---
 import img1 from "../assets/images/game/memory/1.webp";
@@ -13,7 +14,6 @@ import img8 from "../assets/images/game/memory/8.webp";
 import img9 from "../assets/images/game/memory/9.webp";
 import img10 from "../assets/images/game/memory/10.webp";
 import smooch from "../assets/images/game/flappy/smooch.webp";
-import GameHeader from "./GameHeader";
 
 // --- Types ---
 interface Card {
@@ -72,7 +72,7 @@ const createBoard = (): Card[] => {
 };
 
 // --- Component ---
-const MemoryGame: React.FC = () => {
+export default function MemoryGame() {
   const [cards, setCards] = useState<Card[]>(createBoard);
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [moves, setMoves] = useState<number>(0);
@@ -186,8 +186,8 @@ const MemoryGame: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-xl p-2 mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
-      {/* Header - Always visible */}
+    // This outer div is just for centering the whole component on the page
+    <div className="w-full max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       <GameHeader
         title="Stunkie Pair"
         subtitle="Match 'em!"
@@ -200,34 +200,25 @@ const MemoryGame: React.FC = () => {
         onReset={restartGame}
       />
 
-      {/* Game Area */}
-      <div className="relative mt-5 sm:mt-10 ">
-        {gameStarted ? (
-          // --- Game Grid ---
-          <div className="grid  grid-cols-4 gap-2 overflow-hidden min-[539px]:grid-cols-5 sm:gap-3">
-            {cards.map(renderCard)}
-          </div>
-        ) : (
-          // --- Invisible grid to size container ---
-          <div className="grid invisible grid-cols-4 gap-2 overflow-hidden min-[539px]:grid-cols-5 sm:gap-3">
-            {cards.map(renderCard)}
-          </div>
-        )}
-
-        {/* --- Reusable Overlay --- */}
-        <GameScreenOverlay
-          gameStarted={gameStarted}
-          gameOver={isGameWon}
-          score={moves}
-          highScore={memoryHighscore}
-          startGame={startGame}
-          restartGame={restartGame}
-          startText="Help Stunkies to match! 🥰"
-          startImage={smooch}
-        />
-      </div>
+      {/* --- ✅ CORRECTED USAGE --- */}
+      <GameContainer
+        gameStarted={gameStarted}
+        gameOver={isGameWon}
+        score={moves}
+        highScore={memoryHighscore}
+        startGame={startGame}
+        restartGame={restartGame}
+        startText="Help Stunkies to match! 🥰"
+        startImage={smooch}
+        gameOverText="You matched them 💖!">
+        {/* Pass ONLY the actual game grid as the child.
+        No more conditional logic or extra wrappers are needed here.
+        The GameContainer will decide whether to show this grid or the start screen.
+      */}
+        <div className="grid grid-cols-4 gap-2 min-[539px]:grid-cols-5 sm:gap-3">
+          {cards.map(renderCard)}
+        </div>
+      </GameContainer>
     </div>
   );
-};
-
-export default MemoryGame;
+}

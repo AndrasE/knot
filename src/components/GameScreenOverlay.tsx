@@ -1,4 +1,8 @@
-interface GameOverlayProps {
+import React from "react";
+
+// The props are mostly the same, but we add `children`
+interface GameContainerProps {
+  children: React.ReactNode; // To accept the actual game component
   gameStarted: boolean;
   gameOver: boolean;
   startGame: () => void;
@@ -11,7 +15,8 @@ interface GameOverlayProps {
   startImageAlt?: string;
 }
 
-export default function GameOverlay({
+export default function GameContainer({
+  children, // The game grid/area will be passed here
   gameStarted,
   gameOver,
   startGame,
@@ -22,12 +27,14 @@ export default function GameOverlay({
   gameOverText,
   startImage,
   startImageAlt = "game-start",
-}: GameOverlayProps) {
+}: GameContainerProps) {
   return (
-    <>
-      {/* Start Screen */}
-      {!gameStarted && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#f5f0e6] rounded-2xl overflow-hidden">
+    // This is the main wrapper with all the container styling
+    <div className="relative w-full max-w-xl p-2 mx-auto mt-5 overflow-hidden ">
+      {/* Conditionally render the content */}
+      {!gameStarted ? (
+        // --- Start Screen ---
+        <div className="flex flex-col items-center justify-center gap-3 bg-[#f5f0e6]">
           <p className="mb-2 text-xl">{startText}</p>
           {startImage && (
             <img
@@ -42,29 +49,35 @@ export default function GameOverlay({
             Start Game
           </button>
         </div>
-      )}
+      ) : (
+        // --- Game Content and Game Over Screen ---
+        <>
+          {/* Render the actual game that was passed in as children */}
+          {children}
 
-      {/* Game Over */}
-      {gameStarted && gameOver && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-600/90">
-          <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
-            <h2 className="mt-1 mb-4 text-2xl animate-bounce">
-              {gameOverText}
-            </h2>
-            {score !== undefined && (
-              <p className="mb-3 text-xl">🎯 Final Score: {score}</p>
-            )}
-            {highScore !== null && highScore !== undefined && (
-              <p className="mb-6 text-xl">🏆 Best Score: {highScore}</p>
-            )}
-            <button
-              onClick={restartGame}
-              className="px-4 py-2 text-xl text-white transition duration-200 shadow-xl bg-stone-500 hover:bg-stone-600 rounded-xl active:scale-95">
-              Restart Game
-            </button>
-          </div>
-        </div>
+          {/* The Game Over screen can remain an absolute overlay, as it appears on top of the finished game */}
+          {gameOver && (
+            <div className="absolute inset-0 z-50 flex items-center justify-center bg-stone-600/70">
+              <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
+                <h2 className="mt-1 mb-4 text-2xl animate-bounce">
+                  {gameOverText}
+                </h2>
+                {score !== undefined && (
+                  <p className="mb-3 text-xl">🎯 Final Score: {score}</p>
+                )}
+                {highScore !== null && highScore !== undefined && (
+                  <p className="mb-6 text-xl">🏆 Best Score: {highScore}</p>
+                )}
+                <button
+                  onClick={restartGame}
+                  className="px-4 py-2 text-xl text-white transition duration-200 shadow-xl bg-stone-500 hover:bg-stone-600 rounded-xl active:scale-95">
+                  Restart Game
+                </button>
+              </div>
+            </div>
+          )}
+        </>
       )}
-    </>
+    </div>
   );
 }
