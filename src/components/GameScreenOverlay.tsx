@@ -40,6 +40,7 @@ export default function GameScreenOverlay({
             <img
               src={startImage}
               alt={startImageAlt}
+              fetchPriority="high"
               className="mb-5 w-60 rounded-2xl"
             />
           )}
