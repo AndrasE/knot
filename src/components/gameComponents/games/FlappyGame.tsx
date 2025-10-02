@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import flyer from "../assets/images/game/flappy/1.webp";
-import obstacle from "../assets/images/game/flappy/2.webp";
-import smooch from "../assets/images/game/flappy/smooch.webp";
-import GameHeader from "./GameHeader";
-import GameScreenOverlay from "./GameScreenOverlay";
-import launchConfetti from "./Confetti";
+import GameHeader from "../GameHeader";
+import GameScreenOverlay from "../GameScreenOverlay";
+import launchConfetti from "../Confetti";
+import {
+  FlappyGameImages,
+  PlaceholderImages,
+} from "../../../assets/images/game/index";
 
 export default function FlappyGame() {
   const [flyerY, setFlyerY] = useState(0);
@@ -109,9 +110,11 @@ export default function FlappyGame() {
   };
 
   useEffect(() => {
+    if (gameOver) {
+      launchConfetti();
+    }
     if (!gameStarted || gameOver) {
       if (gameOver && score > highScore) {
-        launchConfetti();
         setHighScore(score);
         localStorage.setItem("flappyHighScore", score.toString());
       }
@@ -225,7 +228,7 @@ export default function FlappyGame() {
     <div className="w-full max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       {" "}
       <GameHeader
-        title="Flappy Stunkie"
+        title="Stunkie Flaps"
         subtitle="Smootch 'em!"
         stats={[
           { label: "Score", value: score },
@@ -233,9 +236,6 @@ export default function FlappyGame() {
         ]}
         onReset={restartGame}
       />
-      {/* CORRECTION: The GameScreenOverlay is now correctly used as a single wrapper 
-        for the game elements.
-      */}{" "}
       <GameScreenOverlay
         gameStarted={gameStarted}
         gameOver={gameOver}
@@ -243,9 +243,9 @@ export default function FlappyGame() {
         restartGame={startGame}
         score={score}
         highScore={highScore}
-        startText="Help Stunkies to smooch! 🥰"
+        startText="Help Stunkies to smooch! "
         gameOverText="They smooched! ♥️"
-        startImage={smooch}>
+        startImage={PlaceholderImages.flappy_us}>
         {" "}
         <div className="flex justify-center ">
           {" "}
@@ -269,7 +269,7 @@ export default function FlappyGame() {
                 }}>
                 {" "}
                 <img
-                  src={flyer}
+                  src={FlappyGameImages.flyer}
                   alt="flyer"
                   className="object-cover w-full h-full rounded-xl"
                 />
@@ -292,7 +292,7 @@ export default function FlappyGame() {
                     style={{ width: obstacleWidth, height: obs.gapY }}>
                     {" "}
                     <img
-                      src={obstacle}
+                      src={FlappyGameImages.obstacle}
                       alt="obstacle-head-top"
                       className="absolute bottom-0 object-cover w-full transform rotate-180 rounded-md"
                       style={{ height: `${capHeight}px` }}
@@ -307,7 +307,7 @@ export default function FlappyGame() {
                     }}>
                     {" "}
                     <img
-                      src={obstacle}
+                      src={FlappyGameImages.obstacle}
                       alt="obstacle-head-bottom"
                       className="absolute top-0 object-cover w-full rounded-md"
                       style={{ height: `${capHeight}px` }}

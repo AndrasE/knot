@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import GameHeader from "./GameHeader";
-import smooch from "../assets/images/game/flappy/smooch.webp";
-import img1 from "../assets/images/game/puzzle/1.jpg";
-import img2 from "../assets/images/game/puzzle/2.jpg";
-import img3 from "../assets/images/game/puzzle/3.jpg";
-import GameContainer from "./GameScreenOverlay";
-import launchConfetti from "./Confetti";
+import GameHeader from "../GameHeader";
+import GameContainer from "../GameScreenOverlay";
+import launchConfetti from "../Confetti";
+import {
+  PuzzleGameImages,
+  PlaceholderImages,
+} from "../../../assets/images/game/index";
 
-const images = [img1, img2, img3];
+const images = Object.values(PuzzleGameImages);
 
 export default function DragDropPicturePuzzle() {
   const rows = 3;
@@ -110,7 +110,7 @@ export default function DragDropPicturePuzzle() {
           setHighScore(time);
           localStorage.setItem("puzzleHighScore", String(time));
         }
-      }, 300);
+      }, 1000);
     }
   }
 
@@ -179,8 +179,8 @@ export default function DragDropPicturePuzzle() {
         restartGame={() => shuffleBoard(true, true)}
         score={formatTime(time)}
         highScore={highScore !== null ? formatTime(highScore) : null}
-        startText="Help Stunkies to be complete! 🥰"
-        startImage={smooch}
+        startText="Help Stunkies to be complete! "
+        startImage={PlaceholderImages.puzzle_us}
         gameOverText="They are complete! ♥️">
         <div
           ref={gameContainerRef}

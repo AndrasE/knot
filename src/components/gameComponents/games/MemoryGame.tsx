@@ -1,20 +1,12 @@
 import { useState, useEffect, useCallback, type JSX } from "react";
-import GameHeader from "./GameHeader";
-import GameScreenOverlay from "./GameScreenOverlay";
-import launchConfetti from "./Confetti";
-
+import GameHeader from "../GameHeader";
+import GameScreenOverlay from "../GameScreenOverlay";
+import launchConfetti from "../Confetti";
 // --- Import images ---
-import img1 from "../assets/images/game/memory/1.webp";
-import img2 from "../assets/images/game/memory/2.webp";
-import img3 from "../assets/images/game/memory/3.webp";
-import img4 from "../assets/images/game/memory/4.webp";
-import img5 from "../assets/images/game/memory/5.webp";
-import img6 from "../assets/images/game/memory/6.webp";
-import img7 from "../assets/images/game/memory/7.webp";
-import img8 from "../assets/images/game/memory/8.webp";
-import img9 from "../assets/images/game/memory/9.webp";
-import img10 from "../assets/images/game/memory/10.webp";
-import smooch from "../assets/images/game/flappy/smooch.webp";
+import {
+  MemoryGameImageMap,
+  PlaceholderImages,
+} from "../../../assets/images/game/index";
 
 // --- Types ---
 interface Card {
@@ -26,18 +18,7 @@ interface Card {
 }
 
 // --- Card Assets ---
-const INITIAL_ICONS: string[] = [
-  img1,
-  img2,
-  img3,
-  img4,
-  img5,
-  img6,
-  img7,
-  img8,
-  img9,
-  img10,
-];
+const INITIAL_ICONS: string[] = Object.values(MemoryGameImageMap);
 
 // --- Helper Functions ---
 const shuffle = (array: Card[]): Card[] => {
@@ -210,8 +191,8 @@ export default function MemoryGame() {
         highScore={memoryHighscore}
         startGame={startGame}
         restartGame={restartGame}
-        startText="Help Stunkies to match! 🥰"
-        startImage={smooch}
+        startText="Help Stunkies to match! "
+        startImage={PlaceholderImages.memory_us}
         gameOverText="You matched them 💖!">
         {/* Pass ONLY the actual game grid as the child.
         No more conditional logic or extra wrappers are needed here.

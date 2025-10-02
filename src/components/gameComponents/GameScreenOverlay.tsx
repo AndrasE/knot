@@ -26,7 +26,7 @@ export default function GameScreenOverlay({
   startText,
   gameOverText,
   startImage,
-  startImageAlt = "game-start",
+  startImageAlt = "cute stunkie couple",
 }: GameScreenOverlayProps) {
   return (
     // This is the main wrapper with all the container styling
@@ -41,7 +41,7 @@ export default function GameScreenOverlay({
               src={startImage}
               alt={startImageAlt}
               fetchPriority="high"
-              className="mb-5 w-60 rounded-2xl"
+              className="object-cover mb-5 w-65 h-55 rounded-2xl"
             />
           )}
           <button
