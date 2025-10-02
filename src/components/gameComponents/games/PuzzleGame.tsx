@@ -159,7 +159,7 @@ export default function DragDropPicturePuzzle() {
   }
 
   return (
-    <div className="w-full max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
+    <div className="w-full p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       <GameHeader
         title="Stunkie Puzzle"
         subtitle="Complete 'em!"

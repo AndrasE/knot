@@ -13,8 +13,8 @@ export default function GameHeader({
 }: GameHeaderProps) {
   return (
     <header className="text-center ">
-      <h1 className="pt-2 text-2xl">{title}</h1>
-      {subtitle && <p className="mb-2 text-gray-600">{subtitle}</p>}
+      <h1 className="text-2xl ">{title}</h1>
+      {subtitle && <p className="mb-4 text-gray-600">{subtitle}</p>}
 
       <div className="flex flex-wrap items-center justify-center gap-3">
         {stats.map((stat, i) => (

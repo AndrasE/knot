@@ -30,12 +30,12 @@ export default function GameScreenOverlay({
 }: GameScreenOverlayProps) {
   return (
     // This is the main wrapper with all the container styling
-    <div className="relative w-full max-w-xl p-2 mx-auto mt-5 overflow-hidden ">
+    <div className="relative w-full p-2 mx-auto mt-5 overflow-hidden ">
       {/* Conditionally render the content */}
       {!gameStarted ? (
         // --- Start Screen ---
         <div className="flex flex-col items-center justify-center gap-3 bg-[#f5f0e6]">
-          <p className="mb-2 text-xl">{startText}</p>
+          <p className="mb-3 text-xl">{startText}</p>
           {startImage && (
             <img
               src={startImage}
@@ -71,7 +71,7 @@ export default function GameScreenOverlay({
                 )}
                 <button
                   onClick={restartGame}
-                  className="px-4 py-2 mb-1 text-xl text-green-800 transition duration-200 bg-green-300 shadow-xl rounded-xl active:scale-95">
+                  className="px-4 py-2 text-xl text-green-800 transition duration-200 bg-green-300 shadow-xl rounded-xl active:scale-95">
                   Restart Game
                 </button>
               </div>

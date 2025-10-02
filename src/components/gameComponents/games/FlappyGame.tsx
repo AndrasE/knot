@@ -20,8 +20,8 @@ export default function FlappyGame() {
   });
   const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
-  const [gameAreaWidth, setGameAreaWidth] = useState(360);
-  const [gameAreaHeight, setGameAreaHeight] = useState(420);
+  const [gameAreaWidth, setGameAreaWidth] = useState(450);
+  const [gameAreaHeight, setGameAreaHeight] = useState(450);
   const [lastJumpTime, setLastJumpTime] = useState(0);
   const [lastScoreTime, setLastScoreTime] = useState(0);
 
@@ -40,27 +40,23 @@ export default function FlappyGame() {
       const minGameContentWidth = 300;
       const safetyBuffer = 16;
       const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
+      const windowHeight = window.innerHeight; // Always aim for a 1:1 aspect ratio
 
-      const useSquare = windowWidth >= 1024;
-      const maxGameContentWidth = useSquare ? 580 : 480; // ✅ larger on desktop
+      const maxGameContentSize = windowHeight >= 1024 ? 580 : 440; // Larger max size on desktop
 
       const availableWidth = Math.max(
         minGameContentWidth,
         windowWidth - safetyBuffer
-      );
-      const calculatedWidth = Math.min(maxGameContentWidth, availableWidth);
+      ); // The size is limited by the available width and the maximum allowed size
 
-      const calculatedHeight = useSquare
-        ? calculatedWidth // 1:1 aspect
-        : calculatedWidth * (7 / 6); // default aspect
+      const calculatedSize = Math.min(maxGameContentSize, availableWidth); // Also ensure the size doesn't exceed 90% of the window height
 
-      const finalHeight = Math.min(calculatedHeight, windowHeight * 0.9);
-      const finalWidth = useSquare ? finalHeight : finalHeight * (6 / 7);
+      const finalSize = Math.min(calculatedSize, windowHeight * 0.9); // Set both width and height to the same final size for 1:1 aspect ratio
 
-      setGameAreaWidth(finalWidth);
-      setGameAreaHeight(finalHeight);
-      setFlyerY(finalHeight / 2);
+      setGameAreaWidth(finalSize);
+      setGameAreaHeight(finalSize);
+
+      setFlyerY(finalSize / 2);
     };
 
     updateDimensions();
@@ -225,7 +221,7 @@ export default function FlappyGame() {
   ]);
 
   return (
-    <div className="w-full max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
+    <div className="w-full p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       {" "}
       <GameHeader
         title="Stunkie Flaps"

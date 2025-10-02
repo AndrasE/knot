@@ -162,7 +162,7 @@ export default function MemoryGame() {
         {isVisible ? (
           <img src={card.icon} alt="memory card" className="rounded-md" />
         ) : (
-          "?"
+          "❔"
         )}
       </div>
     );
@@ -170,7 +170,7 @@ export default function MemoryGame() {
 
   return (
     // This outer div is just for centering the whole component on the page
-    <div className="w-full max-w-xl p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
+    <div className="w-full p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       <GameHeader
         title="Stunkie Pair"
         subtitle="Match 'em!"
@@ -198,7 +198,7 @@ export default function MemoryGame() {
         No more conditional logic or extra wrappers are needed here.
         The GameScreenOverlay will decide whether to show this grid or the start screen.
       */}
-        <div className="grid grid-cols-4 gap-2 min-[539px]:grid-cols-5 sm:gap-3">
+        <div className="grid grid-cols-4 gap-1 min-[539px]:grid-cols-5 ">
           {cards.map(renderCard)}
         </div>
       </GameScreenOverlay>
