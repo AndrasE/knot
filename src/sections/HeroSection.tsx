@@ -25,8 +25,6 @@ export default function HeroSection() {
             src={Us}
             alt="us"
             fetchPriority="high"
-            width="300"
-            height="300"
             className="w-full h-full rounded-2xl"
           />
         </div>

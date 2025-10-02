@@ -110,8 +110,8 @@ export default function FlappyGame() {
 
   useEffect(() => {
     if (!gameStarted || gameOver) {
-      launchConfetti();
       if (gameOver && score > highScore) {
+        launchConfetti();
         setHighScore(score);
         localStorage.setItem("flappyHighScore", score.toString());
       }
