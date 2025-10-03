@@ -25,15 +25,35 @@ export const MemoryGameImageMap = {
 };
 
 // --- PUZZLE GAME IMAGES ---
-import puzzle1 from "../game/puzzle/1.jpg";
-import puzzle2 from "../game/puzzle/2.jpg";
-import puzzle3 from "../game/puzzle/3.jpg";
+import puzzle1 from "../game/puzzle/1.webp";
+import puzzle2 from "../game/puzzle/2.webp";
+import puzzle3 from "../game/puzzle/3.webp";
+import puzzle4 from "../game/puzzle/4.webp";
+import puzzle5 from "../game/puzzle/5.webp";
+import puzzle6 from "../game/puzzle/6.webp";
+import puzzle7 from "../game/puzzle/7.webp";
+import puzzle8 from "../game/puzzle/8.webp";
+import puzzle9 from "../game/puzzle/9.webp";
+import puzzle10 from "../game/puzzle/10.webp";
+import puzzle11 from "../game/puzzle/11.webp";
+import puzzle12 from "../game/puzzle/12.webp";
+import puzzle13 from "../game/puzzle/13.webp";
 
 // Export the Puzzle Game Map
 export const PuzzleGameImages = {
   img1: puzzle1,
   img2: puzzle2,
   img3: puzzle3,
+  img4: puzzle4,
+  img5: puzzle5,
+  img6: puzzle6,
+  img7: puzzle7,
+  img8: puzzle8,
+  img9: puzzle9,
+  img10: puzzle10,
+  img11: puzzle11,
+  img12: puzzle12,
+  img13: puzzle13,
 };
 
 // --- FLAPPY GAME IMAGES ---

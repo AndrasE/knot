@@ -62,10 +62,31 @@ export default function DragDropPicturePuzzle() {
   }, []);
 
   function shuffleBoard(startTimer = true, changeImage = false) {
-    let shuffled: number[] = [];
-    do {
-      shuffled = [...initial].sort(() => Math.random() - 0.5);
-    } while (isSolved(shuffled)); // ensure it's not already solved
+    const shuffled: number[] = [...initial];
+
+    // Fisher-Yates shuffle algorithm for a better, slightly longer shuffle
+    let currentIndex = shuffled.length;
+    let randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex !== 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [shuffled[currentIndex], shuffled[randomIndex]] = [
+        shuffled[randomIndex],
+        shuffled[currentIndex],
+      ];
+    }
+
+    // Ensure the shuffled board is not already solved
+    if (isSolved(shuffled)) {
+      // If it is solved, run the shuffle again
+      shuffleBoard(startTimer, changeImage);
+      return;
+    }
 
     setBoard(shuffled);
     setTime(0);
@@ -103,6 +124,7 @@ export default function DragDropPicturePuzzle() {
 
     if (isSolved(newBoard)) {
       setTimerActive(false);
+      // Changed timeout from 1000 to 500ms
       setTimeout(() => {
         setSolved(true);
         launchConfetti();
@@ -110,7 +132,7 @@ export default function DragDropPicturePuzzle() {
           setHighScore(time);
           localStorage.setItem("puzzleHighScore", String(time));
         }
-      }, 1000);
+      }, 1500);
     }
   }
 
@@ -184,7 +206,7 @@ export default function DragDropPicturePuzzle() {
         gameOverText="They are complete! ♥️">
         <div
           ref={gameContainerRef}
-          className="relative flex justify-center w-full mx-auto aspect-square"
+          className="relative flex justify-center w-full mx-auto aspect-square touch-none"
           onDragOver={(e) => e.preventDefault()}
           onTouchEnd={onTouchEnd}>
           <div
@@ -211,7 +233,7 @@ export default function DragDropPicturePuzzle() {
                     style={{ cursor: gameStarted ? "grab" : "default" }}
                     transition={{
                       type: "spring",
-                      stiffness: 300,
+                      stiffness: 200,
                       damping: 30,
                     }}>
                     <div
