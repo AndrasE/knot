@@ -8,7 +8,7 @@ export default function Navbar() {
   const isHomePage = location.pathname === "/";
 
   return (
-    <nav className="fixed top-0 left-0 z-10 flex w-full items-center justify-between gap-2 px-2 py-3 text-lg border-b border-stone-300 sm:px-10 md:px-20 bg-[#f5f0e6]">
+    <nav className="fixed top-0 left-0 z-999 flex w-full items-center justify-between gap-2 px-2 py-3 text-lg border-b border-stone-300 sm:px-10 md:px-20 bg-[#f5f0e6]">
       {/* Home page HashLink */}
       <HashLink
         to="/#hero"
