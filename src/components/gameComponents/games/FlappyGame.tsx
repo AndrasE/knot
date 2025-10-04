@@ -24,6 +24,8 @@ export default function FlappyGame() {
   const [gameAreaHeight, setGameAreaHeight] = useState(450);
   const [lastJumpTime, setLastJumpTime] = useState(0);
   const [lastScoreTime, setLastScoreTime] = useState(0);
+  // --- 1. ADDED STATE for wing flap animation ---
+  const [isFlapping, setIsFlapping] = useState(false);
 
   const flyerX = 80;
   const flyerSize = 48;
@@ -122,6 +124,10 @@ export default function FlappyGame() {
       if (now - lastJumpTime > 200) {
         setVelocity(jumpStrength);
         setLastJumpTime(now);
+
+        // --- 2. TRIGGER ANIMATION on jump ---
+        setIsFlapping(true);
+        setTimeout(() => setIsFlapping(false), 150); // Animation lasts 150ms
       }
     };
 
@@ -222,7 +228,6 @@ export default function FlappyGame() {
 
   return (
     <div className="w-full p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
-      {" "}
       <GameHeader
         title="Stunkie Flaps"
         subtitle="Smootch 'em!"
@@ -242,15 +247,12 @@ export default function FlappyGame() {
         startText="Help Stunkies to smooch! "
         gameOverText="They smooched! ♥️"
         startImage={PlaceholderImages.flappy_us}>
-        {" "}
         <div className="flex justify-center ">
-          {" "}
           <div
             className="relative overflow-hidden rounded-2xl bg-sky-300"
             style={{ width: gameAreaWidth, height: gameAreaHeight }}>
-            {" "}
             <div className="absolute bottom-0 w-full h-2 bg-green-600"></div>
-            {/* Flyer */}{" "}
+            {/* Flyer */}
             {gameStarted && (
               <div
                 className={`absolute transition-transform duration-100 ease-linear ${
@@ -263,37 +265,40 @@ export default function FlappyGame() {
                   height: flyerSize,
                   transform: `rotate(${Math.min(90, velocity * 5)}deg)`,
                 }}>
-                {" "}
                 <img
                   src={FlappyGameImages.flyer}
                   alt="flyer"
                   className="object-cover w-full h-full rounded-xl"
                 />
-                {/* Wings */}{" "}
-                <div className="absolute -left-4 top-3/4 text-2xl -translate-y-1/2 -rotate-12 scale-x-[-1]">
-                  🪽{" "}
-                </div>{" "}
-                <div className="absolute text-2xl -translate-y-1/2 -right-4 top-3/4 rotate-12">
-                  🪽{" "}
-                </div>{" "}
+                {/* --- 3. APPLY CONDITIONAL STYLES to wings --- */}
+                <div
+                  className={`absolute -left-4 top-3/4 text-2xl -translate-y-1/2 scale-x-[-1] transition-transform duration-150 ${
+                    isFlapping ? "-rotate-45" : "-rotate-10"
+                  }`}>
+                  🪽
+                </div>
+                <div
+                  className={`absolute text-2xl -translate-y-1/2 -right-4 top-3/4 transition-transform duration-150 ${
+                    isFlapping ? "rotate-45" : "rotate-10"
+                  }`}>
+                  🪽
+                </div>
               </div>
             )}
-            {/* Obstacles */}{" "}
+            {/* Obstacles */}
             {gameStarted &&
               obstacles.map((obs, i) => (
                 <div key={i} className="absolute" style={{ left: obs.x }}>
-                  {" "}
                   <div
                     className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-b-md"
                     style={{ width: obstacleWidth, height: obs.gapY }}>
-                    {" "}
                     <img
                       src={FlappyGameImages.obstacle}
                       alt="obstacle-head-top"
                       className="absolute bottom-0 object-cover w-full transform rotate-180 rounded-md"
                       style={{ height: `${capHeight}px` }}
-                    />{" "}
-                  </div>{" "}
+                    />
+                  </div>
                   <div
                     className="relative bg-green-500 border-green-600 shadow-inner border-x-3 rounded-t-md"
                     style={{
@@ -301,19 +306,18 @@ export default function FlappyGame() {
                       height: gameAreaHeight - (obs.gapY + gapHeight),
                       marginTop: gapHeight,
                     }}>
-                    {" "}
                     <img
                       src={FlappyGameImages.obstacle}
                       alt="obstacle-head-bottom"
                       className="absolute top-0 object-cover w-full rounded-md"
                       style={{ height: `${capHeight}px` }}
-                    />{" "}
-                  </div>{" "}
+                    />
+                  </div>
                 </div>
-              ))}{" "}
-          </div>{" "}
-        </div>{" "}
-      </GameScreenOverlay>{" "}
+              ))}
+          </div>
+        </div>
+      </GameScreenOverlay>
     </div>
   );
 }
