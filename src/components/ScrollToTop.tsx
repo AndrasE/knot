@@ -6,13 +6,15 @@ export default function ScrollToTop() {
   const location = useLocation();
 
   useEffect(() => {
-    // Check if the current URL path is for the details or gallery pages and scroll to top
-    if (
-      location.pathname === "/details" ||
-      location.pathname === "/gallery" ||
-      location.pathname === "/games"
-    ) {
-      window.scrollTo(0, 0);
+    const pagesToScrollTop = ["/details", "/gallery", "/games"];
+
+    if (pagesToScrollTop.includes(location.pathname)) {
+      // ⏳ Delay to avoid showing previous page's top (HeroSection)
+      const timeout = setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }, 350);
+
+      return () => clearTimeout(timeout);
     }
   }, [location.pathname]);
 

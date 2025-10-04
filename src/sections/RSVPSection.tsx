@@ -23,7 +23,7 @@ const Toast: React.FC<{
 
   return (
     <div
-      className={`fixed bottom-5  p-4 rounded-md text-white shadow-lg z-50 ${transitionClasses} ${visibilityClasses} ${bgColor}`}>
+      className={`fixed bottom-5  p-4 rounded-md text-white shadow-lg z-30 ${transitionClasses} ${visibilityClasses} ${bgColor}`}>
       <div className="flex items-center">
         <span>{toast.message}</span>
       </div>

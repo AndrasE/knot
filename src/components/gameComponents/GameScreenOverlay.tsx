@@ -58,7 +58,7 @@ export default function GameScreenOverlay({
 
           {/* The Game Over screen can remain an absolute overlay, as it appears on top of the finished game */}
           {gameOver && (
-            <div className="absolute inset-0 z-50 flex items-center justify-center bg-[#f5f0e6]/75">
+            <div className="absolute inset-0 z-20 flex items-center justify-center bg-[#f5f0e6]/75">
               <div className="p-8 text-center bg-[#f5f0e6] shadow-2xl rounded-xl">
                 <h2 className="mt-1 mb-4 text-2xl animate-bounce">
                   {gameOverText}
