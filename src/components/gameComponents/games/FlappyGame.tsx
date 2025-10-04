@@ -6,8 +6,16 @@ import {
   FlappyGameImages,
   PlaceholderImages,
 } from "../../../assets/images/game/index";
+// Imports the utility function to handle score comparison and submission to Firebase RTDB.
+import { updateHighScore } from "../../../utils/updateHighScore";
 
-export default function FlappyGame() {
+// --- Props ---
+type GameProps = {
+  // Player name is used as the unique identifier for saving scores in the database.
+  playerName: string;
+};
+
+export default function FlappyGame({ playerName }: GameProps) {
   const [flyerY, setFlyerY] = useState(0);
   const [velocity, setVelocity] = useState(0);
   const [obstacles, setObstacles] = useState<
@@ -15,6 +23,7 @@ export default function FlappyGame() {
   >([]);
   const [score, setScore] = useState(0);
   const [targetScore, setTargetScore] = useState(0);
+  // Initializes the local high score from the browser's localStorage.
   const [highScore, setHighScore] = useState(() => {
     return parseInt(localStorage.getItem("flappyHighScore") || "0", 10);
   });
@@ -24,7 +33,6 @@ export default function FlappyGame() {
   const [gameAreaHeight, setGameAreaHeight] = useState(450);
   const [lastJumpTime, setLastJumpTime] = useState(0);
   const [lastScoreTime, setLastScoreTime] = useState(0);
-  // --- 1. ADDED STATE for wing flap animation ---
   const [isFlapping, setIsFlapping] = useState(false);
 
   const flyerX = 80;
@@ -42,18 +50,18 @@ export default function FlappyGame() {
       const minGameContentWidth = 300;
       const safetyBuffer = 16;
       const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight; // Always aim for a 1:1 aspect ratio
+      const windowHeight = window.innerHeight;
 
-      const maxGameContentSize = windowHeight >= 1024 ? 580 : 440; // Larger max size on desktop
+      const maxGameContentSize = windowHeight >= 1024 ? 580 : 440;
 
       const availableWidth = Math.max(
         minGameContentWidth,
         windowWidth - safetyBuffer
-      ); // The size is limited by the available width and the maximum allowed size
+      );
 
-      const calculatedSize = Math.min(maxGameContentSize, availableWidth); // Also ensure the size doesn't exceed 90% of the window height
+      const calculatedSize = Math.min(maxGameContentSize, availableWidth);
 
-      const finalSize = Math.min(calculatedSize, windowHeight * 0.9); // Set both width and height to the same final size for 1:1 aspect ratio
+      const finalSize = Math.min(calculatedSize, windowHeight * 0.9);
 
       setGameAreaWidth(finalSize);
       setGameAreaHeight(finalSize);
@@ -85,6 +93,7 @@ export default function FlappyGame() {
     return () => clearInterval(interval);
   }, [score, targetScore]);
 
+  // Reset game state for a new start
   const startGame = () => {
     setGameStarted(true);
     setFlyerY(gameAreaHeight / 2);
@@ -96,6 +105,7 @@ export default function FlappyGame() {
     setLastScoreTime(0);
   };
 
+  // Prepare for a new game
   const restartGame = () => {
     setGameStarted(false);
     setFlyerY(gameAreaHeight / 2);
@@ -107,27 +117,41 @@ export default function FlappyGame() {
     setLastScoreTime(0);
   };
 
+  // Main Game Loop, Collision Detection, and High Score Submission
   useEffect(() => {
-    if (gameOver) {
-      launchConfetti();
-    }
+    // This block runs when the component mounts, or when the game state changes
     if (!gameStarted || gameOver) {
-      if (gameOver && score > highScore) {
-        setHighScore(score);
-        localStorage.setItem("flappyHighScore", score.toString());
+      // This 'if' block executes only once when the 'gameOver' state transitions to true.
+      if (gameOver) {
+        // 1. RTDB HIGH SCORE SUBMISSION
+        // Call the utility function with the game ID, player name, and the final score.
+        // The utility function will READ the current RTDB high score and WRITE the new score
+        // ONLY if the new score is higher.
+        updateHighScore("flappy", playerName, score);
+
+        // 2. LOCAL HIGH SCORE UPDATE
+        // This updates the score displayed in the UI and stored in localStorage.
+        if (score > highScore) {
+          setHighScore(score);
+          localStorage.setItem("flappyHighScore", score.toString());
+        }
+
+        launchConfetti(); // Celebrate the end of the game
       }
-      return;
+
+      return; // Stop the effect if the game isn't running
     }
 
+    // ... (Game ongoing logic - jump handlers)
     const handleJump = () => {
       const now = Date.now();
       if (now - lastJumpTime > 200) {
         setVelocity(jumpStrength);
         setLastJumpTime(now);
 
-        // --- 2. TRIGGER ANIMATION on jump ---
+        // Trigger animation
         setIsFlapping(true);
-        setTimeout(() => setIsFlapping(false), 150); // Animation lasts 150ms
+        setTimeout(() => setIsFlapping(false), 150);
       }
     };
 
@@ -140,6 +164,7 @@ export default function FlappyGame() {
     window.addEventListener("click", handleGlobalAction);
     window.addEventListener("touchstart", handleGlobalAction);
 
+    // Game tick (physics and movement)
     const gameLoop = setInterval(() => {
       // Flyer physics
       setFlyerY((prev) => {
@@ -207,12 +232,14 @@ export default function FlappyGame() {
       });
     }, 30);
 
+    // Cleanup function: clears the interval and removes event listeners when the effect stops
     return () => {
       clearInterval(gameLoop);
       window.removeEventListener("click", handleGlobalAction);
       window.removeEventListener("touchstart", handleGlobalAction);
     };
   }, [
+    // Dependencies ensure the effect has access to the latest values for calculations and cleanup.
     flyerY,
     gameOver,
     gameStarted,
@@ -224,6 +251,7 @@ export default function FlappyGame() {
     highScore,
     lastJumpTime,
     lastScoreTime,
+    playerName,
   ]);
 
   return (
@@ -270,7 +298,7 @@ export default function FlappyGame() {
                   alt="flyer"
                   className="object-cover w-full h-full rounded-xl"
                 />
-                {/* --- 3. APPLY CONDITIONAL STYLES to wings --- */}
+                {/* Wing Animation */}
                 <div
                   className={`absolute -left-4 top-3/4 text-2xl -translate-y-1/2 scale-x-[-1] transition-transform duration-150 ${
                     isFlapping ? "-rotate-45" : "-rotate-10"

@@ -7,13 +7,20 @@ import {
   PuzzleGameImages,
   PlaceholderImages,
 } from "../../../assets/images/game/index";
+// Imports the utility function to submit scores to the Firebase RTDB.
+import { updateHighScore } from "../../../utils/updateHighScore";
 
 const images = Object.values(PuzzleGameImages);
 
-export default function DragDropPicturePuzzle() {
+// --- Props ---
+type GameProps = {
+  playerName: string;
+};
+
+export default function PuzzleGame({ playerName }: GameProps) {
   const rows = 3;
   const cols = 3;
-  const total = rows * cols;
+  const total = rows * cols; // 'initial' is the solved board state (0, 1, 2, ... 8).
   const initial = useMemo(
     () => Array.from({ length: total }, (_, i) => i),
     [total]
@@ -27,29 +34,33 @@ export default function DragDropPicturePuzzle() {
   const [highScore, setHighScore] = useState<number | null>(null);
   const [gameStarted, setGameStarted] = useState(false);
   const [imageUrl, setImageUrl] = useState(
+    // Initial image selection. Assumes 'images' is populated immediately.
     images[Math.floor(Math.random() * images.length)]
   );
   const gameContainerRef = useRef<HTMLDivElement>(null);
 
+  // Load local high score and shuffle board on mount
   useEffect(() => {
+    // 1. Load local high score on mount
     const saved = localStorage.getItem("puzzleHighScore");
-    if (saved) setHighScore(parseInt(saved, 10));
-    shuffleBoard(false, true); // shuffle but wait for Start Game
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (saved) setHighScore(parseInt(saved, 10)); // 2. Call shuffleBoard only when the 'initial' array is stable (length > 0)
+
+    // and the game hasn't started yet.
+    if (initial.length > 0) {
+      shuffleBoard(false, true); // Shuffle board but keep timer inactive
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initial]); // DEPENDENCY on 'initial' ensures safe access inside shuffleBoard // Timer loop (runs every 10ms when timerActive is true)
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
     if (timerActive) {
-      // --- CHANGE THE FOLLOWING TWO LINES ---
       interval = setInterval(() => setTime((t) => t + 0.01), 10);
     }
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [timerActive]);
+  }, [timerActive]); // Prevent mobile scroll while dragging
 
-  // Prevent mobile scroll while dragging
   useEffect(() => {
     const gameContainer = gameContainerRef.current;
     if (!gameContainer) return;
@@ -60,31 +71,25 @@ export default function DragDropPicturePuzzle() {
     return () => {
       gameContainer.removeEventListener("touchmove", preventScroll);
     };
-  }, []);
+  }, []); // Shuffles the board and resets game state
 
   function shuffleBoard(startTimer = true, changeImage = false) {
-    const shuffled: number[] = [...initial];
+    // This line is now safe because the calling useEffect ensures 'initial' is ready.
+    const shuffled: number[] = [...initial]; // Fisher-Yates shuffle algorithm
 
-    // Fisher-Yates shuffle algorithm for a better, slightly longer shuffle
     let currentIndex = shuffled.length;
     let randomIndex;
 
-    // While there remain elements to shuffle.
     while (currentIndex !== 0) {
-      // Pick a remaining element.
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
-
-      // And swap it with the current element.
       [shuffled[currentIndex], shuffled[randomIndex]] = [
         shuffled[randomIndex],
         shuffled[currentIndex],
       ];
-    }
+    } // Check against the rare case that the shuffle resulted in the solved state
 
-    // Ensure the shuffled board is not already solved
     if (isSolved(shuffled)) {
-      // If it is solved, run the shuffle again
       shuffleBoard(startTimer, changeImage);
       return;
     }
@@ -93,7 +98,8 @@ export default function DragDropPicturePuzzle() {
     setTime(0);
     setSolved(false);
 
-    if (changeImage) {
+    // Robust check: Only pick a new image if the array is populated.
+    if (changeImage && images.length > 0) {
       setImageUrl(images[Math.floor(Math.random() * images.length)]);
     }
     if (startTimer) {
@@ -103,12 +109,12 @@ export default function DragDropPicturePuzzle() {
       setTimerActive(false);
       setGameStarted(false);
     }
-  }
+  } // Checks if the current board configuration is solved
 
   function isSolved(b: number[] = board) {
     for (let i = 0; i < b.length; i++) if (b[i] !== i) return false;
     return true;
-  }
+  } // Handles the tile swap action
 
   function handleSwap(targetIndex: number) {
     if (draggedIndex === null || !gameStarted || draggedIndex === targetIndex)
@@ -124,20 +130,22 @@ export default function DragDropPicturePuzzle() {
     setDraggedIndex(null);
 
     if (isSolved(newBoard)) {
-      setTimerActive(false);
-      // Changed timeout from 1000 to 500ms
+      setTimerActive(false); // Stop the clock!
       setTimeout(() => {
-        setSolved(true);
-        launchConfetti();
+        setSolved(true); // High Score Logic (Lower time is BETTER)
         if (!highScore || time < highScore) {
+          // 1. Update local state and persistence
           setHighScore(time);
-          localStorage.setItem("puzzleHighScore", String(time));
+          localStorage.setItem("puzzleHighScore", String(time)); // 2. Submit to Firebase RTDB (playerName is guaranteed by props)
+
+          updateHighScore("puzzle", playerName, time);
         }
+
+        launchConfetti();
       }, 1500);
     }
-  }
+  } // --- Mouse Drag & Drop Handlers ---
 
-  // --- Mouse Drag & Drop ---
   function onDragStart(e: React.DragEvent<HTMLDivElement>, index: number) {
     setDraggedIndex(index);
     e.dataTransfer.effectAllowed = "move";
@@ -146,9 +154,8 @@ export default function DragDropPicturePuzzle() {
   function onDrop(e: React.DragEvent<HTMLDivElement>, targetIndex: number) {
     e.preventDefault();
     handleSwap(targetIndex);
-  }
+  } // --- Touch events Handlers (for mobile) ---
 
-  // --- Touch events ---
   function onTouchStart(_e: React.TouchEvent<HTMLDivElement>, index: number) {
     if (!gameStarted) return;
     setDraggedIndex(index);
@@ -171,7 +178,7 @@ export default function DragDropPicturePuzzle() {
       }
     }
     setDraggedIndex(null);
-  }
+  } // Utility to format time display
 
   function formatTime(seconds: number) {
     return seconds.toFixed(1);
@@ -183,11 +190,11 @@ export default function DragDropPicturePuzzle() {
         title="Stunkie Puzzle"
         subtitle="Complete 'em!"
         stats={[
-          { label: "Time", value: formatTime(time) },
+          { label: "Time", value: formatTime(time) }, // Display best time if it exists
           ...(highScore !== null
             ? [{ label: "Best", value: formatTime(highScore) }]
             : []),
-        ]}
+        ]} // Resets board to shuffled state without starting timer
         onReset={() => shuffleBoard(false, true)}
       />
 
