@@ -41,7 +41,8 @@ export default function DragDropPicturePuzzle() {
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
     if (timerActive) {
-      interval = setInterval(() => setTime((t) => t + 1), 1000);
+      // --- CHANGE THE FOLLOWING TWO LINES ---
+      interval = setInterval(() => setTime((t) => t + 0.01), 10);
     }
     return () => {
       if (interval) clearInterval(interval);
@@ -173,11 +174,7 @@ export default function DragDropPicturePuzzle() {
   }
 
   function formatTime(seconds: number) {
-    const m = Math.floor(seconds / 60)
-      .toString()
-      .padStart(2, "0");
-    const s = (seconds % 60).toString().padStart(2, "0");
-    return `${m}:${s}`;
+    return seconds.toFixed(1);
   }
 
   return (
