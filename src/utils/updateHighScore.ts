@@ -12,21 +12,33 @@ export async function updateHighScore(
   playerName: string,
   newScore: number
 ): Promise<void> {
-  if (!playerName || newScore === 0) return; // Basic validation
+  // Add a check for null or undefined scores
+  if (!playerName || newScore == null) return;
 
-  // 1. Create a reference to this player's specific game score node
   const scoreRef = ref(rtdb, `highscores/${gameId}/${playerName}`);
 
   try {
-    // 2. READ the current score from the database
     const snapshot = await get(scoreRef);
     const currentData = snapshot.val();
 
-    // Get the current score, defaulting to 0 if no data exists
-    const currentScore = currentData ? currentData.score : 0;
+    // For games where lower is better, we need a high starting number.
+    // For games where higher is better, we start at 0.
+    const defaultScore =
+      gameId === "puzzle" || gameId === "memory" ? Infinity : 0;
+    const currentScore = currentData ? currentData.score : defaultScore;
 
-    // 3. COMPARE: Check if the new score is higher
-    if (newScore > currentScore) {
+    // ✅ Define what a "high score" means for each game
+    let isNewHighScore = false;
+    if (gameId === "puzzle" || gameId === "memory") {
+      // For puzzle/memory, a LOWER score (faster time) is better
+      isNewHighScore = newScore < currentScore;
+    } else {
+      // For other games (like flappy), a HIGHER score is better
+      isNewHighScore = newScore > currentScore;
+    }
+
+    // 3. COMPARE: Use the new flexible condition
+    if (isNewHighScore) {
       // 4. WRITE: Update the database with the new high score
       await set(scoreRef, {
         score: newScore,
@@ -36,7 +48,7 @@ export async function updateHighScore(
       console.log(`New high score for ${playerName} in ${gameId}: ${newScore}`);
     } else {
       console.log(
-        `Score ${newScore} is not a new high score for ${playerName}. Current high: ${currentScore}`
+        `Score ${newScore} is not a new high score for ${playerName}. Current best: ${currentScore}`
       );
     }
   } catch (error) {

@@ -5,7 +5,6 @@ import FlappyGame from "../components/gameComponents/games/FlappyGame";
 import MemoryGame from "../components/gameComponents/games/MemoryGame";
 import PuzzleGame from "../components/gameComponents/games/PuzzleGame";
 import GameLeaderboardPreview from "../components/gameComponents/GameLeaderboardPreview";
-// ✅ 1. Import the Toast component itself
 import { useToast, Toast } from "../utils/useToast";
 
 export default function GamesPage() {

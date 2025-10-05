@@ -8,7 +8,7 @@ const gameDefinitions = [
   {
     gameKey: "memory" as const,
     title: "Stunkie Pair",
-    unit: "s",
+    unit: "mvs",
     lowerIsBetter: true,
   },
   {
@@ -53,6 +53,8 @@ const SingleGamePreview = ({
           <span className="ml-2 text-right whitespace-nowrap">
             {/* INLINE: Score Formatting */}
             {unit === "pts"
+              ? score.score.toFixed(0)
+              : unit === "mvs"
               ? score.score.toFixed(0)
               : score.score.toFixed(1)}{" "}
             {unit}
