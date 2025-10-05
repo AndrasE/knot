@@ -105,7 +105,7 @@ export default function GameLeaderboardPreview() {
 
         <Link
           to="/leaderboard" // Ensure this is the correct route for your full leaderboard page
-          className="px-4 py-2 my-3 text-xl text-green-800 transition duration-200 bg-green-300 shadow-md rounded-xl active:scale-95">
+          className="px-4 py-2 my-3 text-xl text-green-900 transition duration-200 bg-green-300 shadow-md rounded-xl active:scale-95">
           View top 10
         </Link>
       </div>

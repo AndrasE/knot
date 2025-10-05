@@ -46,7 +46,7 @@ export default function GameScreenOverlay({
           )}
           <button
             onClick={startGame}
-            className="px-4 py-2 mb-2 text-xl text-green-800 transition duration-200 bg-green-300 rounded-md shadow-md active:scale-95">
+            className="px-4 py-2 mb-2 text-xl text-green-900 transition duration-200 bg-green-300 rounded-md shadow-md active:scale-95">
             Start Game
           </button>
         </div>
@@ -71,7 +71,7 @@ export default function GameScreenOverlay({
                 )}
                 <button
                   onClick={restartGame}
-                  className="px-4 py-2 text-xl text-green-800 transition duration-200 bg-green-300 shadow-xl rounded-xl active:scale-95">
+                  className="px-4 py-2 text-xl text-green-900 transition duration-200 bg-green-300 shadow-xl rounded-xl active:scale-95">
                   Restart Game
                 </button>
               </div>
