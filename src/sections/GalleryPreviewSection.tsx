@@ -48,7 +48,7 @@ export default function GalleryPreviewSection() {
           </p>
           <Link
             to="/gallery"
-            className="px-3 py-2 m-auto font-bold text-white rounded-md sm:m-0 max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
+            className="px-3 py-2 m-auto  text-white rounded-md sm:m-0 max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
             View Gallery
           </Link>
         </div>{" "}

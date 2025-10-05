@@ -5,6 +5,7 @@ import PuzzleGame from "../components/gameComponents/games/PuzzleGame";
 // Import necessary Firebase RTDB functions
 import { ref, get, set } from "firebase/database";
 import { rtdb } from "../firebase";
+import GameLeaderboardPreview from "../components/gameComponents/GameLeaderboardPreview";
 
 export default function GamesPage() {
   // Stores the player's name once successfully authenticated/set.
@@ -71,7 +72,7 @@ export default function GamesPage() {
   // --- Conditional Render: Name Input Screen ---
   if (!playerName) {
     return (
-      <div className="flex items-center justify-center h-screen px-5 pt-20 ">
+      <div className="flex items-center justify-center h-screen px-5">
         <div className="flex flex-col items-center justify-center gap-5 px-5 py-8 my-5 border-2 shadow-xl rounded-xl border-stone-300">
           <h2 className="text-2xl ">Enter your name to play!🧸</h2>
           <input
@@ -94,7 +95,7 @@ export default function GamesPage() {
   // --- Conditional Render: Game List Screen (Player is identified) ---
   return (
     <div className="flex flex-col items-center justify-center max-w-lg px-2 pt-20 pb-5 mx-auto sm:pb-15 sm:pt-32 gap-15">
-      {/* Pass the validated player name to each game component */}
+      <GameLeaderboardPreview />
       <MemoryGame playerName={playerName} />
       <FlappyGame playerName={playerName} />
       <PuzzleGame playerName={playerName} />

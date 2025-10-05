@@ -31,11 +31,11 @@ export default function DetailsPreviewSection() {
             className="underline">
             Directions
           </a>
-          <h2 className="text-2xl font-bold ">After?</h2>
+          <h2 className="text-2xl  ">After?</h2>
           <p>No strict plans — just city adventures and a dash of improv!</p>
           <Link
             to="/details"
-            className="px-3 py-2 m-auto font-bold text-white rounded-md sm:m-0 max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
+            className="px-3 py-2 m-auto  text-white rounded-md sm:m-0 max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
             More details
           </Link>
         </div>

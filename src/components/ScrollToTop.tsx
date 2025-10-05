@@ -10,7 +10,8 @@ export default function ScrollToTop() {
     if (
       location.pathname === "/details" ||
       location.pathname === "/gallery" ||
-      location.pathname === "/games"
+      location.pathname === "/games" ||
+      location.pathname === "/leaderboard"
     ) {
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }

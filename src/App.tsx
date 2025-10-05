@@ -15,6 +15,7 @@ import HomePage from "./pages/Home";
 import DetailsPage from "./pages/Details";
 import GalleryPage from "./pages/Gallery";
 import GamesPage from "./pages/Games";
+import LeaderboardPage from "./pages/Leaderboard";
 
 // Component that uses React Router hooks and manages transitions
 function Main() {
@@ -51,6 +52,7 @@ function Main() {
             <Route path="/details" element={<DetailsPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/games" element={<GamesPage />} />
+            <Route path="/leaderboard" element={<LeaderboardPage />} />
           </Routes>
         </animated.div>
       ))}

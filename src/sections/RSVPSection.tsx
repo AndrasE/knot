@@ -130,7 +130,7 @@ export default function RSVPSection() {
           <button
             type="submit"
             disabled={submitting}
-            className="px-3 py-2 ml-auto font-bold text-white transition duration-300 rounded-md max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
+            className="px-3 py-2 ml-auto  text-white transition duration-300 rounded-md max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
             {submitting ? "Sending..." : "Send"}
           </button>
         </form>
