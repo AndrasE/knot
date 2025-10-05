@@ -95,10 +95,11 @@ export default function GamesPage() {
   // --- Conditional Render: Game List Screen (Player is identified) ---
   return (
     <div className="flex flex-col items-center justify-center max-w-lg px-2 pt-20 pb-5 mx-auto sm:pb-15 sm:pt-32 gap-15">
-      <GameLeaderboardPreview />
       <MemoryGame playerName={playerName} />
       <FlappyGame playerName={playerName} />
       <PuzzleGame playerName={playerName} />
+
+      <GameLeaderboardPreview />
     </div>
   );
 }
