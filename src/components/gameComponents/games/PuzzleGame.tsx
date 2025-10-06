@@ -47,12 +47,10 @@ export default function PuzzleGame({ playerName }: GameProps) {
 
     // and the game hasn't started yet.
     if (initial.length > 0) {
-      // Initial shuffle: shuffleBoard(startTimer=false, changeImage=true)
-      shuffleBoard(false, true);
+      shuffleBoard(false, true); // Shuffle board but keep timer inactive
     } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initial]);
+  }, [initial]); // DEPENDENCY on 'initial' ensures safe access inside shuffleBoard // Timer loop (runs every 10ms when timerActive is true)
 
-  // Timer loop (runs every 10ms when timerActive is true)
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
     if (timerActive) {
@@ -61,9 +59,8 @@ export default function PuzzleGame({ playerName }: GameProps) {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [timerActive]);
+  }, [timerActive]); // Prevent mobile scroll while dragging
 
-  // Prevent mobile scroll while dragging
   useEffect(() => {
     const gameContainer = gameContainerRef.current;
     if (!gameContainer) return;
@@ -74,9 +71,8 @@ export default function PuzzleGame({ playerName }: GameProps) {
     return () => {
       gameContainer.removeEventListener("touchmove", preventScroll);
     };
-  }, []);
+  }, []); // Shuffles the board and resets game state
 
-  // Shuffles the board and resets game state
   function shuffleBoard(startTimer = true, changeImage = false) {
     // This line is now safe because the calling useEffect ensures 'initial' is ready.
     const shuffled: number[] = [...initial]; // Fisher-Yates shuffle algorithm
@@ -106,59 +102,20 @@ export default function PuzzleGame({ playerName }: GameProps) {
     if (changeImage && images.length > 0) {
       setImageUrl(images[Math.floor(Math.random() * images.length)]);
     }
-
-    // --- FIX 1: Refine state setting in shuffleBoard ---
-    // We only set gameStarted/timerActive based on the 'startTimer' flag.
-    // The previous 'else' block was causing issues with visibility.
     if (startTimer) {
       setTimerActive(true);
       setGameStarted(true);
     } else {
-      // Keep gameStarted true if it already is (e.g., Reset button pressed mid-game)
-      // This ensures the board is visible, not the Start screen.
       setTimerActive(false);
-      // setGameStarted(false); // REMOVED: This was causing the brief flicker
+      setGameStarted(false);
     }
-    // ----------------------------------------------------
-  }
+  } // Checks if the current board configuration is solved
 
-  // --- NEW HANDLER for START GAME (to allow fade-out before shuffle) ---
-  const handleStartGame = () => {
-    // 1. Immediately hide the Start screen overlay and start the timer
-    setGameStarted(true);
-    setTimerActive(true);
-
-    // 2. Delay the shuffle until after the overlay fully exits (0.15s transition + buffer)
-    setTimeout(() => {
-      // Shuffle the board without changing the active state (it's already set above)
-      shuffleBoard(false, true);
-    }, 200);
-  };
-
-  // --- NEW HANDLER for RESTART GAME (The primary fix for visibility) ---
-  const handleRestartGame = () => {
-    // 1. Immediately remove the solved state. This triggers the Game Over screen exit (0.25s transition).
-    setSolved(false);
-    // 2. Ensure game is marked started and timer is active
-    setGameStarted(true);
-    setTimerActive(true);
-
-    // 3. Delay the shuffle until after the Game Over screen fades out.
-    // Use 300ms for safety (Exit duration is 0.25s).
-    setTimeout(() => {
-      // Shuffle the board only.
-      shuffleBoard(false, true);
-    }, 300);
-  };
-  // -------------------------------------------------------------------
-
-  // Checks if the current board configuration is solved
   function isSolved(b: number[] = board) {
     for (let i = 0; i < b.length; i++) if (b[i] !== i) return false;
     return true;
-  }
+  } // Handles the tile swap action
 
-  // Handles the tile swap action
   function handleSwap(targetIndex: number) {
     if (draggedIndex === null || !gameStarted || draggedIndex === targetIndex)
       return;
@@ -187,9 +144,8 @@ export default function PuzzleGame({ playerName }: GameProps) {
         launchConfetti();
       }, 1500);
     }
-  }
+  } // --- Mouse Drag & Drop Handlers ---
 
-  // --- Mouse Drag & Drop Handlers ---
   function onDragStart(e: React.DragEvent<HTMLDivElement>, index: number) {
     setDraggedIndex(index);
     e.dataTransfer.effectAllowed = "move";
@@ -198,9 +154,8 @@ export default function PuzzleGame({ playerName }: GameProps) {
   function onDrop(e: React.DragEvent<HTMLDivElement>, targetIndex: number) {
     e.preventDefault();
     handleSwap(targetIndex);
-  }
+  } // --- Touch events Handlers (for mobile) ---
 
-  // --- Touch events Handlers (for mobile) ---
   function onTouchStart(_e: React.TouchEvent<HTMLDivElement>, index: number) {
     if (!gameStarted) return;
     setDraggedIndex(index);
@@ -223,9 +178,8 @@ export default function PuzzleGame({ playerName }: GameProps) {
       }
     }
     setDraggedIndex(null);
-  }
+  } // Utility to format time display
 
-  // Utility to format time display
   function formatTime(seconds: number) {
     return seconds.toFixed(1);
   }
@@ -247,8 +201,8 @@ export default function PuzzleGame({ playerName }: GameProps) {
       <GameContainer
         gameStarted={gameStarted}
         gameOver={solved}
-        startGame={handleStartGame}
-        restartGame={handleRestartGame}
+        startGame={() => shuffleBoard(true, false)}
+        restartGame={() => shuffleBoard(true, true)}
         score={formatTime(time)}
         highScore={highScore !== null ? formatTime(highScore) : null}
         startText="Help Stunkies to be complete! "

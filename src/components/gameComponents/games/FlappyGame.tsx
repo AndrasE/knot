@@ -22,10 +22,17 @@ export default function FlappyGame({ playerName }: GameProps) {
     { x: number; gapY: number; scored?: boolean }[]
   >([]);
   const [score, setScore] = useState(0);
-  const [targetScore, setTargetScore] = useState(0);
-  // Initializes the local high score from the browser's localStorage.
-  const [highScore, setHighScore] = useState(() => {
-    return parseInt(localStorage.getItem("flappyHighScore") || "0", 10);
+  const [targetScore, setTargetScore] = useState(0); // Initializes the local high score from the browser's localStorage.
+  const [highScore, setHighScore] = useState<number | null>(() => {
+    const saved = localStorage.getItem("flappyHighScore");
+
+    if (saved) {
+      // If the score exists, return the parsed number.
+      // Use parseFloat or Number() if the score might be a decimal (like time).
+      return parseInt(saved, 10);
+    } // If the score does not exist, return null.
+
+    return null;
   });
   const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
@@ -42,9 +49,8 @@ export default function FlappyGame({ playerName }: GameProps) {
   const capHeight = 48;
   const minObstacleSpacing = 200;
   const gravity = 0.5;
-  const jumpStrength = -7;
+  const jumpStrength = -7; // Dynamic sizing
 
-  // Dynamic sizing
   useEffect(() => {
     const updateDimensions = () => {
       const minGameContentWidth = 300;
@@ -72,9 +78,8 @@ export default function FlappyGame({ playerName }: GameProps) {
     updateDimensions();
     window.addEventListener("resize", updateDimensions);
     return () => window.removeEventListener("resize", updateDimensions);
-  }, []);
+  }, []); // Score animation
 
-  // Score animation
   useEffect(() => {
     if (score >= targetScore) return;
 
@@ -91,9 +96,8 @@ export default function FlappyGame({ playerName }: GameProps) {
     }, 30);
 
     return () => clearInterval(interval);
-  }, [score, targetScore]);
+  }, [score, targetScore]); // Reset game state for a new start
 
-  // Reset game state for a new start
   const startGame = () => {
     setGameStarted(true);
     setFlyerY(gameAreaHeight / 2);
@@ -103,9 +107,8 @@ export default function FlappyGame({ playerName }: GameProps) {
     setTargetScore(0);
     setGameOver(false);
     setLastScoreTime(0);
-  };
+  }; // Prepare for a new game
 
-  // Prepare for a new game
   const restartGame = () => {
     setGameStarted(false);
     setFlyerY(gameAreaHeight / 2);
@@ -115,9 +118,8 @@ export default function FlappyGame({ playerName }: GameProps) {
     setTargetScore(0);
     setGameOver(false);
     setLastScoreTime(0);
-  };
+  }; // Main Game Loop, Collision Detection, and High Score Submission
 
-  // Main Game Loop, Collision Detection, and High Score Submission
   useEffect(() => {
     // This block runs when the component mounts, or when the game state changes
     if (!gameStarted || gameOver) {
@@ -127,11 +129,10 @@ export default function FlappyGame({ playerName }: GameProps) {
         // Call the utility function with the game ID, player name, and the final score.
         // The utility function will READ the current RTDB high score and WRITE the new score
         // ONLY if the new score is higher.
-        updateHighScore("flappy", playerName, score);
+        updateHighScore("flappy", playerName, score); // 2. LOCAL HIGH SCORE UPDATE // This updates the score displayed in the UI and stored in localStorage.
 
-        // 2. LOCAL HIGH SCORE UPDATE
-        // This updates the score displayed in the UI and stored in localStorage.
-        if (score > highScore) {
+        if (score > (highScore ?? -1)) {
+          // Use nullish coalescing for safety in comparison
           setHighScore(score);
           localStorage.setItem("flappyHighScore", score.toString());
         }
@@ -140,16 +141,14 @@ export default function FlappyGame({ playerName }: GameProps) {
       }
 
       return; // Stop the effect if the game isn't running
-    }
+    } // ... (Game ongoing logic - jump handlers)
 
-    // ... (Game ongoing logic - jump handlers)
     const handleJump = () => {
       const now = Date.now();
       if (now - lastJumpTime > 200) {
         setVelocity(jumpStrength);
-        setLastJumpTime(now);
+        setLastJumpTime(now); // Trigger animation
 
-        // Trigger animation
         setIsFlapping(true);
         setTimeout(() => setIsFlapping(false), 150);
       }
@@ -162,9 +161,8 @@ export default function FlappyGame({ playerName }: GameProps) {
     };
 
     window.addEventListener("click", handleGlobalAction);
-    window.addEventListener("touchstart", handleGlobalAction);
+    window.addEventListener("touchstart", handleGlobalAction); // Game tick (physics and movement)
 
-    // Game tick (physics and movement)
     const gameLoop = setInterval(() => {
       // Flyer physics
       setFlyerY((prev) => {
@@ -176,16 +174,14 @@ export default function FlappyGame({ playerName }: GameProps) {
         }
         return next;
       });
-      setVelocity((v) => v + gravity);
+      setVelocity((v) => v + gravity); // Move & filter obstacles
 
-      // Move & filter obstacles
       setObstacles((prev) =>
         prev
           .map((obs) => ({ ...obs, x: obs.x - 5 }))
           .filter((obs) => obs.x + obstacleWidth > 0)
-      );
+      ); // Spawn obstacle
 
-      // Spawn obstacle
       setObstacles((prev) => {
         const lastObstacle = prev[prev.length - 1];
         if (
@@ -199,9 +195,8 @@ export default function FlappyGame({ playerName }: GameProps) {
           }
         }
         return prev;
-      });
+      }); // Collision + scoring
 
-      // Collision + scoring
       let didCollide = false;
       setObstacles((prev) => {
         const now = Date.now();
@@ -230,9 +225,8 @@ export default function FlappyGame({ playerName }: GameProps) {
         if (didCollide) setGameOver(true);
         return newObstacles;
       });
-    }, 30);
+    }, 30); // Cleanup function: clears the interval and removes event listeners when the effect stops
 
-    // Cleanup function: clears the interval and removes event listeners when the effect stops
     return () => {
       clearInterval(gameLoop);
       window.removeEventListener("click", handleGlobalAction);
@@ -260,8 +254,8 @@ export default function FlappyGame({ playerName }: GameProps) {
         title="Stunkie Flaps"
         subtitle="Smootch 'em!"
         stats={[
-          { label: "Score", value: score },
-          { label: "Best", value: highScore },
+          { label: "Score", value: score }, // Apply the conditional spread logic here to only include 'Best' if highScore is a number
+          ...(highScore !== null ? [{ label: "Best", value: highScore }] : []),
         ]}
         onReset={restartGame}
       />

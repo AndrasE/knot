@@ -68,7 +68,7 @@ export default function MemoryGame({ playerName }: GameProps) {
   const [isChecking, setIsChecking] = useState<boolean>(false);
   // Stores the high score (lowest moves) for local UI display.
   const [memoryHighscore, setMemoryHighscore] = useState<number | null>(() => {
-    const saved = localStorage.getItem("memoryGameHighscore");
+    const saved = localStorage.getItem("memoryHighscore");
     return saved ? parseInt(saved, 10) : null;
   });
   const [gameStarted, setGameStarted] = useState<boolean>(false);

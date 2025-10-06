@@ -5,7 +5,7 @@ const gameDefinitions = [
   {
     gameKey: "memory" as const,
     title: "Stunkie Pair",
-    unit: "s",
+    unit: "mvs",
     lowerIsBetter: true,
   },
   {
@@ -33,7 +33,11 @@ const FullScoreList = ({
 
   // Helper function to format the score (same logic as before)
   const formatScore = (score: number) => {
-    return unit === "pts" ? score.toFixed(0) : score.toFixed(1);
+    return unit == "pts"
+      ? score.toFixed(0)
+      : unit == "mvs"
+      ? score.toFixed(0)
+      : score.toFixed(1);
   };
 
   return (
