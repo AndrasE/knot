@@ -21,10 +21,13 @@ export default function GamesPage() {
       const token = localStorage.getItem("playerToken");
       if (localName && token) {
         setPlayerName(localName);
+        showToast(`Welcome, ${localName}! Have fun!`, "success");
       }
       setLoading(false);
     };
     initPlayer();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmitName = async () => {
