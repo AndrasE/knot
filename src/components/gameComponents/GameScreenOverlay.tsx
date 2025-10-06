@@ -56,7 +56,7 @@ export default function GameScreenOverlay({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15, ease: "easeInOut" }}
-            className="absolute inset-0 z-40 flex flex-col items-center justify-center gap-3 bg-[#f5f0e6]">
+            className="absolute inset-0 z-40 flex flex-col items-center justify-center gap-3 pb-3 bg-[#f5f0e6]">
             {/* The inner elements still need their own animations, but we can simplify the first one */}
             <motion.p
               // If the main container skips the initial animation, the child animation will still run.
@@ -65,7 +65,7 @@ export default function GameScreenOverlay({
               initial={hasMounted ? { opacity: 0, y: 15 } : false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.2 }}
-              className="mb-3 text-xl text-stone-700">
+              className="mb-0 text-xl text-stone-700">
               {startText}{" "}
             </motion.p>
             {startImage && (
@@ -76,7 +76,7 @@ export default function GameScreenOverlay({
                 initial={hasMounted ? { scale: 0.9, opacity: 0 } : false}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.15, duration: 0.25 }}
-                className="object-cover mb-5 shadow-md w-65 h-55 rounded-2xl"
+                className="object-cover mb-3 shadow-md w-65 h-50 rounded-2xl"
               />
             )}
             <motion.button
@@ -86,7 +86,7 @@ export default function GameScreenOverlay({
               initial={hasMounted ? { opacity: 0, y: 8 } : false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.2 }}
-              className="px-5 py-2 mb-2 text-xl text-green-900 transition duration-200 bg-green-300 rounded-md shadow-lg hover:bg-green-400 active:scale-95">
+              className="px-5 py-2 text-xl text-green-900 transition duration-200 bg-green-300 rounded-md shadow-lg hover:bg-green-400 active:scale-95">
               Start Game
             </motion.button>
           </motion.div>
