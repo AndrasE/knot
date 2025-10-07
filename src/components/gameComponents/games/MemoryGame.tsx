@@ -66,9 +66,8 @@ export default function MemoryGame({ playerName }: GameProps) {
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [moves, setMoves] = useState<number>(0);
   const [isChecking, setIsChecking] = useState<boolean>(false);
-  // Stores the high score (lowest moves) for local UI display.
   const [memoryHighscore, setMemoryHighscore] = useState<number | null>(() => {
-    const saved = localStorage.getItem("memoryHighscore");
+    const saved = localStorage.getItem("memoryHighScore");
     return saved ? parseInt(saved, 10) : null;
   });
   const [gameStarted, setGameStarted] = useState<boolean>(false);
@@ -77,48 +76,42 @@ export default function MemoryGame({ playerName }: GameProps) {
   const matchedCount: number = cards.filter((c) => c.isMatched).length;
   const isGameWon: boolean = matchedCount === cards.length && cards.length > 0;
 
-  // --- High Score Submission and Win Effects ---
-  useEffect(() => {
-    // Runs whenever the game win status or score changes.
-    if (isGameWon) {
-      // 1. LOCAL HIGH SCORE CHECK (LOWER MOVES IS BETTER)
-      if (memoryHighscore === null || moves < memoryHighscore) {
-        // Update local state and localStorage
-        setMemoryHighscore(moves);
-        localStorage.setItem("memoryGameHighscore", moves.toString());
-
-        // 2. FIREBASE REALTIME DB HIGH SCORE SUBMISSION
-        // Call the utility function. Since 'memory' is a 'lower is better' game,
-        // we only call this when a new local best (lower moves) is achieved,
-        // preventing unnecessary writes.
-        updateHighScore("memory", playerName, moves);
-      }
-
-      // Trigger confetti regardless of high score status
-      launchConfetti();
-    }
-  }, [isGameWon, moves, memoryHighscore, playerName]);
-
-  // Function to start the game
-  const startGame = () => {
+  // New helper function to reset all core game state
+  const resetGameState = () => {
     setCards(createBoard());
     setFlippedCards([]);
     setMoves(0);
     setIsChecking(false);
+  };
+
+  // --- High Score Submission and Win Effects ---
+  useEffect(() => {
+    if (isGameWon) {
+      if (memoryHighscore === null || moves < memoryHighscore) {
+        setMemoryHighscore(moves);
+        localStorage.setItem("memoryHighScore", moves.toString());
+        updateHighScore("memory", playerName, moves);
+      }
+      launchConfetti();
+    }
+  }, [isGameWon, moves, memoryHighscore, playerName]);
+
+  const startGame = () => {
+    resetGameState();
     setGameStarted(true);
   };
 
-  // Restart (returns to start screen)
+  // Used by the Header's "Reset" button to go back to the start screen
   const restartGame = useCallback(() => {
+    resetGameState();
     setGameStarted(false);
   }, []);
 
-  // Check match when two cards are flipped
+  // --- Card flip logic ---
   useEffect(() => {
     if (flippedCards.length !== 2) return;
 
     setIsChecking(true);
-    // Increment move count only when the second card is flipped
     setMoves((m) => m + 1);
 
     const [id1, id2] = flippedCards;
@@ -129,14 +122,12 @@ export default function MemoryGame({ playerName }: GameProps) {
         const card2 = prevCards.find((c) => c.id === id2)!;
 
         if (card1.matchId === card2.matchId) {
-          // It's a match: lock cards in matched state
           return prevCards.map((c) =>
             c.id === id1 || c.id === id2
               ? { ...c, isMatched: true, isFlipped: true }
               : c
           );
         } else {
-          // Not a match: flip cards back over
           return prevCards.map((c) =>
             c.id === id1 || c.id === id2 ? { ...c, isFlipped: false } : c
           );
@@ -149,24 +140,22 @@ export default function MemoryGame({ playerName }: GameProps) {
     return () => clearTimeout(timeout);
   }, [flippedCards]);
 
-  // Handle click
+  // --- Click handler ---
   const handleCardClick = (id: number): void => {
     if (isChecking || flippedCards.length >= 2) return;
 
     const clickedCard = cards.find((c) => c.id === id);
     if (!clickedCard || clickedCard.isFlipped || clickedCard.isMatched) return;
 
-    // Flip the card
     setCards((prev) =>
       prev.map((c) => (c.id === id ? { ...c, isFlipped: true } : c))
     );
-    // Add its ID to the flippedCards array
     setFlippedCards((prev) => [...prev, id]);
   };
 
-  // Render
+  // --- Render card ---
   const renderCard = (card: Card): JSX.Element => {
-    const isVisible: boolean = card.isFlipped || card.isMatched;
+    const isVisible = card.isFlipped || card.isMatched;
     const cardClassName = isVisible
       ? card.isMatched
         ? "bg-green-200 pointer-events-none opacity-80"
@@ -189,15 +178,14 @@ export default function MemoryGame({ playerName }: GameProps) {
     );
   };
 
+  // --- Render ---
   return (
-    // This outer div is just for centering the whole component on the page
     <div className="w-full p-2 m-auto mx-auto border shadow-xl sm:p-3 md:p-4 xl:p-5 rounded-2xl border-stone-500">
       <GameHeader
         title="Stunkie Pair"
         subtitle="Match 'em!"
         stats={[
           { label: "Moves", value: moves },
-          // Only show 'Best' stat if a high score exists
           ...(memoryHighscore !== null
             ? [{ label: "Best", value: memoryHighscore }]
             : []),
@@ -211,11 +199,11 @@ export default function MemoryGame({ playerName }: GameProps) {
         score={moves}
         highScore={memoryHighscore}
         startGame={startGame}
-        restartGame={restartGame}
-        startText="Help Stunkies to match! "
+        // ✅ The fix is here: Use startGame to instantly restart the game.
+        restartGame={startGame}
+        startText="Help Stunkies to match!"
         startImage={PlaceholderImages.memory_us}
         gameOverText="You matched them ♥️!">
-        {/* The card grid is passed as a child to the overlay */}
         <div className="grid grid-cols-4 gap-1 min-[539px]:grid-cols-5 ">
           {cards.map(renderCard)}
         </div>

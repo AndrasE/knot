@@ -36,7 +36,7 @@ export default function GameHeader({
         )}{" "}
         <button
           onClick={onReset}
-          className="px-4 py-2 text-white transition duration-200 bg-red-400 rounded-lg shadow-sm active:scale-95">
+          className="px-4 py-2 text-white transition duration-200 bg-red-400 rounded-lg shadow-sm cursor-pointer active:scale-95">
           Reset{" "}
         </button>{" "}
       </div>{" "}

@@ -81,12 +81,10 @@ export default function GameScreenOverlay({
             )}
             <motion.button
               onClick={startGame}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               initial={hasMounted ? { opacity: 0, y: 8 } : false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.2 }}
-              className="px-5 py-2 text-xl text-green-900 transition duration-200 bg-green-300 rounded-md shadow-lg hover:bg-green-400 active:scale-95">
+              className="px-5 py-2 text-xl text-green-900 transition duration-200 bg-green-300 rounded-md shadow-lg cursor-pointer hover:bg-green-400 active:scale-95">
               Start Game
             </motion.button>
           </motion.div>
@@ -127,10 +125,8 @@ export default function GameScreenOverlay({
 
               <motion.button
                 onClick={restartGame}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className="px-5 py-2 text-xl text-green-900 transition duration-200 bg-green-300 shadow-xl rounded-xl hover:bg-green-400">
+                className="px-5 py-2 text-xl text-green-900 transition duration-200 bg-green-300 shadow-xl cursor-pointer rounded-xl hover:bg-green-400 active:scale-95 ">
                 Restart Game
               </motion.button>
             </motion.div>
