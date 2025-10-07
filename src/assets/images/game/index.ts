@@ -4,11 +4,11 @@ import memory2 from "../game/memory/2.webp";
 import memory3 from "../game/memory/3.webp";
 import memory4 from "../game/memory/4.webp";
 import memory5 from "../game/memory/5.webp";
-import memory6 from "../game/memory/6.webp";
-import memory7 from "../game/memory/7.webp";
-import memory8 from "../game/memory/8.webp";
-import memory9 from "../game/memory/9.webp";
-import memory10 from "../game/memory/10.webp";
+// import memory6 from "../game/memory/6.webp";
+// import memory7 from "../game/memory/7.webp";
+// import memory8 from "../game/memory/8.webp";
+// import memory9 from "../game/memory/9.webp";
+// import memory10 from "../game/memory/10.webp";
 
 // Export the Memory Game Map
 export const MemoryGameImageMap = {
@@ -17,11 +17,11 @@ export const MemoryGameImageMap = {
   img3: memory3,
   img4: memory4,
   img5: memory5,
-  img6: memory6,
-  img7: memory7,
-  img8: memory8,
-  img9: memory9,
-  img10: memory10,
+  // img6: memory6,
+  // img7: memory7,
+  // img8: memory8,
+  // img9: memory9,
+  // img10: memory10,
 };
 
 // --- PUZZLE GAME IMAGES ---
