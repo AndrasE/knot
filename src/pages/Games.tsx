@@ -88,7 +88,7 @@ export default function GamesPage() {
     showToast(`Welcome, ${name}! Have fun!`, "success");
   };
 
-  if (loading) return <p>Loading...</p>; // --- This is where the magic happens ---
+  if (loading) return <p className="text-center">Loading...</p>; // --- This is where the magic happens ---
 
   return (
     // Wrap everything in a single parent element (like a fragment)
