@@ -1,6 +1,5 @@
-const CACHE_NAME = "sarah-andras-wedding-app-v1";
+const CACHE_NAME = "sarah-andras-wedding-app-v2";
 
-// List of essential files to pre-cache on install.
 const urlsToCache = [
   "/",
   "/index.html",
@@ -15,6 +14,7 @@ const urlsToCache = [
   "/src/assets/images/carousel/4.webp",
 ];
 
+// ✅ Pre-cache essential files on install
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
@@ -25,51 +25,69 @@ self.addEventListener("install", (event) => {
   );
 });
 
+// ✅ Runtime caching for .webp and .avif images
 self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    (async () => {
-      try {
-        // Try to fetch the resource from the network first.
-        const networkResponse = await fetch(event.request);
-        const cache = await caches.open(CACHE_NAME);
+  const request = event.request;
 
-        // Cache the new network response for future use.
-        // We clone the response because the stream can only be read once.
-        cache.put(event.request, networkResponse.clone());
-        console.log(
-          `Service Worker: Fetched from network and cached: ${event.request.url}`
-        );
-        return networkResponse;
-      } catch (error) {
-        // If the network fetch fails, look for a cached version.
-        const cachedResponse = await caches.match(event.request);
+  // Only intercept image requests (webp or avif)
+  if (request.destination === "image" && /\.(webp|avif)$/i.test(request.url)) {
+    event.respondWith(
+      (async () => {
+        const cache = await caches.open(CACHE_NAME);
+        const cachedResponse = await cache.match(request);
+
         if (cachedResponse) {
-          console.log(
-            `Service Worker: Serving from cache: ${event.request.url}`
-          );
+          // Try to update the cache in the background
+          fetch(request)
+            .then((networkResponse) => {
+              cache.put(request, networkResponse.clone());
+            })
+            .catch(() => {});
+          console.log(`Service Worker: Serving cached image → ${request.url}`);
           return cachedResponse;
         }
 
-        // If nothing is found in the cache, and the network is offline.
-        console.error(
-          "Service Worker: Fetch failed and no cache available.",
-          error
-        );
+        // If not cached, fetch and cache
+        try {
+          const networkResponse = await fetch(request);
+          cache.put(request, networkResponse.clone());
+          console.log(`Service Worker: Cached new image → ${request.url}`);
+          return networkResponse;
+        } catch (error) {
+          console.error("Service Worker: Failed to fetch image:", request.url);
+          return new Response(null, { status: 503 });
+        }
+      })()
+    );
+    return;
+  }
+
+  // ✅ Default fetch strategy for other resources (network-first)
+  event.respondWith(
+    (async () => {
+      try {
+        const networkResponse = await fetch(request);
+        const cache = await caches.open(CACHE_NAME);
+        cache.put(request, networkResponse.clone());
+        return networkResponse;
+      } catch (error) {
+        const cachedResponse = await caches.match(request);
+        if (cachedResponse) return cachedResponse;
         return new Response("You are offline.", { status: 503 });
       }
     })()
   );
 });
 
+// ✅ Clean up old caches on activate
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
-      // Clean up old caches.
       const cacheNames = await caches.keys();
       await Promise.all(
         cacheNames
-          .filter((cacheName) => cacheName !== CACHE_NAME)
-          .map((cacheName) => caches.delete(cacheName))
+          .filter((name) => name !== CACHE_NAME)
+          .map((name) => caches.delete(name))
       );
       console.log("Service Worker: Old caches cleared.");
     })()
