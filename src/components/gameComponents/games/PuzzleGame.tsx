@@ -18,8 +18,8 @@ type GameProps = {
 };
 
 export default function PuzzleGame({ playerName }: GameProps) {
-  const rows = 3;
-  const cols = 2;
+  const rows = 4;
+  const cols = 4;
   const total = rows * cols; // 'initial' is the solved board state (0, 1, 2, ... 8).
   const initial = useMemo(
     () => Array.from({ length: total }, (_, i) => i),
