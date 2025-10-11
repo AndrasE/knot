@@ -22,9 +22,9 @@ I'm getting married, and this is our official wedding website! Built with **Reac
 * **Integrated Gaming Arcade:** Features a dedicated **/games** route with three custom, themed games (Memory, Flappy-style, Puzzle) to keep guests entertained.
 
 <div align="center">
-*Fully Responsive, Accessible and SEO-Optimized!* 💯
+<i>Fully Responsive, Accessible and SEO-Optimized!* 💯</i>
 
-*PWA - ready (cached assets, ready to be installed)!* 🚀
+<i>PWA - ready (cached assets, ready to be installed)!* 🚀</i>
 </div>
 
 
@@ -36,12 +36,18 @@ I'm getting married, and this is our official wedding website! Built with **Reac
 
 ---
 
-### Packages Used (Core Stack)
+### Packages Used (Core Stack & Dependencies)
 
 * **[React](https://react.dev/)** - The primary JavaScript library used to build the user interface and manage component-based state.
-* **[Firebase](https://firebase.google.com/docs/web/setup)** - Provides real-time database, authentication, and Firestore services, enabling secure data syncing and profile management.
-* **[Tailwind CSS](https://tailwindcss.com/)** - A utility-first CSS framework used for styling, offering rapid development of responsive designs.
 * **[TypeScript](https://www.typescriptlang.org/)** - Used throughout the codebase to add static typing and improve maintainability and developer experience.
+* **[Tailwind CSS](https://tailwindcss.com/)** - A utility-first CSS framework used for styling, offering rapid development of responsive designs.
+* **[Firebase](https://firebase.google.com/docs/web/setup)** - Provides real-time database, authentication, and Firestore services, enabling secure data syncing and profile management.
+* **`@react-spring/web`** - Used for the fluid, physics-based page transitions and animations.
+* **`framer-motion`** - For declarative animations and sophisticated UI interactions across the site.
+* **`embla-carousel-react`** - Powers the highly optimized and touch-friendly carousel for galleries.
+* **`yet-another-react-lightbox`** - Provides the gallery lightbox functionality for viewing photos.
+* **`canvas-confetti` / `react-confetti`** - Used to trigger celebratory effects (like on game completion or winning a high score).
+* **`@formspark/use-formspark`** - Integrated for handling form submissions (RSVP feature).
 
 ---
 
