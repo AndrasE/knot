@@ -38,10 +38,10 @@ I'm getting married, and this is our official wedding website! Built with **Reac
 
 ### Packages Used (Core Stack & Dependencies)
 
-* **[React](https://react.dev/)** - The primary JavaScript library used to build the user interface and manage component-based state.
-* **[TypeScript](https://www.typescriptlang.org/)** - Used throughout the codebase to add static typing and improve maintainability and developer experience.
-* **[Tailwind CSS](https://tailwindcss.com/)** - A utility-first CSS framework used for styling, offering rapid development of responsive designs.
-* **[Firebase](https://firebase.google.com/docs/web/setup)** - Provides real-time database, enabling secure data syncing and profile management.
+* **[react](https://react.dev/)** - The primary JavaScript library used to build the user interface and manage component-based state.
+* **[typeScript](https://www.typescriptlang.org/)** - Used throughout the codebase to add static typing and improve maintainability and developer experience.
+* **[tailwind css](https://tailwindcss.com/)** - A utility-first CSS framework used for styling, offering rapid development of responsive designs.
+* **[firebase](https://firebase.google.com/docs/web/setup)** - Provides real-time database, enabling secure data syncing and profile management.
 * **[@react-spring/web](https://react-spring.dev)** - Used for the fluid, physics-based page transitions and animations.
 * **[framer-motion](https://www.framer.com/)** - For declarative animations and sophisticated UI interactions across the site.
 * **[embla-carousel-react](https://www.embla-carousel.com/get-started/react/)** - Powers the highly optimized and touch-friendly carousel for galleries.
