@@ -1,5 +1,5 @@
 <h3 align="center">
-  <a href="https://andrasapplied.netlify.app/" target="_blank" rel="noopener noreferrer">
+  <a href="https://sarah-andras.netlify.app/" target="_blank" rel="noopener noreferrer">
   <img src="https://github.com/AndrasE/raw-readme/blob/a6e262765a5dcc98ceb5701130a32789dbef6de1/logo/knot-readme-img.png" width="135">
   </a>
   <br>
