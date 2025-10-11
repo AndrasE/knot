@@ -1,6 +1,6 @@
 <h3 align="center">
   <a href="https://andrasapplied.netlify.app/" target="_blank" rel="noopener noreferrer">
-  <img src="https://github.com/AndrasE/raw-readme/blob/a6e262765a5dcc98ceb5701130a32789dbef6de1/logo/applied-readme.png" width="135">
+  <img src="https://github.com/AndrasE/raw-readme/blob/a6e262765a5dcc98ceb5701130a32789dbef6de1/logo/knot-readme-img.png" width="135">
   </a>
   <br>
   Knot
@@ -41,7 +41,7 @@ I'm getting married, and this is our official wedding website! Built with **Reac
 * **[React](https://react.dev/)** - The primary JavaScript library used to build the user interface and manage component-based state.
 * **[TypeScript](https://www.typescriptlang.org/)** - Used throughout the codebase to add static typing and improve maintainability and developer experience.
 * **[Tailwind CSS](https://tailwindcss.com/)** - A utility-first CSS framework used for styling, offering rapid development of responsive designs.
-* **[Firebase](https://firebase.google.com/docs/web/setup)** - Provides real-time database, authentication, and Firestore services, enabling secure data syncing and profile management.
+* **[Firebase](https://firebase.google.com/docs/web/setup)** - Provides real-time database, enabling secure data syncing and profile management.
 * **[@react-spring/web](https://react-spring.dev)** - Used for the fluid, physics-based page transitions and animations.
 * **[framer-motion](https://www.framer.com/)** - For declarative animations and sophisticated UI interactions across the site.
 * **[embla-carousel-react](https://www.embla-carousel.com/get-started/react/)** - Powers the highly optimized and touch-friendly carousel for galleries.
