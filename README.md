@@ -1,6 +1,6 @@
 <h3 align="center">
   <a href="https://andrasapplied.netlify.app/" target="_blank" rel="noopener noreferrer">
-  <img src="https://github.com/AndrasE/raw-readme/blob/7a93175c63780473dfa44e00cbd97021d55e5d90/logo/applied-readme.png" width="135">
+  <img src="https://github.com/AndrasE/raw-readme/blob/a6e262765a5dcc98ceb5701130a32789dbef6de1/logo/applied-readme.png" width="135">
   </a>
   <br>
   Knot
@@ -42,12 +42,12 @@ I'm getting married, and this is our official wedding website! Built with **Reac
 * **[TypeScript](https://www.typescriptlang.org/)** - Used throughout the codebase to add static typing and improve maintainability and developer experience.
 * **[Tailwind CSS](https://tailwindcss.com/)** - A utility-first CSS framework used for styling, offering rapid development of responsive designs.
 * **[Firebase](https://firebase.google.com/docs/web/setup)** - Provides real-time database, authentication, and Firestore services, enabling secure data syncing and profile management.
-* **`@react-spring/web`** - Used for the fluid, physics-based page transitions and animations.
-* **`framer-motion`** - For declarative animations and sophisticated UI interactions across the site.
-* **`embla-carousel-react`** - Powers the highly optimized and touch-friendly carousel for galleries.
-* **`yet-another-react-lightbox`** - Provides the gallery lightbox functionality for viewing photos.
-* **`canvas-confetti` / `react-confetti`** - Used to trigger celebratory effects (like on game completion or winning a high score).
-* **`@formspark/use-formspark`** - Integrated for handling form submissions (RSVP feature).
+* **[@react-spring/web](https://react-spring.dev)** - Used for the fluid, physics-based page transitions and animations.
+* **[framer-motion](https://www.framer.com/)** - For declarative animations and sophisticated UI interactions across the site.
+* **[embla-carousel-react](https://www.embla-carousel.com/get-started/react/)** - Powers the highly optimized and touch-friendly carousel for galleries.
+* **[yet-another-react-lightbox](https://yet-another-react-lightbox.com/)** - Provides the gallery lightbox functionality for viewing photos.
+* **[canvas-confetti/react-confetti](https://www.npmjs.com/package/react-confetti)** - Used to trigger celebratory effects (like on game completion or winning a high score).
+* **[@formspark/use-formspark](https://documentation.formspark.io/)** - Integrated for handling form submissions (RSVP feature).
 
 ---
 
