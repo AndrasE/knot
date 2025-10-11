@@ -29,9 +29,9 @@ I'm getting married, and this is our official wedding website! Built with **Reac
 
 
 <div align="center">
-<img src="https://github.com/AndrasE/raw-readme/blob/a680ed99ff9a58fa3248fbd5b9bb89a1a192cafe/thumbs/applied_1.png" width="240">
-<img src="https://github.com/AndrasE/raw-readme/blob/a680ed99ff9a58fa3248fbd5b9bb89a1a192cafe/thumbs/applied_2.png" width="240">
-<img src="https://github.com/AndrasE/raw-readme/blob/a680ed99ff9a58fa3248fbd5b9bb89a1a192cafe/thumbs/applied_3.png" width="240">
+<img src="https://github.com/AndrasE/raw-readme/blob/18f0200d883181833a2d7c0c7d6c7c25e827d708/thumbs/knot-1.png" width="240">
+<img src="https://github.com/AndrasE/raw-readme/blob/18f0200d883181833a2d7c0c7d6c7c25e827d708/thumbs/knot-2.png" width="240">
+<img src="https://github.com/AndrasE/raw-readme/blob/18f0200d883181833a2d7c0c7d6c7c25e827d708/thumbs/knot-3.png" width="240">
 </div>
 
 ---
@@ -87,7 +87,7 @@ VITE_FIREBASE_PROJECT_ID="Your key"
 VITE_FIREBASE_STORAGE_BUCKET="Your key"
 VITE_FIREBASE_MESSAGING_SENDER_ID="Your key"
 VITE_FIREBASE_APP_ID="Your key"
-VITE_FIREBASE_MEASUREMENT_ID=G-"Your key"
+VITE_FIREBASE_MEASUREMENT_ID="Your key"
 VITE_FIREBASE_DATABASE_URL="Your key"
 ```
 
