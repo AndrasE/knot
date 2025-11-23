@@ -57,6 +57,12 @@ body {
   position: relative;
 }
 
+p.circle-dot {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: #908985;
+}
+
 .circle-dot::after {
   content: "";
   position: absolute;
