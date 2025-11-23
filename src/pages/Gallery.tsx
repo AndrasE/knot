@@ -15,24 +15,85 @@ import image4 from "../assets/images/gallery/4.jpg";
 import image5 from "../assets/images/gallery/5.jpg";
 import image6 from "../assets/images/gallery/6.jpg";
 import image7 from "../assets/images/gallery/7.jpg";
+import image8 from "../assets/images/gallery/8.jpg";
+import image9 from "../assets/images/gallery/9.jpg";
+import image10 from "../assets/images/gallery/10.jpg";
 
 const galleryImages = [
-  { src: image1, width: 2000, height: 1500, title: "Image 1" },
-  { src: image2, width: 1280, height: 853, title: "Image 2" },
-  { src: image3, width: 2048, height: 1152, title: "Image 3" },
-  { src: image4, width: 1600, height: 1200, title: "Image 4" },
-  { src: image5, width: 1200, height: 1200, title: "Image 5" },
-  { src: image6, width: 1400, height: 800, title: "Image 6" },
-  { src: image7, width: 1400, height: 1050, title: "Image 7" },
-  { src: image1, width: 2000, height: 1500, title: "Image 8" },
-  { src: image2, width: 1280, height: 853, title: "Image 9" },
-  { src: image3, width: 2048, height: 1152, title: "Image 10" },
-  { src: image4, width: 1600, height: 1200, title: "Image 11" },
+  {
+    src: image1,
+    width: 2000,
+    height: 1500,
+    title: "Morden Park House",
+    alt: "Morden Park House",
+  },
+  {
+    src: image2,
+    width: 1280,
+    height: 853,
+    title: "Morden Park House",
+    alt: "Morden Park House",
+  },
+  {
+    src: image3,
+    width: 2048,
+    height: 1152,
+    title: "Morden Park House",
+    alt: "Morden Park House",
+  },
+  {
+    src: image4,
+    width: 1024,
+    height: 1024,
+    title: "1960s Routemaster Bus",
+    alt: "1960s Routemaster Bus",
+  },
+  {
+    src: image5,
+    width: 900,
+    height: 600,
+    title: "1960s Routemaster Bus",
+    alt: "1960s Routemaster Bus",
+  },
+  {
+    src: image6,
+    width: 900,
+    height: 720,
+    title: "1960s Routemaster Bus",
+    alt: "1960s Routemaster Bus",
+  },
+  {
+    src: image7,
+    width: 1600,
+    height: 1200,
+    title: "Cherrry Tree Pub",
+    alt: "Cherry Tree Pub",
+  },
+  {
+    src: image8,
+    width: 1200,
+    height: 1200,
+    title: "Cherrry Tree Pub",
+    alt: "Cherry Tree Pub",
+  },
+  {
+    src: image9,
+    width: 1400,
+    height: 800,
+    title: "Cherrry Tree Pub",
+    alt: "Cherry Tree Pub",
+  },
+  {
+    src: image10,
+    width: 1400,
+    height: 1050,
+    title: "Cherrry Tree Pub",
+    alt: "Cherry Tree Pub",
+  },
 ];
 
 export default function GalleryPage() {
   const [index, setIndex] = useState(-1);
-
   // Scroll to top when navigating to this page
 
   return (
@@ -40,7 +101,7 @@ export default function GalleryPage() {
       <p className="max-w-2xl pt-4 pb-8 text-center">
         We'll share the best photos here after the wedding, and post a link to a
         shared album where you can view and download all of the photos. As for
-        now here are a few photos of the venue and us.
+        now here are a few photos of the venue as planned.
       </p>
       <div className="grid grid-cols-2 gap-5 pb-5 md:pb-10 sm:grid-cols-3 md:grid-cols-4">
         {galleryImages.map((image, i) => (
