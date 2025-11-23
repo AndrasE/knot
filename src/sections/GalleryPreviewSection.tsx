@@ -7,6 +7,12 @@ import img1 from "../assets/images/carousel/1.webp";
 import img2 from "../assets/images/carousel/2.webp";
 import img3 from "../assets/images/carousel/3.webp";
 import img4 from "../assets/images/carousel/4.webp";
+import img5 from "../assets/images/carousel/5.webp";
+import img6 from "../assets/images/carousel/6.webp";
+import img7 from "../assets/images/carousel/7.webp";
+import img8 from "../assets/images/carousel/8.webp";
+import img9 from "../assets/images/carousel/9.webp";
+import img10 from "../assets/images/carousel/10.webp";
 
 // Use the imported variables in your array
 const gallerySlides = [
@@ -25,6 +31,30 @@ const gallerySlides = [
   {
     src: img4,
     alt: "Gazeebo at the venue",
+  },
+  {
+    src: img5,
+    alt: "1960s Routemaster Bus",
+  },
+  {
+    src: img6,
+    alt: "1960s Routemaster Bus",
+  },
+  {
+    src: img7,
+    alt: "1960s Routemaster Bus",
+  },
+  {
+    src: img8,
+    alt: "Cherry Tree Pub",
+  },
+  {
+    src: img9,
+    alt: "Cherry Tree Pub",
+  },
+  {
+    src: img10,
+    alt: "Cherry Tree Pub",
   },
 ];
 
@@ -48,7 +78,7 @@ export default function GalleryPreviewSection() {
           </p>
           <Link
             to="/gallery"
-            className="px-3 py-2 m-auto  text-white rounded-md sm:m-0 max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
+            className="px-3 py-2 m-auto text-white rounded-md sm:m-0 max-w-fit bg-stone-500 hover:bg-stone-600 disabled:opacity-50">
             View Gallery
           </Link>
         </div>{" "}

@@ -24,14 +24,10 @@ const galleryImages = [
   { src: image5, width: 1200, height: 1200, title: "Image 5" },
   { src: image6, width: 1400, height: 800, title: "Image 6" },
   { src: image7, width: 1400, height: 1050, title: "Image 7" },
-  // Add more images here
-  { src: image1, width: 2000, height: 1500, title: "Image 1" },
-  { src: image2, width: 1280, height: 853, title: "Image 2" },
-  { src: image3, width: 2048, height: 1152, title: "Image 3" },
-  { src: image4, width: 1600, height: 1200, title: "Image 4" },
-  { src: image5, width: 1200, height: 1200, title: "Image 5" },
-  { src: image6, width: 1400, height: 800, title: "Image 6" },
-  { src: image7, width: 1400, height: 1050, title: "Image 7" },
+  { src: image1, width: 2000, height: 1500, title: "Image 8" },
+  { src: image2, width: 1280, height: 853, title: "Image 9" },
+  { src: image3, width: 2048, height: 1152, title: "Image 10" },
+  { src: image4, width: 1600, height: 1200, title: "Image 11" },
 ];
 
 export default function GalleryPage() {
