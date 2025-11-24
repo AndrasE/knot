@@ -35,21 +35,31 @@ export default function EventPage() {
             celebration will continue. It's the perfect way to travel in style
             and keep the party atmosphere going!
           </p>
-          <p className="circle-dot">Cherry Three Pub</p>
+          <p className="circle-dot">
+            Dining, Drinking, Dancing - Cherry Three Pub
+          </p>
           <p className="pb-2 text-justify">
-            Drinking, Dinnering, Dancing in the pub We will start with drinks
-            and snacks at the Cherry Tree pub in Dulwich, and will later indulge
-            in a little buffet.
+            We will start with drinks and snacks at the Cherry Tree pub in
+            Dulwich, and will later indulge in a little buffet.
           </p>
           <p className="pb-2 text-justify">
             The pub is located in pretty Dulwich, 31-33 Grove Vale, SE22 8EQ
             London.
           </p>
-          <p className="text-justify ">
+          <p className="pb-5 text-justify ">
             Look forward to a casual pub vibe where we have our own dedicated
             area outside and partly shielded, but can also mingle with the pub
             crowd. <br /> As our fundings are small, we would ask you to pay for
             your drinks.
+          </p>
+          <p className="circle-dot">The show can go on!</p>
+          <p className="text-justify ">
+            If we are still fresh and energetic and want to continue celebrating
+            after pub closing at 11PM, we will take a cab and within 20 minutes
+            we will be back at the bubbling heart of London with plenty of
+            nightlife options - we will have a look at concrete places once the
+            date is getting closer, however properly ending up in a sparkling
+            gay club, ready to dance the night away.
           </p>
         </div>
       </div>

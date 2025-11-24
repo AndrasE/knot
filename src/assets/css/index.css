@@ -37,6 +37,11 @@ body {
   font-weight: 100;
 }
 
+ul.details li {
+  list-style: inside circle;
+  margin-bottom: 0.5rem;
+}
+
 /* Est nav height */
 .nav-content-offset {
   padding-top: 3.5rem;
