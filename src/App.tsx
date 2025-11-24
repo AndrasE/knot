@@ -12,6 +12,7 @@ import { useTransition, animated } from "@react-spring/web";
 import ScrollToTop from "./components/ScrollToTop";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/Home";
+import EventPage from "./pages/Event";
 import DetailsPage from "./pages/Details";
 import GalleryPage from "./pages/Gallery";
 import GamesPage from "./pages/Games";
@@ -49,6 +50,7 @@ function Main() {
           {/* Routes must receive the location object (item) from the transition hook */}
           <Routes location={item}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/event" element={<EventPage />} />
             <Route path="/details" element={<DetailsPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/games" element={<GamesPage />} />

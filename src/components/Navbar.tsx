@@ -28,6 +28,12 @@ export default function Navbar() {
       {isHomePage ? (
         <>
           <HashLink
+            to="/#eventpreview"
+            smooth
+            className="text-base cursor-pointer sm:text-lg">
+            Event
+          </HashLink>
+          <HashLink
             to="/#detailspreview"
             smooth
             className="text-base cursor-pointer sm:text-lg">
@@ -38,12 +44,6 @@ export default function Navbar() {
             smooth
             className="text-base cursor-pointer sm:text-lg">
             Gallery
-          </HashLink>
-          <HashLink
-            to="/#guests"
-            smooth
-            className="text-base cursor-pointer sm:text-lg">
-            Guests
           </HashLink>
           <HashLink
             to="/#RSVP"

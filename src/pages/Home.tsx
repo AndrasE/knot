@@ -8,6 +8,9 @@ const DetailsPreviewSection = lazy(
 const GalleryPreviewSection = lazy(
   () => import("../sections/GalleryPreviewSection")
 );
+const EventPreviewSection = lazy(
+  () => import("../sections/EventPreviewSection")
+);
 const GuestsSection = lazy(() => import("../sections/GuestsSection"));
 const RSVPSection = lazy(() => import("../sections/RSVPSection"));
 const GamePreviewSection = lazy(
@@ -22,10 +25,11 @@ export default function HomePage() {
 
       {/* All other sections are wrapped in a Suspense component */}
       <Suspense fallback={<div>Loading...</div>}>
+        <EventPreviewSection />
         <DetailsPreviewSection />
         <GalleryPreviewSection />
-        <GuestsSection />
         <RSVPSection />
+        <GuestsSection />
         <GamePreviewSection />
       </Suspense>
     </div>
