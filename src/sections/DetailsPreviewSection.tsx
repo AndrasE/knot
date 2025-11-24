@@ -17,7 +17,7 @@ export default function DetailsPreviewSection() {
           <h2 className="text-2xl ">Accomodation:</h2>
           <p>
             Here are some accommodation ideas for our friends visiting from
-            abroad. Click for details!
+            abroad. Click below for more details!
           </p>
 
           <Link
