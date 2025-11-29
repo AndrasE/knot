@@ -8,6 +8,7 @@ export default function ScrollToTop() {
   useEffect(() => {
     // Check if the current URL path is for the details or gallery pages and scroll to top
     if (
+      location.pathname === "/event" ||
       location.pathname === "/details" ||
       location.pathname === "/gallery" ||
       location.pathname === "/games" ||

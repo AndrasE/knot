@@ -1,4 +1,4 @@
-const CACHE_NAME = "sarah-andras-wedding-app-v3";
+const CACHE_NAME = "sarah-andras-wedding-app-v4";
 
 const urlsToCache = [
   "/",

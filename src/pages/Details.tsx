@@ -7,9 +7,7 @@ export default function DetailsPage() {
           <p className="pb-4 text-justify">
             We want you to feel relaxed and enjoy the day - Think comfortable
             with a little shine: sundresses, nice tops, chinos, button-downs. No
-            need for anything formal! We want you to feel relaxed and enjoy the
-            day - Think comfortable with a little shine: sundresses, nice tops,
-            chinos, button-downs. No need for anything formal!
+            need for anything formal!
           </p>
           <p className="pb-2 circle-dot">Gifts</p>
           <p className="pb-4 text-justify">
