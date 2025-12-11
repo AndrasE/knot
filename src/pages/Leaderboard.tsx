@@ -50,7 +50,7 @@ const FullScoreList = ({
       {error && <p className="text-sm text-center text-red-500">{error}</p>}
 
       {!loading && topScores.length === 0 && (
-        <p className="text-sm text-center text-gray-500">
+        <p className="text-sm text-center text-stone-500">
           No scores recorded yet!
         </p>
       )}
