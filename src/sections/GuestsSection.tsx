@@ -22,6 +22,10 @@ export default function GuestsSection() {
           <li>Chrissie</li>
           <li>Simone</li>
           <li>Carla</li>
+          <li>Mariann</li>
+          <li>Szilvi</li>
+          <li>Soraia</li>
+          <li>Shreen</li>
         </ul>
       </div>
     </section>
