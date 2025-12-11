@@ -74,7 +74,7 @@ export default function Navbar() {
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className={`
       text-3xl transition duration-300 ease-in-out transform cursor-pointer
-      hover:text-stone-700 text-stone-600 sm:hidden
+      hover:text-stone-700 text-stone-600 
       ${dropdownOpen ? "rotate-180" : "rotate-0"}
       `}
             />

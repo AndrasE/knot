@@ -23,27 +23,25 @@ export default function DetailsPage() {
           <p className="pb-2 circle-dot">
             Accommodation for our friends from abroad
           </p>
-          <p className="pb-2 text-justify">
-            <ul className="details">
-              <li>
-                Going fully British but pricey: <br /> The nostalgic and very
-                typical British The Clarendon Hotel in Blackheath, 16 Montpelier
-                Row, London SE3 0RW (5min from our flat), <br /> We get a
-                discounted rate for around 130 per night/one room.
-              </li>
-              <li>
-                A more budget option but decent: <br />
-                Travelodge Greenwich, Blackheath Road, London SE10 8DA. <br />{" "}
-                Between 70 and 90 per night depending on the day).
-              </li>
-              <li>
-                AirBnB might be best: <br /> However we advise to stay away from
-                neighbourhoods like Catford, Deptford, New Cross, Woolwich and
-                the centre of Lewisham. Look into Blackheath, Greenwich or Isle
-                of Dogs for stays to stay safe and decent in big wild London.
-              </li>
-            </ul>
-          </p>
+          <ul className="pb-2 text-justify details">
+            <li>
+              Going fully British but pricey: <br /> The nostalgic and very
+              typical British The Clarendon Hotel in Blackheath, 16 Montpelier
+              Row, London SE3 0RW (5min from our flat), <br /> We get a
+              discounted rate for around 130 per night/one room.
+            </li>
+            <li>
+              A more budget option but decent: <br />
+              Travelodge Greenwich, Blackheath Road, London SE10 8DA. <br />{" "}
+              Between 70 and 90 per night depending on the day).
+            </li>
+            <li>
+              AirBnB might be best: <br /> However we advise to stay away from
+              neighbourhoods like Catford, Deptford, New Cross, Woolwich and the
+              centre of Lewisham. Look into Blackheath, Greenwich or Isle of
+              Dogs for stays to stay safe and decent in big wild London.
+            </li>
+          </ul>
           <p className="circle-dot">Dietary details</p>
           <p className="text-justify ">
             If you want to eat vegan, leave out meat, or are allergic to
