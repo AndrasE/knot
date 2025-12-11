@@ -57,6 +57,22 @@ ul.details li {
   @apply flex flex-col items-center justify-center min-h-screen px-5 mx-auto;
 }
 
+/* Dropdown dots */
+.nav-circle-dot {
+  position: relative;
+}
+
+.nav-circle-dot::after {
+  content: "";
+  position: absolute;
+  left: -23px;
+  top: 10px;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: #57534e; /* Darker grey */
+}
+
 /* Timeline dots */
 .circle-dot {
   position: relative;
