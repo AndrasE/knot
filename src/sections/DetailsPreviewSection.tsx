@@ -4,7 +4,7 @@ export default function DetailsPreviewSection() {
   return (
     <section
       id="detailspreview"
-      className="max-w-6xl flex-center-100vh nav-content-offset ">
+      className="max-w-6xl pb-5 flex-center-100vh nav-content-offset">
       <div className="flex flex-row items-center justify-center max-w-2xl gap-10 align-center">
         <div className="flex flex-col gap-2 text-center sm:text-right">
           <h1 className="text-6xl font-dawning ">Details </h1>

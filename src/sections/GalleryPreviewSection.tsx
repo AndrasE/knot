@@ -62,7 +62,7 @@ export default function GalleryPreviewSection() {
   return (
     <section
       id="gallerypreview"
-      className="max-w-2xl flex-center-100vh nav-content-offset ">
+      className="max-w-2xl pb-5 flex-center-100vh nav-content-offset ">
       <h1 className="pb-6 text-6xl font-dawning">Gallery</h1>
       <div className="flex flex-col items-center justify-center gap-5 sm:gap-10 align-center sm:flex-row ">
         <Carousel

@@ -2,7 +2,7 @@ export default function GuestsSection() {
   return (
     <section
       id="guests"
-      className="max-w-2xl text-center flex-center-100vh nav-content-offset ">
+      className="max-w-2xl pb-5 text-center flex-center-100vh nav-content-offset ">
       <h1 className="pb-5 text-6xl font-dawning ">Guests </h1>
       <p className="max-w-sm pb-5 ">
         Our confirmed guests so far. Please use the form above or reach out to

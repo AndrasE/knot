@@ -5,7 +5,7 @@ export default function HeroSection() {
     <section
       id="hero"
       className="max-w-6xl flex-center-100vh nav-content-offset ">
-      <div className="flex flex-col items-center justify-center gap-5 sm:gap-10 align-center sm:flex-row ">
+      <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:gap-10 align-center sm:flex-row ">
         <div className="text-center sm:w-2/3">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-dawning">
             Sarah{" "}

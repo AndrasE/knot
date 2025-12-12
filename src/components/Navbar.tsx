@@ -1,16 +1,56 @@
-import { HashLink } from "react-router-hash-link";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import NavDropdown from "./NavDropdown";
 import Logo from "../assets/images/icons/navlogo.avif";
 import { IoIosArrowDropdown } from "react-icons/io";
-import { useState } from "react";
 
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === "/";
-
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  // Prevent background scrolling when dropdown is open
+  useEffect(() => {
+    const preventDefault = (e: Event) => {
+      e.preventDefault();
+    };
+
+    const preventKey = (e: KeyboardEvent) => {
+      const keys = [
+        "ArrowUp",
+        "ArrowDown",
+        "PageUp",
+        "PageDown",
+        "Home",
+        "End",
+        " ",
+      ];
+      if (keys.includes(e.key)) e.preventDefault();
+    };
+
+    if (dropdownOpen) {
+      const options: AddEventListenerOptions = { passive: false };
+      window.addEventListener(
+        "wheel",
+        preventDefault as EventListener,
+        options
+      );
+      window.addEventListener(
+        "touchmove",
+        preventDefault as EventListener,
+        options
+      );
+      window.addEventListener("keydown", preventKey as EventListener);
+    }
+
+    return () => {
+      window.removeEventListener("wheel", preventDefault as EventListener);
+      window.removeEventListener("touchmove", preventDefault as EventListener);
+      window.removeEventListener("keydown", preventKey as EventListener);
+    };
+  }, [dropdownOpen]);
 
   return (
     <>
