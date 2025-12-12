@@ -69,7 +69,9 @@ export default function Navbar() {
             fetchPriority="high"
             className="w-10"
           />
-          <span className="ml-1 text-xl sm:hidden text-stone-700">knot</span>
+          {isHomePage && (
+            <span className="ml-1 text-xl sm:hidden text-stone-700">knot</span>
+          )}
         </HashLink>
 
         {/* Conditionally render the links based on the route */}
