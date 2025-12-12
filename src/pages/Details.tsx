@@ -3,13 +3,13 @@ export default function DetailsPage() {
     <div className="max-w-2xl pt-20 pb-5 mx-auto flex-center-100vh">
       <div className="pl-4 border-l-2 border-stone-500">
         <div className="text-left ">
-          <p className="pb-2 circle-dot">Dress code</p>
+          <p className="pb-1 circle-dot">Dress code</p>
           <p className="pb-4 text-justify">
             We want you to feel relaxed and enjoy the day - Think comfortable
             with a little shine: sundresses, nice tops, chinos, button-downs. No
             need for anything formal!
           </p>
-          <p className="pb-2 circle-dot">Gifts</p>
+          <p className="pb-1 circle-dot">Gifts</p>
           <p className="pb-4 text-justify">
             All we want and need is having you there to celebrate with us!
             Asking you to come over and pay for your drinks is already a lot -
@@ -20,10 +20,10 @@ export default function DetailsPage() {
             Pets" in Tunisia, run by Mariem who cared so well for our little boy
             Caramel. (Details to follow soon)
           </p>
-          <p className="pb-2 circle-dot">
+          <p className="pb-1 circle-dot">
             Accommodation for our friends from abroad
           </p>
-          <ul className="pb-2 text-justify details">
+          <ul className="pb-1 text-justify details">
             <li>
               Going fully British but pricey: <br /> The nostalgic and very
               typical British The Clarendon Hotel in Blackheath, 16 Montpelier
@@ -42,7 +42,7 @@ export default function DetailsPage() {
               Dogs for stays to stay safe and decent in big wild London.
             </li>
           </ul>
-          <p className="circle-dot">Dietary details</p>
+          <p className="pb-1 circle-dot">Dietary details</p>
           <p className="text-justify ">
             If you want to eat vegan, leave out meat, or are allergic to
             anything do let us know by July 1st the latest. We will make sure
