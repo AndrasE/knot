@@ -57,6 +57,7 @@ export default function Navbar() {
       <nav className="fixed top-0 left-0 z-999 flex w-full items-center justify-between gap-2  py-3 text-lg border-b border-stone-300 sm:px-10 px-3 bg-[#f5f0e6]">
         {/* Home page HashLink */}
         <HashLink
+          onClick={() => dropdownOpen && setDropdownOpen(false)}
           to="/#hero"
           smooth
           className="flex items-center cursor-pointer">
@@ -75,36 +76,42 @@ export default function Navbar() {
         {isHomePage ? (
           <>
             <HashLink
+              onClick={() => dropdownOpen && setDropdownOpen(false)}
               to="/#eventpreview"
               smooth
               className="hidden text-base cursor-pointer sm:block sm:text-lg">
               Event
             </HashLink>
             <HashLink
+              onClick={() => dropdownOpen && setDropdownOpen(false)}
               to="/#detailspreview"
               smooth
               className="hidden text-base cursor-pointer sm:block sm:text-lg">
               Details
             </HashLink>
             <HashLink
+              onClick={() => dropdownOpen && setDropdownOpen(false)}
               to="/#gallerypreview"
               smooth
               className="hidden text-base cursor-pointer sm:block sm:text-lg">
               Gallery
             </HashLink>
             <HashLink
+              onClick={() => dropdownOpen && setDropdownOpen(false)}
               to="/#RSVP"
               smooth
               className="hidden text-base cursor-pointer sm:block sm:text-lg">
               RSVP
             </HashLink>
             <HashLink
+              onClick={() => dropdownOpen && setDropdownOpen(false)}
               to="/#guests"
               smooth
               className="hidden text-base cursor-pointer sm:block sm:text-lg">
               Guests
             </HashLink>
             <HashLink
+              onClick={() => dropdownOpen && setDropdownOpen(false)}
               to="/#gamespreview"
               smooth
               className="hidden text-base cursor-pointer sm:block sm:text-lg">

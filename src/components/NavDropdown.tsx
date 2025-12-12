@@ -21,13 +21,13 @@ export default function NavDropdown({ isOpen, onClose }: Props) {
             to="/#eventpreview"
             smooth
             onClick={() => onClose()}
-            className="text-2xl cursor-pointer nav-circle-dot">
+            className="text-3xl cursor-pointer sm: sm:text-2xl nav-circle-dot">
             Event
           </HashLink>
           <Link
             to="/event"
             onClick={() => onClose()}
-            className="ml-2 cursor-pointer text">
+            className="ml-2 text-xl cursor-pointer sm:text-base">
             Event Page
           </Link>
 
@@ -35,53 +35,53 @@ export default function NavDropdown({ isOpen, onClose }: Props) {
             to="/#detailspreview"
             smooth
             onClick={() => onClose()}
-            className="mt-4 text-2xl cursor-pointer nav-circle-dot">
+            className="mt-4 text-3xl cursor-pointer sm:text-2xl nav-circle-dot">
             Details
           </HashLink>
           <Link
             to="/details"
             onClick={() => onClose()}
-            className="ml-2 cursor-pointer ">
+            className="ml-2 text-xl cursor-pointer sm:text-base ">
             Details Page
           </Link>
           <HashLink
             to="/#gallerypreview"
             smooth
             onClick={() => onClose()}
-            className="mt-4 text-2xl cursor-pointer nav-circle-dot">
+            className="mt-4 text-3xl cursor-pointer sm:text-2xl nav-circle-dot">
             Gallery
           </HashLink>
           <Link
             to="/gallery"
             onClick={() => onClose()}
-            className="ml-2 cursor-pointer ">
+            className="ml-2 text-xl cursor-pointer sm:text-base ">
             Gallery Page
           </Link>
           <HashLink
             to="/#RSVP"
             smooth
             onClick={() => onClose()}
-            className="mt-4 text-2xl cursor-pointer nav-circle-dot">
+            className="mt-4 text-3xl cursor-pointer sm:text-2xl nav-circle-dot">
             RSVP
           </HashLink>
           <HashLink
             to="/#guests"
             smooth
             onClick={() => onClose()}
-            className="mt-4 text-2xl cursor-pointer nav-circle-dot">
+            className="mt-4 text-3xl cursor-pointer sm:text-2xl nav-circle-dot">
             Guests
           </HashLink>
           <HashLink
             to="/#gamespreview"
             smooth
             onClick={() => onClose()}
-            className="mt-4 text-2xl cursor-pointer nav-circle-dot">
+            className="mt-4 text-3xl cursor-pointer sm:text-2xl nav-circle-dot">
             Games
           </HashLink>
           <Link
             to="/games"
             onClick={() => onClose()}
-            className="ml-2 cursor-pointer ">
+            className="ml-2 text-xl cursor-pointer sm:text-base ">
             Games Page
           </Link>
         </div>

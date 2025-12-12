@@ -80,7 +80,7 @@ const FullScoreList = ({
 // --- Main Full Leaderboard Page Component ---
 export default function LeaderboardPage() {
   return (
-    <div className="p-5 pt-20 flex-center-100vh">
+    <div className="p-10 pt-20 flex-center-100vh">
       <h1 className="mb-2 text-2xl font-extrabold text-stone-800">
         Top 10 Leaderboards✨
       </h1>
