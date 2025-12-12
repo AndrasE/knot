@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import { GoDot } from "react-icons/go";
 
 type Props = {
   isOpen: boolean;
@@ -21,14 +22,16 @@ export default function NavDropdown({ isOpen, onClose }: Props) {
             to="/#eventpreview"
             smooth
             onClick={() => onClose()}
-            className="text-3xl cursor-pointer sm: sm:text-2xl nav-circle-dot">
-            Event
+            className="text-3xl cursor-pointer sm:text-2xl nav-circle-dot">
+            <span className="nav-link-hover">Event</span>
           </HashLink>
+
           <Link
             to="/event"
             onClick={() => onClose()}
-            className="ml-2 text-xl cursor-pointer sm:text-base">
-            Event Page
+            className="relative flex items-center text-xl cursor-pointer sm:text-base right-1">
+            <GoDot />
+            <span className="nav-link-hover">Event Page</span>
           </Link>
 
           <HashLink
@@ -36,53 +39,63 @@ export default function NavDropdown({ isOpen, onClose }: Props) {
             smooth
             onClick={() => onClose()}
             className="mt-4 text-3xl cursor-pointer sm:text-2xl nav-circle-dot">
-            Details
+            <span className="nav-link-hover">Details</span>
           </HashLink>
           <Link
             to="/details"
             onClick={() => onClose()}
-            className="ml-2 text-xl cursor-pointer sm:text-base ">
-            Details Page
+            className="relative flex items-center text-xl cursor-pointer sm:text-base right-1">
+            <GoDot />
+            <span className="nav-link-hover">Details Page</span>
           </Link>
           <HashLink
             to="/#gallerypreview"
             smooth
             onClick={() => onClose()}
             className="mt-4 text-3xl cursor-pointer sm:text-2xl nav-circle-dot">
-            Gallery
+            <span className="nav-link-hover">Gallery</span>
           </HashLink>
           <Link
             to="/gallery"
             onClick={() => onClose()}
-            className="ml-2 text-xl cursor-pointer sm:text-base ">
-            Gallery Page
+            className="relative flex items-center text-xl cursor-pointer sm:text-base right-1">
+            <GoDot />
+            <span className="nav-link-hover">Gallery Page</span>
           </Link>
           <HashLink
             to="/#RSVP"
             smooth
             onClick={() => onClose()}
             className="mt-4 text-3xl cursor-pointer sm:text-2xl nav-circle-dot">
-            RSVP
+            <span className="nav-link-hover">RSVP</span>
           </HashLink>
           <HashLink
             to="/#guests"
             smooth
             onClick={() => onClose()}
-            className="mt-4 text-3xl cursor-pointer sm:text-2xl nav-circle-dot">
-            Guests
+            className="mt-4 text-3xl cursor-pointer r sm:text-2xl nav-circle-dot">
+            <span className="nav-link-hover">Guests</span>
           </HashLink>
           <HashLink
             to="/#gamespreview"
             smooth
             onClick={() => onClose()}
             className="mt-4 text-3xl cursor-pointer sm:text-2xl nav-circle-dot">
-            Games
+            <span className="nav-link-hover">Games</span>
           </HashLink>
           <Link
             to="/games"
             onClick={() => onClose()}
-            className="ml-2 text-xl cursor-pointer sm:text-base ">
-            Games Page
+            className="relative flex items-center text-xl cursor-pointer sm:text-base right-1">
+            <GoDot />
+            <span className="nav-link-hover">Games Page</span>
+          </Link>
+          <Link
+            to="/leaderboard"
+            onClick={() => onClose()}
+            className="relative flex items-center text-xl cursor-pointer sm:text-base left-2">
+            <GoDot />
+            <span className="nav-link-hover">Leaderboard</span>
           </Link>
         </div>
       </div>

@@ -101,6 +101,29 @@ p.circle-dot {
   background-color: #57534e; /* Darker grey */
 }
 
+/* Dropdown hover underline animation */
+.nav-link-hover {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+  padding-bottom: 0.1rem;
+}
+
+.nav-link-hover::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #57534e;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-link-hover:hover::before {
+  width: 100%;
+}
+
 /* Lightbox overrides */
 .yarl__container {
   background-color: #f5f0e6;
