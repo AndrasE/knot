@@ -1,4 +1,4 @@
-const CACHE_NAME = "sarah-andras-wedding-app-v4";
+const CACHE_NAME = "sarah-andras-wedding-app-v5";
 
 const urlsToCache = [
   "/",
@@ -14,18 +14,24 @@ const urlsToCache = [
   "/src/assets/images/carousel/4.webp",
 ];
 
-// 1. ✅ Pre-cache essential files on install
+// 1. ✅ INSTALL: Pre-cache essential files
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
-      const cache = await caches.open(CACHE_NAME);
-      await cache.addAll(urlsToCache);
-      console.log("Service Worker: Essential files pre-cached successfully.");
+      try {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.addAll(urlsToCache);
+        console.log("Service Worker: Essential files pre-cached successfully.");
+      } catch (error) {
+        // Fail loudly if pre-caching fails to prevent a bad SW from activating
+        console.error('SW Installation failed during pre-caching:', error);
+        throw error; 
+      }
     })()
   );
 });
 
-// 2. ✅ Clean up old caches on activate AND take immediate control (for programmatic update)
+// 2. ✅ ACTIVATE: Clean up old caches and take control
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
@@ -36,7 +42,7 @@ self.addEventListener("activate", (event) => {
           .map((name) => caches.delete(name))
       );
       
-      // Allows the new SW to control all open tabs immediately after activation
+      // Ensure the new SW immediately controls new pages (fixes update flow)
       self.clientsClaim(); 
       
       console.log("Service Worker: Old caches cleared and clients claimed.");
@@ -44,7 +50,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// 3. ✅ Listen for 'skipWaiting' message from the page (to fix the double-reload UX)
+// 3. ✅ MESSAGE: Listener for programmatic skipWaiting (fixes double-reload UX)
 self.addEventListener('message', (event) => {
   if (event.data && event.data.action === 'skipWaiting') {
     self.skipWaiting();
@@ -54,18 +60,17 @@ self.addEventListener('message', (event) => {
 
 
 // -------------------------------------------------------------------------
-// --- SAFE CACHING STRATEGIES TO PREVENT HANGS ---
+// --- SAFE CACHING STRATEGIES (Prevents Deadlocks/Hangs on Mobile) ---
 // -------------------------------------------------------------------------
 
 /**
- * Strategy: Cache-First, then Network-Update (Stale-While-Revalidate)
- * This is fast and prevents deadlocks by IMMEDIATELY returning the cache.
+ * Strategy 1: Stale-While-Revalidate (for images)
+ * Prioritizes speed (cache) while updating in the background.
  */
 const staleWhileRevalidate = async (request) => {
     const cache = await caches.open(CACHE_NAME);
     const cachedResponse = await cache.match(request);
     
-    // Start the network request to update the cache in the background.
     const networkFetch = fetch(request)
       .then(networkResponse => {
         if (networkResponse && networkResponse.status === 200) {
@@ -75,38 +80,34 @@ const staleWhileRevalidate = async (request) => {
       })
       .catch(error => {
         console.warn(`SW: Background network update failed for ${request.url}`, error);
-        return null; // Don't crash if the network update fails
+        return null;
       });
 
-    // CRITICAL: Return the cached response immediately if available. 
-    // This is the fastest response and prevents the page from waiting/hanging.
+    // CRITICAL: Return cached response immediately to prevent page hang.
     if (cachedResponse) {
-      console.log(`SW: Serving cached image (Stale-While-Revalidate) → ${request.url}`);
+      console.log(`SW: Serving cached image (SWR) → ${request.url}`);
       return cachedResponse;
     } 
     
-    // If no cache, wait for the network response (and throw if it fails)
+    // Fallback: If no cache, wait for the network.
     const networkResponse = await networkFetch;
     
-    if (networkResponse) {
-        return networkResponse;
-    }
+    if (networkResponse) return networkResponse;
     
-    // Final fallback if both cache and network failed
+    // Final fallback
     console.error(`SW: Failed to fetch and no cache for ${request.url}`);
-    return new Response(null, { status: 503, statusText: "Offline Fallback Failed" });
+    return new Response(null, { status: 503, statusText: "Offline/Network Fallback Failed" });
 };
 
 /**
- * Strategy: Network-First, then Cache-Fallback
- * Best for core assets like HTML, CSS, and JS.
+ * Strategy 2: Network-First, Cache-Fallback (for all other files)
+ * Ensures the app tries for the newest code, but has a robust offline fallback.
  */
 const networkFirst = async (request) => {
     const cache = await caches.open(CACHE_NAME);
     try {
         const networkResponse = await fetch(request);
         
-        // Cache successful responses for next time
         if (networkResponse && networkResponse.status === 200) {
             cache.put(request, networkResponse.clone());
         }
@@ -119,9 +120,9 @@ const networkFirst = async (request) => {
             return cachedResponse;
         }
         
-        // If nothing is found, return an explicit 503 response
+        // Return a response so the promise resolves (prevents hang)
         console.error("SW: Network and Cache failed for:", request.url);
-        return new Response("You are offline.", { status: 503 });
+        return new Response("You are offline and no cache is available.", { status: 503 });
     }
 };
 
@@ -130,12 +131,10 @@ const networkFirst = async (request) => {
 self.addEventListener("fetch", (event) => {
     const request = event.request;
 
-    // Use Stale-While-Revalidate for images
     if (request.destination === "image" && /\.(webp|avif)$/i.test(request.url)) {
         event.respondWith(staleWhileRevalidate(request));
         return;
     }
 
-    // Use Network-First for everything else
     event.respondWith(networkFirst(request));
 });
