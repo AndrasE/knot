@@ -105,14 +105,12 @@ p.circle-dot {
 .nav-link-hover {
   position: relative;
   display: inline-block;
-  line-height: 1;
-  padding-bottom: 0.1rem;
 }
 
 .nav-link-hover::before {
   content: "";
   position: absolute;
-  bottom: 0;
+  bottom: 3px;
   left: 0;
   width: 0;
   height: 1px;

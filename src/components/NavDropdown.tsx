@@ -59,7 +59,7 @@ export default function NavDropdown({ isOpen, onClose }: Props) {
             to="/gallery"
             onClick={() => onClose()}
             className="relative flex items-center text-xl cursor-pointer sm:text-base right-1">
-            <GoDot />
+            <GoDot className="self-center" />
             <span className="nav-link-hover">Gallery Page</span>
           </Link>
           <HashLink
@@ -93,7 +93,7 @@ export default function NavDropdown({ isOpen, onClose }: Props) {
           <Link
             to="/leaderboard"
             onClick={() => onClose()}
-            className="relative flex items-center text-xl cursor-pointer sm:text-base left-2">
+            className="relative flex items-center justify-center text-xl cursor-pointer sm:text-base left-2">
             <GoDot />
             <span className="nav-link-hover">Leaderboard</span>
           </Link>
