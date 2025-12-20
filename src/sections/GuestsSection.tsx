@@ -11,13 +11,13 @@ export default function GuestsSection() {
 
       <div className="flex flex-row items-center justify-center gap-10 align-center ">
         <ul className="grid w-full grid-cols-2 gap-x-10 gap-y-2 md:grid-cols-3 lg:grid-cols-4">
-          <li>Sarah </li>
-          <li>Andras </li>
+          <li>Sarah</li>
+          <li>Andras</li>
           <li>Mama A</li>
-          <li>Pappa A </li>
-          <li>Pappa S </li>
-          <li>Kari </li>
-          <li>Boch </li>
+          <li>Pappa A</li>
+          <li>Pappa S</li>
+          <li>Kari</li>
+          <li>Boch</li>
           <li>Dave</li>
           <li>Chrissie</li>
           <li>Simone</li>
@@ -26,6 +26,9 @@ export default function GuestsSection() {
           <li>Szilvi</li>
           <li>Soraia</li>
           <li>Shreen</li>
+          <li>Allison</li>
+          <li>Maria</li>
+          <li>Martin</li>
         </ul>
       </div>
     </section>
