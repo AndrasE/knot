@@ -15,7 +15,7 @@ export default function EventPreviewSection() {
           <p>Morden Park House - The Gazebo</p>
           <p>Friday, 24 July 2026 at 14:00 BST (13:00 UTC)</p>
           <a
-            href="https://maps.app.goo.gl/9RzE9R4LqY4A5Y8A9"
+            href="https://maps.app.goo.gl/wXVzTjF84DXsfm5E8"
             target="_blank"
             rel="noopener noreferrer"
             className="underline">
@@ -25,7 +25,7 @@ export default function EventPreviewSection() {
           <p>Cherry Tree - Dulwich</p>
           <p>Friday, 24 July 2026 est 16:00 BST (15:00 UTC)</p>
           <a
-            href="https://maps.app.goo.gl/7RzE9R4LqY4A5Y8A9"
+            href="https://maps.app.goo.gl/3v2VE7zn5dDmapnJ7"
             target="_blank"
             rel="noopener noreferrer"
             className="underline">

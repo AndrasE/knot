@@ -26,9 +26,17 @@ export default function DetailsPage() {
           <ul className="pb-1 text-justify details">
             <li>
               Going fully British but pricey: <br /> The nostalgic and very
-              typical British The Clarendon Hotel in Blackheath, 16 Montpelier
-              Row, London SE3 0RW (5min from our flat), <br /> We get a
-              discounted rate for around 130 per night/one room.
+              typical British{" "}
+              <a
+                className="underline decoration-stone-500"
+                href="https://maps.app.goo.gl/HpsMtoh8opJizrqW8"
+                target="_blank"
+                rel="noopener noreferrer">
+                The Clarendon Hotel
+              </a>{" "}
+              in Blackheath, 16 Montpelier Row, London SE3 0RW (5min from our
+              flat), <br /> We get a discounted rate for around 130 per
+              night/one room.
             </li>
             <li>
               A more budget option but decent: <br />
