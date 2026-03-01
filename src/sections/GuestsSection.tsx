@@ -34,6 +34,8 @@ export default function GuestsSection() {
           <li>Martin</li>
           <li>Anja</li>
           <li>Alex</li>
+          <li>Anna</li>
+          <li>Kelly</li>
           <li>Melis</li>
           <li>Simone P</li>
           <li>Danda</li>
@@ -45,6 +47,9 @@ export default function GuestsSection() {
           <li>Sonia</li>
           <li>Anna</li>
           <li>Johnatan</li>
+          <li>Meshalyn</li>
+          <li>Heder</li>
+          <li>Toma</li>
         </ul>
       </div>
     </section>
