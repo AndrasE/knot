@@ -14,9 +14,12 @@ export default function GuestsSection() {
           <li>Sarah</li>
           <li>Andras</li>
           <li>Mama A</li>
+          <li>Mama S</li>
           <li>Pappa A</li>
           <li>Pappa S</li>
           <li>Kari</li>
+          <li>David</li>
+          <li>Rene</li>
           <li>Boch</li>
           <li>Dave</li>
           <li>Chrissie</li>
@@ -30,6 +33,7 @@ export default function GuestsSection() {
           <li>Maria</li>
           <li>Martin</li>
           <li>Anja</li>
+          <li>Alex</li>
           <li>Melis</li>
           <li>Simone P</li>
           <li>Danda</li>
@@ -38,6 +42,9 @@ export default function GuestsSection() {
           <li>Milena</li>
           <li>Emilian </li>
           <li>Etienne</li>
+          <li>Sonia</li>
+          <li>Anna</li>
+          <li>Johnatan</li>
         </ul>
       </div>
     </section>
