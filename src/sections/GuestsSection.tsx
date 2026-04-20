@@ -13,15 +13,17 @@ export default function GuestsSection() {
         <ul className="grid w-full grid-cols-2 gap-x-10 gap-y-2 md:grid-cols-3 lg:grid-cols-4">
           <li>Sarah</li>
           <li>Andras</li>
+          <li>Boch</li>
+          <li>Dave</li>
           <li>Mama A</li>
           <li>Mama S</li>
+          <li>Mama B</li>
           <li>Pappa A</li>
           <li>Pappa S</li>
+          <li>Pappa B</li>
           <li>Kari</li>
           <li>David</li>
           <li>Rene</li>
-          <li>Boch</li>
-          <li>Dave</li>
           <li>Chrissie</li>
           <li>Simone C</li>
           <li>Carla</li>
@@ -50,6 +52,8 @@ export default function GuestsSection() {
           <li>Meshalyn</li>
           <li>Heder</li>
           <li>Toma</li>
+          <li>Ildiko</li>
+          <li>Benedek</li>
         </ul>
       </div>
     </section>
