@@ -1,4 +1,4 @@
-const CACHE_NAME = "wedding-app-v7";
+const CACHE_NAME = "wedding-app-v8";
 
 const APP_SHELL = [
   "/",
@@ -21,7 +21,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(APP_SHELL);
-    })
+    }),
   );
   self.skipWaiting();
 });
@@ -35,9 +35,9 @@ self.addEventListener("activate", (event) => {
       .keys()
       .then((keys) =>
         Promise.all(
-          keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
-        )
-      )
+          keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)),
+        ),
+      ),
   );
   self.clients.claim();
 });
@@ -92,7 +92,7 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       caches.match("/index.html").then((cached) => {
         return cached || fetch("/index.html");
-      })
+      }),
     );
     return;
   }
