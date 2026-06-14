@@ -11,8 +11,11 @@ export default function DetailsPreviewSection() {
           <h2 className="text-2xl ">Dress code:</h2>
           <p>As you wish, not needed anything formal</p>
 
-          <h2 className="text-2xl ">Gifts:</h2>
-          <p>As you wish, just be there, all that matters!</p>
+          <h2 className="text-2xl ">Meetup:</h2>
+          <p>
+            Either come to Morden Park House for the event or join us for a
+            predrink & lunch at a nearby pub!
+          </p>
 
           <h2 className="text-2xl ">Accomodation:</h2>
           <p>

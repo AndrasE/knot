@@ -3,18 +3,19 @@ import HeroSection from "../sections/HeroSection";
 
 // Lazy load all sections that are not in the initial viewport
 const DetailsPreviewSection = lazy(
-  () => import("../sections/DetailsPreviewSection")
+  () => import("../sections/DetailsPreviewSection"),
 );
 const GalleryPreviewSection = lazy(
-  () => import("../sections/GalleryPreviewSection")
+  () => import("../sections/GalleryPreviewSection"),
 );
 const EventPreviewSection = lazy(
-  () => import("../sections/EventPreviewSection")
+  () => import("../sections/EventPreviewSection"),
 );
 const GuestsSection = lazy(() => import("../sections/GuestsSection"));
 const RSVPSection = lazy(() => import("../sections/RSVPSection"));
+const GiftsSection = lazy(() => import("../sections/GiftsSection"));
 const GamePreviewSection = lazy(
-  () => import("../sections/GamesPreviewSection")
+  () => import("../sections/GamesPreviewSection"),
 );
 
 export default function HomePage() {
@@ -30,6 +31,7 @@ export default function HomePage() {
         <GalleryPreviewSection />
         <RSVPSection />
         <GuestsSection />
+        <GiftsSection />
         <GamePreviewSection />
       </Suspense>
     </div>

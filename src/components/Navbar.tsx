@@ -35,12 +35,12 @@ export default function Navbar() {
       window.addEventListener(
         "wheel",
         preventDefault as EventListener,
-        options
+        options,
       );
       window.addEventListener(
         "touchmove",
         preventDefault as EventListener,
-        options
+        options,
       );
       window.addEventListener("keydown", preventKey as EventListener);
     }
@@ -111,6 +111,13 @@ export default function Navbar() {
               smooth
               className="hidden text-base cursor-pointer sm:block sm:text-lg">
               Guests
+            </HashLink>
+            <HashLink
+              onClick={() => dropdownOpen && setDropdownOpen(false)}
+              to="/#gifts"
+              smooth
+              className="hidden text-base cursor-pointer sm:block sm:text-lg">
+              Gifts
             </HashLink>
             <HashLink
               onClick={() => dropdownOpen && setDropdownOpen(false)}

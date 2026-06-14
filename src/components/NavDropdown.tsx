@@ -77,6 +77,13 @@ export default function NavDropdown({ isOpen, onClose }: Props) {
             <span className="nav-link-hover">Guests</span>
           </HashLink>
           <HashLink
+            to="/#gifts"
+            smooth
+            onClick={() => onClose()}
+            className="mt-4 text-3xl cursor-pointer r sm:text-2xl nav-circle-dot">
+            <span className="nav-link-hover">Gifts</span>
+          </HashLink>
+          <HashLink
             to="/#gamespreview"
             smooth
             onClick={() => onClose()}

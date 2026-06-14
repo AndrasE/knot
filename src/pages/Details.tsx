@@ -9,16 +9,25 @@ export default function DetailsPage() {
             with a little shine: sundresses, nice tops, chinos, button-downs. No
             need for anything formal!
           </p>
-          <p className="pb-1 circle-dot">Gifts</p>
+          <p className="pb-1 circle-dot">Meetup</p>
           <p className="pb-4 text-justify">
-            All we want and need is having you there to celebrate with us!
-            Asking you to come over and pay for your drinks is already a lot -
-            so please don't worry about gifts. <br />
-            If you want to contribute something, add a little donation to our
-            wedding pot. (Details to follow soon) <br />
-            Alternatively, a small donation to the amazing vet clinic "Happy
-            Pets" in Tunisia, run by Mariem who cared so well for our little boy
-            Caramel. (Details to follow soon)
+            Predrink and quick lunch at the{" "}
+            <a
+              className="underline decoration-stone-500"
+              href="https://maps.app.goo.gl/YuW4RSv8bikgesz7A"
+              target="_blank"
+              rel="noopener noreferrer">
+              Harvester George Pub
+            </a>{" "}
+            next to the event from 12:15 onwards, or come straight at the{" "}
+            <a
+              href="https://maps.app.goo.gl/wXVzTjF84DXsfm5E8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline">
+              Registry Office
+            </a>{" "}
+            at 13:30. The pub is a 5-minute walk from the Mordan Park House.
           </p>
           <p className="pb-1 circle-dot">
             Accommodation for our friends from abroad
