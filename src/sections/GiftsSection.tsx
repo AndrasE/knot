@@ -18,14 +18,21 @@ export default function GiftsSection() {
       </p>
 
       <div className="flex flex-row items-center justify-center gap-10 align-center ">
-        <div className="flex flex-row gap-8 text-center">
-          <a href="https://www.amazon.co.uk/" target="_blank">
+        <div className="flex flex-row gap-10 text-center">
+          <a
+            className="flex flex-col items-center"
+            href="https://www.amazon.co.uk/"
+            target="_blank"
+            rel="noopener noreferrer">
+            <p>Honeymoon</p>
             <PiVanThin className="transition-transform duration-200 h-15 w-15 hover:scale-110" />
           </a>
           <a
+            className="flex flex-col items-center"
             href="https://www.amazon.co.uk"
             target="_blank"
             rel="noopener noreferrer">
+            <p>Dog rescue</p>
             <PiDogThin className="transition-transform duration-200 w-15 h-15 hover:scale-110" />
           </a>
         </div>
