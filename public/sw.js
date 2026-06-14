@@ -1,4 +1,4 @@
-const CACHE_NAME = "wedding-app-v8";
+const CACHE_NAME = "wedding-app-v9";
 
 const APP_SHELL = [
   "/",
