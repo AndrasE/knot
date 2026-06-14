@@ -21,7 +21,7 @@ export default function GiftsSection() {
         <div className="flex flex-row gap-10 text-center">
           <a
             className="flex flex-col items-center"
-            href="https://www.amazon.co.uk/"
+            href="https://www.thankbox.com/app/thankbox/8I9D7yar"
             target="_blank"
             rel="noopener noreferrer">
             <p>Honeymoon</p>
@@ -29,7 +29,7 @@ export default function GiftsSection() {
           </a>
           <a
             className="flex flex-col items-center"
-            href="https://www.amazon.co.uk"
+            href="https://www.thankbox.com/app/thankbox/Xyn1uiD0"
             target="_blank"
             rel="noopener noreferrer">
             <p>Dog rescue</p>
