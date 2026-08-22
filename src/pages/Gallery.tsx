@@ -7,90 +7,7 @@ import {
   Slideshow,
 } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/styles.css";
-
-import image1 from "../assets/images/gallery/1.jpg";
-import image2 from "../assets/images/gallery/2.jpeg";
-import image3 from "../assets/images/gallery/3.jpg";
-import image4 from "../assets/images/gallery/4.jpg";
-import image5 from "../assets/images/gallery/5.jpg";
-import image6 from "../assets/images/gallery/6.jpg";
-import image7 from "../assets/images/gallery/7.jpg";
-import image8 from "../assets/images/gallery/8.jpg";
-import image9 from "../assets/images/gallery/9.jpg";
-import image10 from "../assets/images/gallery/10.jpg";
-
-const galleryImages = [
-  {
-    src: image1,
-    width: 2000,
-    height: 1500,
-    title: "Morden Park House",
-    alt: "Morden Park House",
-  },
-  {
-    src: image2,
-    width: 1280,
-    height: 853,
-    title: "Morden Park House",
-    alt: "Morden Park House",
-  },
-  {
-    src: image3,
-    width: 2048,
-    height: 1152,
-    title: "Morden Park House",
-    alt: "Morden Park House",
-  },
-  {
-    src: image4,
-    width: 1024,
-    height: 1024,
-    title: "1960s Routemaster Bus",
-    alt: "1960s Routemaster Bus",
-  },
-  {
-    src: image5,
-    width: 900,
-    height: 600,
-    title: "1960s Routemaster Bus",
-    alt: "1960s Routemaster Bus",
-  },
-  {
-    src: image6,
-    width: 900,
-    height: 720,
-    title: "1960s Routemaster Bus",
-    alt: "1960s Routemaster Bus",
-  },
-  {
-    src: image7,
-    width: 1600,
-    height: 1200,
-    title: "Cherrry Tree Pub",
-    alt: "Cherry Tree Pub",
-  },
-  {
-    src: image8,
-    width: 1200,
-    height: 1200,
-    title: "Cherrry Tree Pub",
-    alt: "Cherry Tree Pub",
-  },
-  {
-    src: image9,
-    width: 1400,
-    height: 800,
-    title: "Cherrry Tree Pub",
-    alt: "Cherry Tree Pub",
-  },
-  {
-    src: image10,
-    width: 1400,
-    height: 1050,
-    title: "Cherrry Tree Pub",
-    alt: "Cherry Tree Pub",
-  },
-];
+import { galleryImages } from "../assets/images/gallery/galleryData";
 
 export default function GalleryPage() {
   const [index, setIndex] = useState(-1);
@@ -99,9 +16,15 @@ export default function GalleryPage() {
   return (
     <div className="max-w-6xl pt-20 mx-auto flex-center-100vh">
       <p className="max-w-2xl pt-4 pb-8 text-center">
-        We'll share the best photos here after the wedding, and post a link to a
-        shared album where you can view and download all of the photos. As for
-        now here are a few photos of the venue as planned.
+        Here are some highlights from our wedding! To view or download the full
+        collection in original high quality, please visit this link:{" "}
+        <a
+          className="underline decoration-stone-500"
+          href="https://www.dropbox.com/scl/fo/upg30swv5kkq8ajr8lji4/AOHweNsCmUVfVo8Rtcj2jWA?rlkey=3l1rcjz07x6ebkrun2o8ssc2y&st=0ztoh347&dl=0"
+          target="_blank"
+          rel="noopener noreferrer">
+          dropbox
+        </a>{" "}
       </p>
       <div className="grid grid-cols-2 gap-5 pb-5 md:pb-10 sm:grid-cols-3 md:grid-cols-4">
         {galleryImages.map((image, i) => (

@@ -8,13 +8,10 @@ export default function GiftsSection() {
       className="max-w-2xl pb-5 text-center flex-center-100vh nav-content-offset ">
       <h1 className="pb-5 text-6xl font-dawning ">Gifts </h1>
       <p className="max-w-sm pb-2 ">
-        It is totally optional, but if you would like to give us a gift, we
-        would be very grateful.
-      </p>
-      <p className="max-w-sm pb-5 ">
-        You could either support us and our honemoon, or you are more then
-        welcome to donate to Mariem's dog rescue charity, which is very close to
-        our hearts. Thank you!
+        Your love, presence, and generous gifts meant the world to us. Having
+        you celebrate with us made our wedding day unforgettable, and we are so
+        deeply grateful for your kindness and support as we begin this new
+        chapter together. Thank you so much!!
       </p>
 
       <div className="flex flex-row items-center justify-center gap-10 align-center ">

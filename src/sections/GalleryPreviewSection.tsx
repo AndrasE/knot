@@ -3,58 +3,48 @@ import { Link } from "react-router-dom";
 import Carousel from "../components/Carousel";
 
 // Import each image file individually
-import img1 from "../assets/images/carousel/1.webp";
-import img2 from "../assets/images/carousel/2.webp";
-import img3 from "../assets/images/carousel/3.webp";
-import img4 from "../assets/images/carousel/4.webp";
-import img5 from "../assets/images/carousel/5.webp";
-import img6 from "../assets/images/carousel/6.webp";
-import img7 from "../assets/images/carousel/7.webp";
-import img8 from "../assets/images/carousel/8.webp";
-import img9 from "../assets/images/carousel/9.webp";
-import img10 from "../assets/images/carousel/10.webp";
+import img1 from "../assets/images/carousel/1.jpg";
+import img2 from "../assets/images/carousel/2.jpg";
+import img3 from "../assets/images/carousel/3.jpg";
+import img4 from "../assets/images/carousel/4.jpg";
+import img5 from "../assets/images/carousel/5.jpg";
+import img6 from "../assets/images/carousel/6.jpg";
+import img7 from "../assets/images/carousel/7.jpg";
+import img8 from "../assets/images/carousel/8.jpg";
 
 // Use the imported variables in your array
 const gallerySlides = [
   {
     src: img1,
-    alt: "Morden Park House",
+    alt: "Soon to be wifey",
   },
   {
     src: img2,
-    alt: "Morden Park House",
+    alt: "Witnessing the vows",
   },
   {
     src: img3,
-    alt: "Gazeebo at the venue",
+    alt: "Mamas",
   },
   {
     src: img4,
-    alt: "Gazeebo at the venue",
+    alt: "Families",
   },
   {
     src: img5,
-    alt: "1960s Routemaster Bus",
+    alt: "Celebrating",
   },
   {
     src: img6,
-    alt: "1960s Routemaster Bus",
+    alt: "Witnesses, the bestests!",
   },
   {
     src: img7,
-    alt: "1960s Routemaster Bus",
+    alt: "Families",
   },
   {
     src: img8,
-    alt: "Cherry Tree Pub",
-  },
-  {
-    src: img9,
-    alt: "Cherry Tree Pub",
-  },
-  {
-    src: img10,
-    alt: "Cherry Tree Pub",
+    alt: "Thank you for coming, lovely humans!",
   },
 ];
 
@@ -67,14 +57,13 @@ export default function GalleryPreviewSection() {
       <div className="flex flex-col items-center justify-center gap-5 sm:gap-10 align-center sm:flex-row ">
         <Carousel
           slides={gallerySlides}
-          className="w-3/4 sm:w-1/3 max-w-[230px] shadow-xl"
+          className="w-3/4  max-w-[280px] shadow-xl"
         />
         <div className="flex flex-col gap-2 text-center sm:text-left sm:w-2/3">
           <p className="max-w-md pt-2 ">
-            Here you will find a gallery of our favorite moments together. We
-            can't wait to create more memories with you on our special day! For
-            now, we have only shared photos of our venue, as well as a few
-            photos of us.
+            Welcome to our gallery! We had an incredible time celebrating our
+            special day with everyone. Browse through to see a selection of
+            photos from our venue and a few of our favorite moments together.
           </p>
           <Link
             to="/gallery"

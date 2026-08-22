@@ -5,8 +5,8 @@ export default function GuestsSection() {
       className="max-w-2xl pb-5 text-center flex-center-100vh nav-content-offset ">
       <h1 className="pb-5 text-6xl font-dawning ">Guests </h1>
       <p className="max-w-sm pb-5 ">
-        Our confirmed guests so far. Please use the form above or reach out to
-        us directly. Thank you!
+        Here is a look back at everyone who celebrated with us! Thank you all so
+        much for making our day so special.
       </p>
 
       <div className="flex flex-row items-center justify-center gap-10 align-center ">
@@ -30,26 +30,25 @@ export default function GuestsSection() {
           <li>Carla</li>
           <li>Mariann</li>
           <li>Szilvi</li>
+          <li>Nici</li>
           <li>Soraia</li>
           <li>Shreen</li>
           <li>Allison</li>
           <li>Maria</li>
           <li>Martin</li>
           <li>Anja</li>
-          <li>Alex</li>
-          <li>Anna</li>
           <li>Kelly</li>
           <li>Melis</li>
           <li>Simone P</li>
           <li>Danda</li>
           <li>Jimmy</li>
-          <li>Sehr</li>
           <li>Milena</li>
           <li>Emilian </li>
           <li>Etienne</li>
           <li>Sonia</li>
           <li>Anna</li>
           <li>Johnatan</li>
+          <li>Romy</li>
           <li>Meshalyn</li>
           <li>Heder</li>
           <li>Toma</li>
@@ -57,6 +56,7 @@ export default function GuestsSection() {
           <li>Benedek</li>
           <li>Nimrod</li>
           <li>Teresa</li>
+          <li>Issa</li>
         </ul>
       </div>
     </section>

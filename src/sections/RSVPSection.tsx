@@ -35,8 +35,8 @@ export default function RSVPSection() {
       <h1 className="pb-5 text-6xl font-dawning">RSVP</h1>
       <div className="flex flex-col gap-3 text-center">
         <p className="max-w-md">
-          Please confirm your attendance by filling out the form below. Thank
-          you!
+          RSVPs are now closed, but feel free to drop us a message if you would
+          like to say hello!
         </p>
         <form onSubmit={onSubmit} className="flex flex-col gap-4 p-5">
           <input
